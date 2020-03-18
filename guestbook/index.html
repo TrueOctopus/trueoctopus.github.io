@@ -114,7 +114,7 @@
   </div>
 </div>
 </div>
-
+<div class="comment"><div id="comments"></div></div>
 <!--
  * @Author: your name
  * @Date: 2020-03-17 17:51:06
@@ -207,6 +207,26 @@
 }());
 </script>
 <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '8rycpw8GhDeKYbhRLiyzbdOf-gzGzoHsz',
+    appKey: '2nIJtVqdhQW2obyEfWTbez0W',
+    placeholder: '可填写邮箱以获得回复通知，请注意本站通知是否被您的邮箱列为了垃圾邮件。',
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    lang: 'zh' || 'zh-cn'
+  });
+</script>
 
 </body>
 </html>
