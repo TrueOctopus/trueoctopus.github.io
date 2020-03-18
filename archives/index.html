@@ -15,13 +15,13 @@
     theme: 'lx',
     version: '0.3.8',
     localsearch:{
-      "enable": false,
+      "enable": true,
       "trigger": "auto",
       "top_n_per_article": 1,
       "unescape": false,
       "preload": false
       },
-    path: '-'
+    path: 'search.xml'
   };
 </script>
 
@@ -72,6 +72,23 @@
 <body>
 
 <div id="page">
+<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+<div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Search..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
 
 <div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/images/cover.jpeg)">
   <div class="overlay">
@@ -80,7 +97,10 @@
     <span>True Octopus</span>
     <h1>章鱼的博客</h1>
     <span>——分享所得</span>
-    
+    <div class="social-links">
+    <a href="https://github.com/TrueOctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
+    <a href="zhengzhaoyu123@gmail.com" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+</div>
   </div>
   </div>
 </div>
@@ -128,7 +148,10 @@
   <ul class="menu-items">
     <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
-    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-th-list fa-fw"></i>分类</span>
+        
+    </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
@@ -175,7 +198,7 @@
 	});
 }());
 </script>
-
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
 
 </body>
 </html>
