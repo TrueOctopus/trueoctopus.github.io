@@ -9,7 +9,7 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #222;
-  background: #fff;
+  background: #f8f8f8;
 }
 #page {
   position: relative;
@@ -358,7 +358,6 @@ ul.search-result-list li a {
   color: #187775;
 }
 footer {
-  background: #fafafa;
   clear: both;
   font-size: 12px;
   padding: 20px 60px;
@@ -409,13 +408,21 @@ a.category-link {
     padding: 30px;
   }
 }
+.lx-post {
+  padding: 10px;
+}
 .lx-post .lx-entry {
   float: left;
   width: 100%;
-  border-bottom: 1px solid #dedede;
+  boder: none;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,0.1), 0 0 0 1px rgba(10,10,10,0.02);
 }
 .single .lx-post .lx-entry {
-  border-bottom: none;
+  border: 1px solid #dedede;
+  box-shadow: none;
 }
 .lx-post .lx-entry > div {
   width: 100%;
@@ -506,7 +513,9 @@ a.category-link {
   width: 100%;
 }
 #pagination .page-number.current {
-  background: #999;
+  background: #009688;
+  border: none;
+  border-radius: 50%;
   color: #fff;
   cursor: default;
 }
@@ -524,6 +533,21 @@ a.category-link {
   margin-left: 0;
   max-width: 960px;
   margin: 0 auto;
+}
+.v .vwrap {
+  background: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,0.1), 0 0 0 1px rgba(10,10,10,0.02);
+}
+.v .vlist {
+  background: #fff;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,0.1), 0 0 0 1px rgba(10,10,10,0.02);
+}
+.v .vlist .vcard {
+  padding: 20px;
 }
 .gototop {
   position: fixed;
@@ -1306,9 +1330,23 @@ blockquote p,
 blockquote div {
   text-align: center;
 }
-.btn,
-a.but,
 .post-button a.btn {
+  display: inline-block;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #fff;
+  background: #58be8e;
+  border: none;
+  text-decoration: none;
+  border-radius: 9999px;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+  line-height: 2;
+}
+.btn,
+a.btn {
   display: inline-block;
   padding: 0 20px;
   font-size: 14px;
