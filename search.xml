@@ -4,8 +4,9 @@
     <title>更新pip及pip换源</title>
     <url>/2020/03/19/%E6%9B%B4%E6%96%B0pip%E5%8F%8Apip%E6%8D%A2%E6%BA%90/</url>
     <content><![CDATA[<div class="note default">
-            <p>运行环境：<br>    Ubuntu18.04<br>    python3.6</p>
+            <p>运行环境：<br>    Ubuntu18.04</p>
           </div>
+
 <h1 id="更新pip的三种方法"><a href="#更新pip的三种方法" class="headerlink" title="更新pip的三种方法"></a>更新pip的三种方法</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line">$ python -m pip install -U --force-reinstall pip</span><br><span class="line">$ pip install --user --upgrade pip</span><br></pre></td></tr></table></figure>
 <h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><p>当使用pip安装时速度过慢可尝试使用更换为国内源的方式，但是国内源可能没有对应的安装包或没有最新的版本。<br><br></p>
 <h2 id="换源的方式"><a href="#换源的方式" class="headerlink" title="换源的方式"></a>换源的方式</h2><div class="note info">
@@ -25,7 +26,6 @@
       </categories>
       <tags>
         <tag>Ubuntu</tag>
-        <tag>python</tag>
         <tag>pip</tag>
       </tags>
   </entry>
