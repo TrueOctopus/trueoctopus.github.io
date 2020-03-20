@@ -101,7 +101,66 @@
 
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2020/03/20/%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/">快捷键列表</a></h2>
+      <h2 class="title"><a href="/2020/03/20/linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%AE%BE%E7%BD%AE%E5%85%B3%E9%97%AD%E7%9B%96%E5%AD%90%E4%B8%8D%E4%BC%91%E7%9C%A0/">linux命令行设置关闭盖子不休眠</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-20 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span>
+      <p><div class="note info">
+            <p>之前使用老笔记本制作nas时，将笔记本合上后会断连，所以需要使用命令行设置关闭盖子不休眠</p>
+          </div>
+
+<br>
+
+<p><strong>方法：</strong><br>打开文件：/etc/systemd/logind.conf，并修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#HandleLidSwitch    合上笔记本盖后的行为，suspend改为ignore（即合盖不休眠）</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>在原文件中，还要去掉前面的#来取消注释<br><br><br>在这个文件中还有一些相关的值可以修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#HandlePowerKey     按下电源键后的行为，默认power off</span><br><span class="line">#HandleSleepKey     按下挂起键后的行为，默认suspend</span><br><span class="line">#HandleHibernateKey 按下休眠键后的行为，默认hibernate</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2020/03/20/linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%AE%BE%E7%BD%AE%E5%85%B3%E9%97%AD%E7%9B%96%E5%AD%90%E4%B8%8D%E4%BC%91%E7%9C%A0/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/03/20/OMV-Extras%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/">OMV-Extras安装脚本</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-20 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/OMV/">OMV</a></span>
+      <p><h2 id="两种安装方式"><a href="#两种安装方式" class="headerlink" title="两种安装方式"></a>两种安装方式</h2><p>一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -O - https:&#x2F;&#x2F;github.com&#x2F;OpenMediaVault-Plugin-Developers&#x2F;packages&#x2F;raw&#x2F;master&#x2F;install | bash</span><br></pre></td></tr></table></figure>
+<p>二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install dirmngr</span><br><span class="line"># 下载安装包</span><br><span class="line">$ wget http:&#x2F;&#x2F;omv-extras.org&#x2F;openmediavault-omvextrasorg_latest_all4.deb</span><br><span class="line"># 安装</span><br><span class="line">$ dpkg -i openmediavault-omvextrasorg_latest_all4.deb</span><br><span class="line"># 更新</span><br><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2020/03/20/OMV-Extras%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/03/20/%E5%BC%95%E5%AF%BC%E4%BC%98%E5%85%88%E7%BA%A7%E6%9B%B4%E6%94%B9/">引导优先级更改</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-20 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span>
+      <p><h2 id="调整引导优先级方法："><a href="#调整引导优先级方法：" class="headerlink" title="调整引导优先级方法："></a>调整引导优先级方法：</h2><ol>
+<li><p>开机进Bios系统，比如联想、Dell电脑F2进，不同电脑进Bios方式不同，具体需自行查阅</p>
+</li>
+<li><p>在Bios中进入Boot菜单</p>
+</li>
+<li><p>在Boot菜单下使用F5或F6调整启动优先</p>
+</li>
+<li><p>注意：当EFI与Legacy两种启动方式同时存在时，可在Boot Priority选项中选择两种启动方式的优先级</p>
+</li>
+<li><p>按F10保存并退出</p>
+</li>
+</ol>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/03/20/%E5%BC%95%E5%AF%BC%E4%BC%98%E5%85%88%E7%BA%A7%E6%9B%B4%E6%94%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/03/20/%E8%A7%A3%E5%86%B3electron-ssr%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/">解决electron-ssr无法使用问题</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-20 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span>
+      <p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>大概是因为这个软件基于Python2，然后软连接挂了，或者是没安装python，确认安装完成后输入以下命令，重启软件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo In -s &#x2F;usr&#x2F;bin&#x2F;python3 &#x2F;usr&#x2F;bin&#x2F;python</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>如果提示已存在，把原有的删去重新建一个</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/03/20/%E8%A7%A3%E5%86%B3electron-ssr%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/">Windows快捷键列表</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-20 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span>
       <p><h2 id="Ctrl键功能"><a href="#Ctrl键功能" class="headerlink" title="Ctrl键功能"></a>Ctrl键功能</h2><ol>
 <li><p>Ctrl S 保存　</p>
@@ -364,7 +423,7 @@
 </li>
 </ol>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/03/20/%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -432,7 +491,7 @@
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-th-list fa-fw"></i>分类</span>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>

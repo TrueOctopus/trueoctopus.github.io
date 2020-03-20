@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>更新pip及pip换源 | 章鱼的博客</title>
+  <title>linux命令行设置关闭盖子不休眠 | 章鱼的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="TrueOctopus">
   <meta name="keywords" content="tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
@@ -83,16 +83,16 @@
 
 <div id="page">
 
-<meta name="keywords" content="Ubuntu,pip,pip换源,tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
+<meta name="keywords" content="linux,关闭盖子不休眠,tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
 
 <div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
     <div class="page-title">
       <div class="avatar"><a href="/"><img src="/images/avatar.jpg"></a></div>
-      <span>2020-03-19</span>
-      <h2>更新pip及pip换源</h2>
+      <span>2020-03-20</span>
+      <h2>linux命令行设置关闭...</h2>
       <div class="tags"><i
-          class="fa fa-tag"></i><a class="tag-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/pip/" rel="tag">pip</a>
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" rel="tag">使用技巧</a>
       </div>
     <div class="social-links">
     <a href="https://github.com/trueoctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
@@ -104,24 +104,16 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <div class="note default">
-            <p>运行环境：<br>    Ubuntu18.04</p>
+        <div class="note info">
+            <p>之前使用老笔记本制作nas时，将笔记本合上后会断连，所以需要使用命令行设置关闭盖子不休眠</p>
           </div>
 
-<h1 id="更新pip的三种方法"><a href="#更新pip的三种方法" class="headerlink" title="更新pip的三种方法"></a>更新pip的三种方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line">$ python -m pip install -U --force-reinstall pip</span><br><span class="line">$ pip install --user --upgrade pip</span><br></pre></td></tr></table></figure>
-<h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><p>当使用pip安装时速度过慢可尝试使用更换为国内源的方式，但是国内源可能没有对应的安装包或没有最新的版本。<br><br></p>
-<h2 id="换源的方式"><a href="#换源的方式" class="headerlink" title="换源的方式"></a>换源的方式</h2><div class="note info">
-            <p>国内pip镜像源：</p><ul><li>阿里： <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a> </li><li>中国科技大学： <a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a>  </li><li>豆瓣： <a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a>   </li><li>清华大学： <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a>   </li><li>中国科学技术大学： <a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li></ul>
-          </div>
-<ol>
-<li><h3 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a><strong>临时使用</strong></h3> 例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install tensorflow -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>注意：</strong>-i后添加的是指定的pip源<br><br></p>
-<ol start="2">
-<li><h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a><strong>永久修改</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit ~&#x2F;.pip&#x2F;pip.conf</span><br><span class="line">修改内容如下：</span><br><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>注意：</strong>index-url后填写的是指定的pip源，当没有pip.conf时请自行在对应位置创建文件，这里使用的文本编辑器是gedit，目标文件不存在的话会自行创建。</p>
+<br>
 
+<p><strong>方法：</strong><br>打开文件：/etc/systemd/logind.conf，并修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#HandleLidSwitch    合上笔记本盖后的行为，suspend改为ignore（即合盖不休眠）</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>在原文件中，还要去掉前面的#来取消注释<br><br><br>在这个文件中还有一些相关的值可以修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#HandlePowerKey     按下电源键后的行为，默认power off</span><br><span class="line">#HandleSleepKey     按下挂起键后的行为，默认suspend</span><br><span class="line">#HandleHibernateKey 按下休眠键后的行为，默认hibernate</span><br></pre></td></tr></table></figure>
       </div>
     </div>
   </div>
@@ -129,12 +121,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/">
+		<a class="copy" href="#">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>Windows...</h3>
+						<h3>没有更新的文章</h3>
 					</div>
 				</div>
 			</div>
@@ -142,12 +134,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="#">
+		<a class="copy" href="/2020/03/20/OMV-Extras%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>没有更早的文章</h3>
+						<h3>OMV-Ext...</h3>
 					</div>
 				</div>
 			</div>
