@@ -3,7 +3,11 @@
   <entry>
     <title>解决Flask+Apache2邮箱前端验证问题</title>
     <url>/2020/07/29/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="解决Flask-Apache2解决邮箱前端验证问题"><a href="#解决Flask-Apache2解决邮箱前端验证问题" class="headerlink" title="解决Flask+Apache2解决邮箱前端验证问题"></a>解决Flask+Apache2解决邮箱前端验证问题</h2><p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
+    <content><![CDATA[<h1 id="解决Flask-Apache2解决邮箱前端验证问题"><a href="#解决Flask-Apache2解决邮箱前端验证问题" class="headerlink" title="解决Flask+Apache2解决邮箱前端验证问题"></a>解决Flask+Apache2解决邮箱前端验证问题</h1><br/>
+
+<p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
+<br/>
+
 <p><img src="https://s1.ax1x.com/2020/07/29/amMFmj.png" alt="amMFmj.png"></p>
 <p>如果已经安装了这个模块但是仍然报错时，可能是由于flask与Apache模块间的兼容问题，这时需要调整以下几个模块的版本</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Flask-WTF&#x3D;&#x3D;0.14.2</span><br><span class="line">WTForms&#x3D;&#x3D;2.1</span><br><span class="line">Werkzeug&#x3D;&#x3D;0.16.0</span><br></pre></td></tr></table></figure>
@@ -21,7 +25,9 @@
   <entry>
     <title>Apache2解决中文编码问题</title>
     <url>/2020/07/29/Apache2%E8%A7%A3%E5%86%B3%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="Apache2-解决utf-8编码问题"><a href="#Apache2-解决utf-8编码问题" class="headerlink" title="Apache2 解决utf-8编码问题"></a>Apache2 解决utf-8编码问题</h2><ol>
+    <content><![CDATA[<h1 id="Apache2-解决utf-8编码问题"><a href="#Apache2-解决utf-8编码问题" class="headerlink" title="Apache2 解决utf-8编码问题"></a>Apache2 解决utf-8编码问题</h1><br/>
+
+<ol>
 <li><p>修改 /usr/lib/python2.7/ 下的 site.py 文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo vim &#x2F;usr&#x2F;lib&#x2F;python2.7&#x2F;site.py</span><br></pre></td></tr></table></figure>
 
