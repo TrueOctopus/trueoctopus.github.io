@@ -145,7 +145,7 @@
 <p>首先可以更新下pip</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
 
-<p>随后使用pip进行安装，建议在虚拟环境下安装，速度慢的可以给<a href="https://trueoctopus.top/2020/03/19/更新pip及pip换源/" target="_blank" rel="noopener">pip换源</a></p>
+<p>随后使用pip进行安装，建议在虚拟环境下安装，速度慢的可以给<a href="https://trueoctopus.top/2020/03/19/更新pip及pip换源/">pip换源</a></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(venv)$ pip install tensorflow-gpu # 默认安装最新版</span><br><span class="line">(venv)$ pip install tensorflow-gpu&#x3D;&#x3D;2.0.0 # 可选择版本安装</span><br></pre></td></tr></table></figure>
 
 <p>检验是否成功</p>
@@ -240,8 +240,8 @@
         <category>其他</category>
       </categories>
       <tags>
-        <tag>使用技巧</tag>
         <tag>Ubuntu</tag>
+        <tag>使用技巧</tag>
       </tags>
   </entry>
   <entry>
