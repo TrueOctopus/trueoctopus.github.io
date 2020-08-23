@@ -101,6 +101,68 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/08/23/Apache2%E8%A7%A3%E5%86%B3%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98%20-%20%E5%89%AF%E6%9C%AC/">Apache2解决authorization跨域问题</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-08-23 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
+      <p><h1 id="Apache2-解决authorization跨域问题"><a href="#Apache2-解决authorization跨域问题" class="headerlink" title="Apache2 解决authorization跨域问题"></a>Apache2 解决authorization跨域问题</h1><br/>
+
+<div class="note default">
+            <p>问题描述：前端在请求头中发送的Authorization字段消失不见，报跨域错误而跨域配置无误</p><p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
+          </div>
+
+<br/>
+
+<ol>
+<li><p>修改apache2配置文件，默认位于 /etc/apache2/sites-available/，软链接到sites-enabled文件夹才会生效</p>
+<p>添加如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LoadModule headers_module &#x2F;usr&#x2F;lib&#x2F;apache2&#x2F;modules&#x2F;mod_headers.so # 跨域用mod</span><br><span class="line">Header always set Access-Control-Allow-Origin &quot;*&quot;</span><br><span class="line">Header always set Access-Control-Allow-Methods &quot;GET,POST,PUT,DELETE,OPTIONS&quot;</span><br><span class="line">Header always set Access-Control-Allow-Headers &quot;authorization,content-type&quot;</span><br><span class="line"># 上面为跨域配置</span><br><span class="line">WSGIPassAuthorization On # 请求头中允许authorization发送</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>重启服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo &#x2F;etc&#x2F;init.d&#x2F;apache2 restart</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/08/23/Apache2%E8%A7%A3%E5%86%B3%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98%20-%20%E5%89%AF%E6%9C%AC/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/08/23/Apache2%E9%83%A8%E7%BD%B2flask/">Apache2部署flask</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-08-23 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
+      <p><div class="note default">
+            <p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
+          </div>
+
+<h1 id="Apache2部署flask"><a href="#Apache2部署flask" class="headerlink" title="Apache2部署flask"></a>Apache2部署flask</h1><br/>
+
+<ol>
+<li><p>在项目根目录下新建wsgi配置文件，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import site</span><br><span class="line">site.addsitedir(&#39;&#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;venv&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#39;) # 项目的环境配置</span><br><span class="line">import sys       </span><br><span class="line">sys.path.insert(0, &#39;&#x2F;home&#x2F;zzy&#x2F;xgkxflask&#39;) # 项目根目录</span><br><span class="line">from flasky import app as application # 启动文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置apache2配置文件，默认位于 /etc/apache2/sites-available/，默认配置为000-default.conf，可自行配置，软链接到sites-enabled文件夹才会生效，例子如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt; # 应用的端口</span><br><span class="line">	# The ServerName directive sets the request scheme, hostname and port that</span><br><span class="line">	# the server uses to identify itself. This is used when creating</span><br><span class="line">	# redirection URLs. In the context of virtual hosts, the ServerName</span><br><span class="line">	# specifies what hostname must appear in the request&#39;s Host: header to</span><br><span class="line">	# match this virtual host. For the default virtual host (this file) this</span><br><span class="line">	# value is not decisive as it is used as a last resort host regardless.</span><br><span class="line">	# However, you must set it for any further virtual host explicitly.</span><br><span class="line">	ServerName trueoctopus.com # 绑定的域名</span><br><span class="line"></span><br><span class="line">	ServerAdmin xgkx@hgu.edu.cn # 管理员联系方式，出错时会显示在报错内容中</span><br><span class="line">	DocumentRoot &#x2F;home&#x2F;zzy&#x2F;xgkxflask # 网站根目录</span><br><span class="line">	</span><br><span class="line">	LoadModule headers_module &#x2F;usr&#x2F;lib&#x2F;apache2&#x2F;modules&#x2F;mod_headers.so # 跨域用mod</span><br><span class="line">    Header always set Access-Control-Allow-Origin &quot;*&quot;</span><br><span class="line">    Header always set Access-Control-Allow-Methods &quot;GET,POST,PUT,DELETE,OPTIONS&quot;</span><br><span class="line">	Header always set Access-Control-Allow-Headers &quot;authorization,content-type&quot;</span><br><span class="line">	# 上面为跨域配置</span><br><span class="line"></span><br><span class="line">	WSGIDaemonProcess xgkxflask user&#x3D;zzy group&#x3D;zzy processes&#x3D;4 threads&#x3D;4 </span><br><span class="line">	# 进程配置 用户不得为root用户，processes为进程 threads为线程</span><br><span class="line">	WSGIScriptAlias &#x2F; &#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;xgkxflask.wsgi</span><br><span class="line">    # wsgi配置文件地址，将IP:端口&#x2F;下的请求转发至项目位置</span><br><span class="line">	WSGIPassAuthorization On # 请求头中允许authorization发送</span><br><span class="line"></span><br><span class="line">	&lt;Directory &#x2F;home&#x2F;zzy&#x2F;xgkxflask&gt; # 项目地址</span><br><span class="line">	WSGIProcessGroup xgkxflask #项目名</span><br><span class="line">	WSGIApplicationGroup %&#123;GLOBAL&#125;</span><br><span class="line">	</span><br><span class="line">	#权限设置</span><br><span class="line">    Order allow,deny</span><br><span class="line">    Allow from all</span><br><span class="line">	Require all granted</span><br><span class="line">	&lt;&#x2F;Directory&gt;</span><br><span class="line"></span><br><span class="line">	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,</span><br><span class="line">	# error, crit, alert, emerg.</span><br><span class="line">	# It is also possible to configure the loglevel for particular</span><br><span class="line">	# modules, e.g.</span><br><span class="line">	#LogLevel info ssl:warn</span><br><span class="line">	</span><br><span class="line">	# 日志位置</span><br><span class="line">	ErrorLog $&#123;APACHE_LOG_DIR&#125;&#x2F;error.log </span><br><span class="line">	CustomLog $&#123;APACHE_LOG_DIR&#125;&#x2F;access.log combined</span><br><span class="line"></span><br><span class="line">	# For most configuration files from conf-available&#x2F;, which are</span><br><span class="line">	# enabled or disabled at a global level, it is possible to</span><br><span class="line">	# include a line for only one particular virtual host. For example the</span><br><span class="line">	# following line enables the CGI configuration for this host only</span><br><span class="line">	# after it has been globally disabled with &quot;a2disconf&quot;.</span><br><span class="line">	#Include conf-available&#x2F;serve-cgi-bin.conf</span><br><span class="line">&lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在ports.conf中配置端口，位于/etc/apache2下，服务器安全组需开放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listen 80</span><br><span class="line">Listen 8080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo &#x2F;etc&#x2F;init.d&#x2F;apache2 restart</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/08/23/Apache2%E9%83%A8%E7%BD%B2flask/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/07/29/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/">解决Flask+Apache2邮箱前端验证问题</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-07-29 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/flask/">flask</a></span>
       <p><h1 id="解决Flask-Apache2解决邮箱前端验证问题"><a href="#解决Flask-Apache2解决邮箱前端验证问题" class="headerlink" title="解决Flask+Apache2解决邮箱前端验证问题"></a>解决Flask+Apache2解决邮箱前端验证问题</h1><br/>
@@ -584,38 +646,15 @@
       <div class="post-button"><a class="btn" href="/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/03/19/%E6%9B%B4%E6%96%B0pip%E5%8F%8Apip%E6%8D%A2%E6%BA%90/">更新pip及pip换源</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-19 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span>
-      <p><div class="note default">
-            <p>运行环境：<br>    Ubuntu18.04</p>
-          </div>
-
-<h1 id="更新pip的三种方法"><a href="#更新pip的三种方法" class="headerlink" title="更新pip的三种方法"></a>更新pip的三种方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line">$ python -m pip install -U --force-reinstall pip</span><br><span class="line">$ pip install --user --upgrade pip</span><br></pre></td></tr></table></figure>
-<h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><p>当使用pip安装时速度过慢可尝试使用更换为国内源的方式，但是国内源可能没有对应的安装包或没有最新的版本。<br><br></p>
-<h2 id="换源的方式"><a href="#换源的方式" class="headerlink" title="换源的方式"></a>换源的方式</h2><div class="note info">
-            <p>国内pip镜像源：</p><ul><li>阿里： <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a> </li><li>中国科技大学： <a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a>  </li><li>豆瓣： <a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a>   </li><li>清华大学： <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a>   </li><li>中国科学技术大学： <a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li></ul>
-          </div>
-<ol>
-<li><h3 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a><strong>临时使用</strong></h3> 例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install tensorflow -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>注意：</strong>-i后添加的是指定的pip源<br><br></p>
-<ol start="2">
-<li><h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a><strong>永久修改</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit ~&#x2F;.pip&#x2F;pip.conf</span><br><span class="line">修改内容如下：</span><br><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>注意：</strong>index-url后填写的是指定的pip源，当没有pip.conf时请自行在对应位置创建文件，这里使用的文本编辑器是gedit，目标文件不存在的话会自行创建。</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/03/19/%E6%9B%B4%E6%96%B0pip%E5%8F%8Apip%E6%8D%A2%E6%BA%90/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
-    </div>
-  </div>
 
 
-
+<div id="pagination">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"></a>
+</div>
 
 <footer>
   <div>
-  Copyright &copy; 2020.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号</a> <br/>转载请注明出处
+  Copyright &copy; 2019.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号</a> <br/>转载请注明出处
   </div>
 </footer>
   </div>
