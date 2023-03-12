@@ -57,10 +57,18 @@
 	     });
 	}); 
 	</script>
-  
+  <!--Google_Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FJ730WCCCZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FJ730WCCCZ');
+</script>
+
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 <body>
 <div class="single">
 <a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
@@ -192,7 +200,7 @@
 <p>首先可以更新下pip</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
 
-<p>随后使用pip进行安装，建议在虚拟环境下安装，速度慢的可以给<a href="https://trueoctopus.top/2020/03/19/更新pip及pip换源/">pip换源</a></p>
+<p>随后使用pip进行安装，建议在虚拟环境下安装，速度慢的可以给<a href="https://trueoctopus.top/2020/03/19/更新pip及pip换源/" target="_blank" rel="noopener">pip换源</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ pip install tensorflow-gpu # 默认安装最新版</span><br><span class="line">(venv)$ pip install tensorflow-gpu&#x3D;&#x3D;2.0.0 # 可选择版本安装</span><br></pre></td></tr></table></figure>
 
 <p>检验是否成功</p>
