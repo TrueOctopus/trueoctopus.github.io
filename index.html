@@ -118,6 +118,127 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">SpringBoot自动装配</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-13 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/JAVA/">JAVA</a></span>
+      <p><h1 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a>SpringBoot自动装配原理</h1><h2 id="一、Conditon"><a href="#一、Conditon" class="headerlink" title="一、Conditon"></a>一、Conditon</h2><p>实现选择性创建Bean操作</p>
+<br/>
+
+<ol>
+<li>通过坐标是否存在从而创建Bean</li>
+</ol>
+<p><strong>ClassCondition:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class ClassCondition implements Condition &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;1.需求： 导入Jedis坐标后创建Bean</span><br><span class="line">        &#x2F;&#x2F;思路：判断redis.clients.jedis.Jedis.class文件是否存在</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        try &#123;</span><br><span class="line">            Class&lt;?&gt; cls &#x3D; Class.forName(&quot;redis.clients.jedis.Jedis&quot;);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">        return flag;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UserConfig:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UserConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @Conditional(ClassCondition.class)</span><br><span class="line">    public User user()&#123;</span><br><span class="line">        return new User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将类的判断变为动态的判断</li>
+</ol>
+<p><strong>ClassCondition:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class ClassCondition implements Condition &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param context 上下文对象。用于获取环境，IOC容器，ClassLoader对象</span><br><span class="line">     * @param metadata 注解元对象。 可以用于获取注解定义的属性值</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;2.需求： 导入通过注解属性值value指定坐标后创建Bean</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;获取注解属性值  value</span><br><span class="line">        Map&lt;String, Object&gt; map &#x3D; metadata.getAnnotationAttributes(ConditionOnClass.class.getName());</span><br><span class="line">        String[] value &#x3D; (String[]) map.get(&quot;value&quot;);</span><br><span class="line"></span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        try &#123;</span><br><span class="line">            for (String className : value) &#123;</span><br><span class="line">                Class&lt;?&gt; cls &#x3D; Class.forName(className);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">        return flag;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>ConditionOnClass</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Conditional(ClassCondition.class)</span><br><span class="line">public @interface ConditionOnClass &#123;</span><br><span class="line">    String[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UserConfig</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UserConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @@ConditionOnClass(&quot;redis.clients.jedis.Jedis&quot;)</span><br><span class="line">    public User user()&#123;</span><br><span class="line">        return new User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>ConditionalOnProperty 值存在才会创建Bean</li>
+</ol>
+<p><strong>UserConfig</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UserConfig &#123;</span><br><span class="line"></span><br><span class="line">    @@Bean</span><br><span class="line">    @ConditionalOnProperty(name &#x3D; &quot;test&quot;,havingValue &#x3D; &quot;111&quot;)</span><br><span class="line">    public User user()&#123;</span><br><span class="line">        return new User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SpringBoot自动配置中存在各类不同触发条件下的ConditionalOn*<br><br/></p>
+<h2 id="二、Enable"><a href="#二、Enable" class="headerlink" title="二、Enable"></a>二、Enable</h2><p>动态启用某些功能，底层使用@Import注解导入配置类，实现Bean的动态加载。</p>
+<br/>
+
+<p>SpringBoot不能直接获取第三方工程的Bean，原因是在@SpringBootApplication中存在@ComponentScan注解，其扫描的范围只有当前引导类所在的包及其子包。</p>
+<ol>
+<li>使用@ComponentScan添加对应的第三方包名(不常用)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@ComponentScan(&quot;com.demo.config&quot;)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>可以使用@Import注解加载类，这些类都会被Spring创建，并放入IOC容器(不常用)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(Userconfig.class)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>可以对Import注解进行封装</li>
+</ol>
+<p><strong>EnableUser</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Import(UserConfig.class)</span><br><span class="line">public @interface EnableUser &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Application</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableUser</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、-Import注解"><a href="#三、-Import注解" class="headerlink" title="三、@Import注解"></a>三、@Import注解</h2><p>@Import的四种用法</p>
+<ol>
+<li>导入Bean</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(User.class)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>导入配置类</li>
+</ol>
+<p><strong>UserConfig</strong> 可不加@Configuration</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class UserConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public User user() &#123;</span><br><span class="line">        return new User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Role role() &#123;</span><br><span class="line">        return new Role();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Application</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(UserConfig.class)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>导入ImportSelector的实现类</li>
+</ol>
+<p><strong>ImportSelector</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.ImportSelector;</span><br><span class="line">import org.springframework.core.type.AnnotationMetadata;</span><br><span class="line"></span><br><span class="line">public class MyImportSelector implements ImportSelector &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String[] selectImports(AnnotationMetadata importingClassMetadata) &#123;</span><br><span class="line">        return new String[]&#123;&quot;com.demo.domain.User&quot;, &quot;com.demo.domain.Role&quot;&#125;;</span><br><span class="line">        &#x2F;&#x2F; 可以写在配置文件里</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Application</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(MyImportSelector.class)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>导入ImportBeanDefinitionRegistrar实现类</li>
+</ol>
+<p><strong>MyImportBeanDefinitionRegistrar</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;</span><br><span class="line"></span><br><span class="line">public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) &#123;</span><br><span class="line">        AbstractBeanDefinition beanDefinition &#x3D; BeanDefinitionBuilder.rootBeanDefinition(User.class).getBeanDefinition();</span><br><span class="line">        registry.registerBeanDefinition(&quot;user&quot;, beanDefinition);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Application</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(&#123;MyImportBeanDefinitionRegistrar.class&#125;)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="四、-EnableAutoConfiguration注解"><a href="#四、-EnableAutoConfiguration注解" class="headerlink" title="四、@EnableAutoConfiguration注解"></a>四、@EnableAutoConfiguration注解</h2><p>在@SpringBootApplication中有注解@EnableAutoConfiguration，其中有@Import({AutoConfigurationImportSelector.class})，使用了上一节中的第三种方式</p>
+<p><strong>EnableAutoConfiguration</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">@AutoConfigurationPackage</span><br><span class="line">@Import(&#123;AutoConfigurationImportSelector.class&#125;)</span><br><span class="line">public @interface EnableAutoConfiguration &#123;</span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY &#x3D; &quot;spring.boot.enableautoconfiguration&quot;;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] exclude() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    String[] excludeName() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>AutoConfigurationImportSelector</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">public String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">    if (!this.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">        return NO_IMPORTS;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        AutoConfigurationMetadata autoConfigurationMetadata &#x3D; AutoConfigurationMetadataLoader.loadMetadata(this.beanClassLoader);</span><br><span class="line">        AutoConfigurationEntry autoConfigurationEntry &#x3D; this.getAutoConfigurationEntry(autoConfigurationMetadata, annotationMetadata);</span><br><span class="line">        return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>其中getAutoConfigurationEntry中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">protected AutoConfigurationEntry getAutoConfigurationEntry(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">    if (!this.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">        return EMPTY_ENTRY;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        AnnotationAttributes attributes &#x3D; this.getAttributes(annotationMetadata);</span><br><span class="line">        List&lt;String&gt; configurations &#x3D; this.getCandidateConfigurations(annotationMetadata, attributes);</span><br><span class="line">        configurations &#x3D; this.removeDuplicates(configurations);</span><br><span class="line">        Set&lt;String&gt; exclusions &#x3D; this.getExclusions(annotationMetadata, attributes);</span><br><span class="line">        this.checkExcludedClasses(configurations, exclusions);</span><br><span class="line">        configurations.removeAll(exclusions);</span><br><span class="line">        configurations &#x3D; this.filter(configurations, autoConfigurationMetadata);</span><br><span class="line">        this.fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">        return new AutoConfigurationEntry(configurations, exclusions);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中getCandidateConfigurations中，通过SpringFactoriesLoader加载，加载内容在<strong>META-INF/spring.factories</strong>，没有则会报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">protected List&lt;String&gt; getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) &#123;</span><br><span class="line">    List&lt;String&gt; configurations &#x3D; SpringFactoriesLoader.loadFactoryNames(this.getSpringFactoriesLoaderFactoryClass(), this.getBeanClassLoader());</span><br><span class="line">    Assert.notEmpty(configurations, &quot;No auto configuration classes found in META-INF&#x2F;spring.factories. If you are using a custom packaging, make sure that file is correct.&quot;);</span><br><span class="line">    return configurations;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如下图所示一个spring.factories文件</p>
+<p><img src="https://i.imgtg.com/2023/03/13/fPMfa.png" alt="fPMfa.png"></p>
+<p>其中比如RedisAutoConfiguration，通过ConditionalOnClass等条件注解控制相关Bean的加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConditionalOnClass(&#123;RedisOperations.class&#125;)</span><br><span class="line">@EnableConfigurationProperties(&#123;RedisProperties.class&#125;)</span><br><span class="line">@Import(&#123;LettuceConnectionConfiguration.class, JedisConnectionConfiguration.class&#125;)</span><br><span class="line">public class RedisAutoConfiguration &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<ul>
+<li>@EnableAutoConfiguration注解内部使用@Import({AutoConfigurationImportSelector.class})加载配置类</li>
+<li>其配置文件位于META-INF/spring.factories中，当SpringBoot启动时会自动加载</li>
+<li>但是并不是所有的Bean都会被初始化，只有满足Condition条件的Bean才会被加载</li>
+</ul>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/08/23/Apache2%E8%A7%A3%E5%86%B3authorization%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">Apache2解决authorization跨域问题</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-08-23 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
       <p><h1 id="Apache2-解决authorization跨域问题"><a href="#Apache2-解决authorization跨域问题" class="headerlink" title="Apache2 解决authorization跨域问题"></a>Apache2 解决authorization跨域问题</h1><br/>
@@ -167,7 +288,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import site</span><br><span class="line">site.addsitedir(&#39;&#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;venv&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#39;) # 项目的环境配置</span><br><span class="line">import sys       </span><br><span class="line">sys.path.insert(0, &#39;&#x2F;home&#x2F;zzy&#x2F;xgkxflask&#39;) # 项目根目录</span><br><span class="line">from flasky import app as application # 启动文件</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置apache2配置文件，默认位于 /etc/apache2/sites-available/，默认配置为000-default.conf，可自行配置，软链接到sites-enabled文件夹才会生效，范例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt; # 应用的端口</span><br><span class="line">	# The ServerName directive sets the request scheme, hostname and port that</span><br><span class="line">	# the server uses to identify itself. This is used when creating</span><br><span class="line">	# redirection URLs. In the context of virtual hosts, the ServerName</span><br><span class="line">	# specifies what hostname must appear in the request&#39;s Host: header to</span><br><span class="line">	# match this virtual host. For the default virtual host (this file) this</span><br><span class="line">	# value is not decisive as it is used as a last resort host regardless.</span><br><span class="line">	# However, you must set it for any further virtual host explicitly.</span><br><span class="line">	ServerName trueoctopus.com # 绑定的域名</span><br><span class="line"></span><br><span class="line">	ServerAdmin xgkx@hgu.edu.cn # 管理员联系方式，出错时会显示在报错内容中</span><br><span class="line">	DocumentRoot &#x2F;home&#x2F;zzy&#x2F;xgkxflask # 网站根目录</span><br><span class="line">	</span><br><span class="line">	LoadModule headers_module &#x2F;usr&#x2F;lib&#x2F;apache2&#x2F;modules&#x2F;mod_headers.so # 跨域用mod</span><br><span class="line">        Header always set Access-Control-Allow-Origin &quot;*&quot;</span><br><span class="line">        Header always set Access-Control-Allow-Methods &quot;GET,POST,PUT,DELETE,OPTIONS&quot;</span><br><span class="line">	Header always set Access-Control-Allow-Headers &quot;authorization,content-type&quot;</span><br><span class="line">	# 上面为跨域配置</span><br><span class="line"></span><br><span class="line">	WSGIDaemonProcess xgkxflask user&#x3D;zzy group&#x3D;zzy processes&#x3D;4 threads&#x3D;4 </span><br><span class="line">	# 进程配置 用户不得为root用户，processes为进程 threads为线程</span><br><span class="line">	WSGIScriptAlias &#x2F; &#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;xgkxflask.wsgi</span><br><span class="line">    	# wsgi配置文件地址，将IP:端口&#x2F;下的请求转发至项目位置</span><br><span class="line">	WSGIPassAuthorization On # 请求头中允许authorization发送</span><br><span class="line"></span><br><span class="line">	&lt;Directory &#x2F;home&#x2F;zzy&#x2F;xgkxflask&gt; # 项目地址</span><br><span class="line">	WSGIProcessGroup xgkxflask #项目名</span><br><span class="line">	WSGIApplicationGroup %&#123;GLOBAL&#125;</span><br><span class="line">	</span><br><span class="line">	#权限设置</span><br><span class="line">        Order allow,deny</span><br><span class="line">        Allow from all</span><br><span class="line">	Require all granted</span><br><span class="line">	&lt;&#x2F;Directory&gt;</span><br><span class="line"></span><br><span class="line">	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,</span><br><span class="line">	# error, crit, alert, emerg.</span><br><span class="line">	# It is also possible to configure the loglevel for particular</span><br><span class="line">	# modules, e.g.</span><br><span class="line">	#LogLevel info ssl:warn</span><br><span class="line">	</span><br><span class="line">	# 日志位置</span><br><span class="line">	ErrorLog $&#123;APACHE_LOG_DIR&#125;&#x2F;error.log </span><br><span class="line">	CustomLog $&#123;APACHE_LOG_DIR&#125;&#x2F;access.log combined</span><br><span class="line"></span><br><span class="line">	# For most configuration files from conf-available&#x2F;, which are</span><br><span class="line">	# enabled or disabled at a global level, it is possible to</span><br><span class="line">	# include a line for only one particular virtual host. For example the</span><br><span class="line">	# following line enables the CGI configuration for this host only</span><br><span class="line">	# after it has been globally disabled with &quot;a2disconf&quot;.</span><br><span class="line">	#Include conf-available&#x2F;serve-cgi-bin.conf</span><br><span class="line">&lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">  &lt;VirtualHost *:80&gt; # 应用的端口</span><br><span class="line"># The ServerName directive sets the request scheme, hostname and port that</span><br><span class="line">  	# the server uses to identify itself. This is used when creating</span><br><span class="line">  	# redirection URLs. In the context of virtual hosts, the ServerName</span><br><span class="line">  	# specifies what hostname must appear in the request&#39;s Host: header to</span><br><span class="line">  	# match this virtual host. For the default virtual host (this file) this</span><br><span class="line">  	# value is not decisive as it is used as a last resort host regardless.</span><br><span class="line">  	# However, you must set it for any further virtual host explicitly.</span><br><span class="line">  	ServerName trueoctopus.com # 绑定的域名</span><br><span class="line">  </span><br><span class="line">  	ServerAdmin xgkx@hgu.edu.cn # 管理员联系方式，出错时会显示在报错内容中</span><br><span class="line">  	DocumentRoot &#x2F;home&#x2F;zzy&#x2F;xgkxflask # 网站根目录</span><br><span class="line">  	</span><br><span class="line">  	LoadModule headers_module &#x2F;usr&#x2F;lib&#x2F;apache2&#x2F;modules&#x2F;mod_headers.so # 跨域用mod</span><br><span class="line">          Header always set Access-Control-Allow-Origin &quot;*&quot;</span><br><span class="line">          Header always set Access-Control-Allow-Methods &quot;GET,POST,PUT,DELETE,OPTIONS&quot;</span><br><span class="line">  	Header always set Access-Control-Allow-Headers &quot;authorization,content-type&quot;</span><br><span class="line">  	# 上面为跨域配置</span><br><span class="line">  </span><br><span class="line">  	WSGIDaemonProcess xgkxflask user&#x3D;zzy group&#x3D;zzy processes&#x3D;4 threads&#x3D;4 </span><br><span class="line">  	# 进程配置 用户不得为root用户，processes为进程 threads为线程</span><br><span class="line">  	WSGIScriptAlias &#x2F; &#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;xgkxflask.wsgi</span><br><span class="line">      	# wsgi配置文件地址，将IP:端口&#x2F;下的请求转发至项目位置</span><br><span class="line">  	WSGIPassAuthorization On # 请求头中允许authorization发送</span><br><span class="line">  </span><br><span class="line">  	&lt;Directory &#x2F;home&#x2F;zzy&#x2F;xgkxflask&gt; # 项目地址</span><br><span class="line">  	WSGIProcessGroup xgkxflask #项目名</span><br><span class="line">  	WSGIApplicationGroup %&#123;GLOBAL&#125;</span><br><span class="line">  	</span><br><span class="line">  	#权限设置</span><br><span class="line">          Order allow,deny</span><br><span class="line">          Allow from all</span><br><span class="line">  	Require all granted</span><br><span class="line">  	&lt;&#x2F;Directory&gt;</span><br><span class="line">  </span><br><span class="line">  	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,</span><br><span class="line">  	# error, crit, alert, emerg.</span><br><span class="line">  	# It is also possible to configure the loglevel for particular</span><br><span class="line">  	# modules, e.g.</span><br><span class="line">  	#LogLevel info ssl:warn</span><br><span class="line">  	</span><br><span class="line">  	# 日志位置</span><br><span class="line">  	ErrorLog $&#123;APACHE_LOG_DIR&#125;&#x2F;error.log </span><br><span class="line">  	CustomLog $&#123;APACHE_LOG_DIR&#125;&#x2F;access.log combined</span><br><span class="line">  </span><br><span class="line">  	# For most configuration files from conf-available&#x2F;, which are</span><br><span class="line">  	# enabled or disabled at a global level, it is possible to</span><br><span class="line">  	# include a line for only one particular virtual host. For example the</span><br><span class="line">  	# following line enables the CGI configuration for this host only</span><br><span class="line">  	# after it has been globally disabled with &quot;a2disconf&quot;.</span><br><span class="line">  	#Include conf-available&#x2F;serve-cgi-bin.conf</span><br><span class="line">  &lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在ports.conf中配置端口，位于/etc/apache2下，服务器安全组需开放</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listen 80</span><br><span class="line">Listen 8080</span><br></pre></td></tr></table></figure>
@@ -400,274 +521,6 @@
       <div class="post-button"><a class="btn" href="/2020/03/20/%E8%A7%A3%E5%86%B3electron-ssr%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/">Windows快捷键列表</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-20 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span>
-      <p><h2 id="Ctrl键功能"><a href="#Ctrl键功能" class="headerlink" title="Ctrl键功能"></a>Ctrl键功能</h2><ol>
-<li><p>Ctrl S 保存　</p>
-</li>
-<li><p>Ctrl W 关闭程序</p>
-</li>
-<li><p>Ctrl N 新建</p>
-</li>
-<li><p>Ctrl O 打开　　</p>
-</li>
-<li><p>Ctrl Z 撤销　　</p>
-</li>
-<li><p>Ctrl F 查找　　</p>
-</li>
-<li><p>Ctrl X 剪切　　</p>
-</li>
-<li><p>Ctrl C 复制　　</p>
-</li>
-<li><p>Ctrl V 粘贴　　</p>
-</li>
-<li><p>Ctrl A 全选　　</p>
-</li>
-<li><p>Ctrl [ 缩小文字　　</p>
-</li>
-<li><p>Ctrl ] 放大文字　　</p>
-</li>
-<li><p>Ctrl B 粗体　　</p>
-</li>
-<li><p>Ctrl I 斜体　　</p>
-</li>
-<li><p>Ctrl U 下划线　　</p>
-</li>
-<li><p>Ctrl Shift 输入法切换　　</p>
-</li>
-<li><p>Ctrl 空格 中英文切换　　</p>
-</li>
-<li><p>Ctrl 回车 QQ号中发送信息</p>
-</li>
-<li><p>Ctrl Home 光标快速移到文件头</p>
-</li>
-<li><p>Ctrl End 光标快速移到文件尾</p>
-</li>
-<li><p>Ctrl Esc 显示开始菜单　　</p>
-</li>
-<li><p>Ctrl Shift &lt; 快速缩小文字</p>
-</li>
-<li><p>Ctrl Shift &gt; 快速放大文字　　</p>
-</li>
-<li><p>Ctrl F5 在IE中强行刷新　　</p>
-</li>
-<li><p>Ctrl 拖动文件 复制文件</p>
-</li>
-<li><p>Ctrl Backspace 启动\关闭输入法</p>
-</li>
-<li><p>拖动文件时按住Ctrl Shift 创建快捷方式</p>
-</li>
-</ol>
-<h2 id="Alt功能"><a href="#Alt功能" class="headerlink" title="Alt功能"></a>Alt功能</h2><ol>
-<li><p>Alt 空格 C 关闭窗口</p>
-</li>
-<li><p>Alt 空格 N 最小化当前窗口</p>
-</li>
-<li><p>Alt 空格 R 恢复最小化窗口</p>
-</li>
-<li><p>Alt 空格 X 最大化当前窗口</p>
-</li>
-<li><p>Alt 空格 M 移动窗口</p>
-</li>
-<li><p>Alt 空格 S 改变窗口大小</p>
-</li>
-<li><p>Alt Tab 两个程序交换</p>
-</li>
-<li><p>Alt 255 QQ号中输入无名人</p>
-</li>
-<li><p>Alt F 打开文件菜单</p>
-</li>
-<li><p>Alt V 打开视图菜单</p>
-</li>
-<li><p>Alt E 打开编辑菜单</p>
-</li>
-<li><p>Alt I 打开插入菜单</p>
-</li>
-<li><p>Alt O 打开格式菜单</p>
-</li>
-<li><p>Alt T 打开工具菜单</p>
-</li>
-<li><p>Alt A 打开表格菜单</p>
-</li>
-<li><p>Alt W 打开窗口菜单</p>
-</li>
-<li><p>Alt H 打开帮助菜单</p>
-</li>
-<li><p>Alt 回车 查看文件属性</p>
-</li>
-<li><p>Alt 双击文件 查看文件属性</p>
-</li>
-<li><p>Alt X 关闭C语言</p>
-</li>
-</ol>
-<h2 id="Shift快捷键"><a href="#Shift快捷键" class="headerlink" title="Shift快捷键"></a>Shift快捷键</h2><ol>
-<li><p>Shift 空格 半\全角切换</p>
-</li>
-<li><p>Shift Delete 永久删除所选项，而不将它放到“回收站”中。　</p>
-</li>
-<li><p>拖动某一项时按 CTRL 复制所选项。</p>
-</li>
-<li><p>拖动某一项时按 CTRL SHIFT创建所选项目的快捷键。</p>
-</li>
-</ol>
-<h2 id="winkey快捷键"><a href="#winkey快捷键" class="headerlink" title="winkey快捷键"></a>winkey快捷键</h2><ol>
-<li><p>winkey D ：最小化桌面上的所有窗口，无论是聊天的窗口还是游戏的窗口</p>
-</li>
-<li><p>winkey I：打开windows设置</p>
-</li>
-<li><p>winkey E：打开文件资源管理器</p>
-</li>
-<li><p>winkey A：打开操作中心</p>
-</li>
-<li><p>winkey C：打开Cortana</p>
-</li>
-<li><p>winkey V：打开历史剪切板（老版本不支持）</p>
-</li>
-<li><p>winkey S：搜索</p>
-</li>
-</ol>
-<h2 id="WORD全套快捷键小技巧"><a href="#WORD全套快捷键小技巧" class="headerlink" title="WORD全套快捷键小技巧　　"></a>WORD全套快捷键小技巧　　</h2><ol>
-<li><p>CTRL O 打开　　</p>
-</li>
-<li><p>CTRL P 打印　</p>
-</li>
-<li><p>CTRL A 全选　　</p>
-</li>
-<li><p>CTRL [/] 对文字进行大小设置（在选中目标情况下）　　</p>
-</li>
-<li><p>CTRL D 字体设置（在选中目标情况下）　　</p>
-</li>
-<li><p>CTRL G/H 查找/替换;</p>
-</li>
-<li><p>CTRL N 全文删除;</p>
-</li>
-<li><p>CTRL M 左边距（在选中目标情况下）；</p>
-</li>
-<li><p>CTRL U 绘制下划线（在选中目标情况下）;　　</p>
-</li>
-<li><p>CTRL B 加粗文字（在选中目标情况下）;</p>
-</li>
-<li><p>CTRL I 倾斜文字（在选中目标情况下）;</p>
-</li>
-<li><p>CTRL Q 两边对齐（无首行缩进），（在选中目标情况下）或将光标放置目标文字的段尾，亦可操作</p>
-</li>
-<li><p>CTRL J 两端对齐（操作同上）</p>
-</li>
-<li><p>CTRL E 居中（操作同上）</p>
-</li>
-<li><p>CTRL R 右对齐（操作同上）</p>
-</li>
-<li><p>CTRL K 插入超链接</p>
-</li>
-<li><p>CTRL T/Y 可进行首行缩进（将光标移到需做此操作的段尾，或将此段选中进行操作</p>
-</li>
-<li><p>Ctrl A（或Ctrl 小键盘上数字5）：选中全文。</p>
-</li>
-<li><p>Ctrl B：给选中的文字加粗（再按一次，取消加粗）。</p>
-</li>
-<li><p>Ctrl C：将选中的文字复制到剪贴板中。</p>
-</li>
-<li><p>Ctrl D：打开“字体”对话框，快速完成字体的各种设置。</p>
-</li>
-<li><p>Ctrl E：使光标所在行的文本居中。</p>
-</li>
-<li><p>Ctrl F：打开“查找与替换”对话框，并定位在“查找”标签上。</p>
-</li>
-<li><p>Ctrl G：打开“查找与替换”对话框，并定位在“定位”标签上。</p>
-</li>
-<li><p>Ctrl H：打开“查找与替换”对话框，并定位在“替换”标签上。</p>
-</li>
-<li><p>Ctrl I：使选中的文字倾斜（再按一次，取消倾斜）。</p>
-</li>
-<li><p>Ctrl K：打开“插入超链接”对话框。</p>
-</li>
-<li><p>Ctrl Shift L：给光标所在行的文本加上“项目符号”。</p>
-</li>
-<li><p>Ctrl M：同时增加首行和悬挂缩进。</p>
-</li>
-<li><p>Ctrl Shift M：同时减少首行和悬挂缩进。</p>
-</li>
-<li><p>Ctrl N：新建一个空文档。</p>
-</li>
-<li><p>Ctrl O（或Ctrl F12）：打开“打开”对话框。</p>
-</li>
-<li><p>Ctrl P（或Ctrl Shift F12）：打开“打印”对话框。　　</p>
-</li>
-<li><p>Ctrl R：使光标所在行的文本右对齐。　　</p>
-</li>
-<li><p>Ctrl S：为新文档打开“另保存为”对话框，或对当前文档进行保存。</p>
-</li>
-<li><p>Ctrl T：增加首行缩进。</p>
-</li>
-<li><p>Ctrl Shift T：减少首行缩进。</p>
-</li>
-<li><p>Ctrl U：给选中的文字加上下划线（再按一次，去年下划线）。</p>
-</li>
-<li><p>Ctrl V：将剪贴板中的文本或图片粘贴到光标处。若剪贴板中有多个内容，则将 最后一条内容粘贴到光标处。</p>
-</li>
-<li><p>Ctrl X：将选中的文字剪切到剪贴板中。</p>
-</li>
-<li><p>Ctrl Z：撤销刚才进行的操作（可以多次使用）。</p>
-</li>
-<li><p>Ctrl 0：将选中的文本每段前增加12磅的间距。</p>
-</li>
-<li><p>Ctrl 1：若选中的文本行距不是“单倍行距”，则将其快速设置为“单倍行距”。</p>
-</li>
-<li><p>Ctrl 2： 将选中的文本行距设置为“两倍行距”。</p>
-</li>
-<li><p>Ctrl 5：将选中的文本行距设置为“1.5倍行距”。</p>
-</li>
-<li><p>Ctrl F2：快速执行“打印预览”功能。</p>
-</li>
-<li><p>Ctrl F4：关闭当前文档。</p>
-</li>
-<li><p>Ctrl F5：使窗口还原到最大化之前的状态。</p>
-</li>
-<li><p>Ctrl Shift F5：打开“书签”对话框。</p>
-</li>
-<li><p>Ctrl Shift F8：激活列选择功能，即通常所说的选择竖块文本（再按一次或按ESC键，取消该功能）。</p>
-</li>
-<li><p>Ctrl F9：在光标处插入一域记号“{}”（注意：直接输入的一对大括号不能作为域记号）。</p>
-</li>
-<li><p>Ctrl F5：使窗口还原到最大化之前的状态（再按一次，就会使窗口再次最大化）。</p>
-</li>
-<li><p>Ctrl Deltet：删除光标后面的一个英文单词或一个中文词语（可反复使用）。 </p>
-</li>
-<li><p>Ctrl Enter：将光标后面的内容快速移到下一页。</p>
-</li>
-<li><p>Ctrl End：快速将光标移到文末。</p>
-</li>
-<li><p>Ctrl Home（或Ctrl Page Up）：快速将光标移到文首。</p>
-</li>
-<li><p>Ctrl Insert Insert(即按两下Insert键)：快速打开或更改“任务窗格”到“剪贴板”状态。</p>
-</li>
-<li><p>Ctrl ：打开中文输入法的“在线造词”功能。</p>
-</li>
-<li><p>Ctrl ：快速切换到下标输入状态（再按一次恢复到正常状态）。</p>
-</li>
-<li><p>Ctrl Shift ：快速切换到上标输入状态（再按一次恢复到正常状态）。</p>
-</li>
-<li><p>Ctrl →：按英文单词或中文词语的间隔向后移动光标。</p>
-</li>
-<li><p>Ctrl ←：按英文单词或中文词语的间隔向前移动光标。</p>
-</li>
-<li><p>Ctrl J：文本两端对齐</p>
-</li>
-<li><p>Ctrl L：文本左对齐</p>
-</li>
-<li><p>Ctrl Q：段落重置</p>
-</li>
-<li><p>Ctrl W：关闭当前文档</p>
-</li>
-<li><p>Ctrl Y：重复上一操作（部分操作不适用）</p>
-</li>
-</ol>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
-    </div>
-  </div>
 
 
 <div id="pagination">
@@ -710,7 +563,7 @@
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-th-list fa-fw"></i>分类</span>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
