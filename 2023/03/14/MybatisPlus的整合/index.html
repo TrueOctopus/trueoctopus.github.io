@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>MybatisPlus | 真丶章鱼</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="TrueOctopus">
+  <meta name="keywords" content="tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
+  <meta name="description" content="个人一些学习心得的分享">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.8',
+    localsearch:{
+      "enable": true,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'search.xml'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.8-fixed/source/css/main.min.css">
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "black-grey",
+	     });
+	}); 
+	</script>
+  <!--Google_Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FJ730WCCCZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FJ730WCCCZ');
+</script>
+<!--baidu_analytics-->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?21f26915b6f95a060b761aab1e41201f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+<div class="single">
+<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+<div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Search..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+<div id="page">
+
+<meta name="keywords" content="JAVA,MybatisPlus,tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
+
+<div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="/images/avatar.jpg"></a></div>
+      <span>2023-03-14</span>
+      <h2>MybatisPlus</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/JAVA/" rel="tag">JAVA</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/MybatisPlus/" rel="tag">MybatisPlus</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a>
+      </div>
+    <div class="social-links">
+    <a href="https://github.com/trueoctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:18368876370@163.com" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+</div></div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <h1 id="MybatisPlus的整合"><a href="#MybatisPlus的整合" class="headerlink" title="MybatisPlus的整合"></a>MybatisPlus的整合</h1><h3 id="一、Spring-Mybatis-mp实现"><a href="#一、Spring-Mybatis-mp实现" class="headerlink" title="一、Spring + Mybatis + mp实现"></a>一、Spring + Mybatis + mp实现</h3><p><strong>jdbc.properties</strong>  jdbc配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">jdbc.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">jdbc.username&#x3D;root  </span><br><span class="line">jdbc.password&#x3D;root</span><br></pre></td></tr></table></figure>
+
+<p><strong>applicationContext.xml</strong>  Spring配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;  </span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;  </span><br><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;  </span><br><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;  </span><br><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans  </span><br><span class="line">      http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd&quot;&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;context:property-placeholder location&#x3D;&quot;classpath:*.properties&quot;&#x2F;&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;!-- 定义数据源 --&gt;  </span><br><span class="line">    &lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.alibaba.druid.pool.DruidDataSource&quot;  </span><br><span class="line">          destroy-method&#x3D;&quot;close&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;$&#123;jdbc.url&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;$&#123;jdbc.username&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;jdbc.password&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value&#x3D;&quot;$&#123;jdbc.driver&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;maxActive&quot; value&#x3D;&quot;10&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;minIdle&quot; value&#x3D;&quot;5&quot;&#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;bean&gt;  </span><br><span class="line">    </span><br><span class="line">    &lt;!--这里使用MP提供的sqlSessionFactory，完成了Spring与MP的整合--&gt;  </span><br><span class="line">    &lt;bean id&#x3D;&quot;sqlSessionFactory&quot; class&#x3D;&quot;com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;configLocation&quot; value&#x3D;&quot;classpath:mybatis-config.xml&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;globalConfig&quot;&gt;  </span><br><span class="line">            &lt;bean class&#x3D;&quot;com.baomidou.mybatisplus.core.config.GlobalConfig&quot;&gt;  </span><br><span class="line">                &lt;property name&#x3D;&quot;dbConfig&quot;&gt;  </span><br><span class="line">                    &lt;bean class&#x3D;&quot;com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig&quot;&gt;  </span><br><span class="line">                        &lt;property name&#x3D;&quot;idType&quot; value&#x3D;&quot;AUTO&quot;&#x2F;&gt;  </span><br><span class="line">                    &lt;&#x2F;bean&gt;</span><br><span class="line">				&lt;&#x2F;property&gt;</span><br><span class="line">			&lt;&#x2F;bean&gt;</span><br><span class="line">		&lt;&#x2F;property&gt;</span><br><span class="line">	&lt;&#x2F;bean&gt;  </span><br><span class="line">	</span><br><span class="line">    &lt;!--扫描mapper接口，使用的依然是Mybatis原生的扫描器--&gt;  </span><br><span class="line">    &lt;bean class&#x3D;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;basePackage&quot; value&#x3D;&quot;cn.itcast.mp.simple.mapper&quot;&#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;bean&gt;  </span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>User</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import com.baomidou.mybatisplus.annotation.TableName;  </span><br><span class="line">import lombok.AllArgsConstructor;  </span><br><span class="line">import lombok.Data;  </span><br><span class="line">import lombok.NoArgsConstructor;  </span><br><span class="line">  </span><br><span class="line">@Data  </span><br><span class="line">@NoArgsConstructor  </span><br><span class="line">@AllArgsConstructor  </span><br><span class="line">@TableName(&quot;tb_user&quot;)  </span><br><span class="line">public class User &#123;  </span><br><span class="line">  </span><br><span class="line">    private Long id;  </span><br><span class="line">    private String userName;  </span><br><span class="line">    private String password;  </span><br><span class="line">    private String name;  </span><br><span class="line">    private Integer age;  </span><br><span class="line">    private String email;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UserMapper</strong>接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import cn.itcast.mp.simple.pojo.User;  </span><br><span class="line">import com.baomidou.mybatisplus.core.mapper.BaseMapper;  </span><br><span class="line">  </span><br><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、SpringBoot-Mybatis-mp实现"><a href="#二、SpringBoot-Mybatis-mp实现" class="headerlink" title="二、SpringBoot + Mybatis + mp实现"></a>二、SpringBoot + Mybatis + mp实现</h3><p><strong>application.properties</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name &#x3D; itcast-mp-springboot  </span><br><span class="line">  </span><br><span class="line">spring.datasource.driver-class-name&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">spring.datasource.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">spring.datasource.username&#x3D;root  </span><br><span class="line">spring.datasource.password&#x3D;root</span><br></pre></td></tr></table></figure>
+
+<p><strong>pojo</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import com.baomidou.mybatisplus.annotation.TableName;  </span><br><span class="line">import lombok.AllArgsConstructor;  </span><br><span class="line">import lombok.Data;  </span><br><span class="line">import lombok.NoArgsConstructor;  </span><br><span class="line">  </span><br><span class="line">@Data  </span><br><span class="line">@NoArgsConstructor  </span><br><span class="line">@AllArgsConstructor  </span><br><span class="line">@TableName(&quot;tb_user&quot;)  </span><br><span class="line">public class User &#123;  </span><br><span class="line">  </span><br><span class="line">    private Long id;  </span><br><span class="line">    private String userName;  </span><br><span class="line">    private String password;  </span><br><span class="line">    private String name;  </span><br><span class="line">    private Integer age;  </span><br><span class="line">    private String email;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>mapper</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import cn.itcast.mp.pojo.User;</span><br><span class="line">import com.baomidou.mybatisplus.core.mapper.BaseMapper;</span><br><span class="line"></span><br><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>application</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mp; import org.mybatis.spring.annotation.MapperScan;</span><br><span class="line">import org.springframework.boot.SpringApplication; </span><br><span class="line">import org.springframework.boot.WebApplicationType; </span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication; </span><br><span class="line">import org.springframework.boot.builder.SpringApplicationBuilder;</span><br><span class="line"></span><br><span class="line">@MapperScan(&quot;cn.itcast.mp.mapper&quot;) &#x2F;&#x2F;设置mapper接口的扫描包</span><br><span class="line">@SpringBootApplication public class MyApplication &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(MyApplication.class, args); </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2023/03/15/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>Mybatis...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>SpringB...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号-1</a> <br/>转载请注明出处
+  </div>
+</footer>
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button> 
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>TrueOctopus</p>
+          <span class="tagline">一个带学生</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-th-list fa-fw"></i>分类</span>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言板</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="http://yangyuheng.top" target="_blank">yangyuheng的个人博客</a></li>
+        <li> <a href="https://lx.blleng.cn" target="_blank">Hexo主题-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
+
+</body>
+</html>

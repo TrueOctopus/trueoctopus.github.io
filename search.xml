@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MybatisPlus的CRUD操作</title>
+    <url>/2023/03/15/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端</tag>
+        <tag>MybatisPlus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MybatisPlus</title>
+    <url>/2023/03/14/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/</url>
+    <content><![CDATA[<h1 id="MybatisPlus的整合"><a href="#MybatisPlus的整合" class="headerlink" title="MybatisPlus的整合"></a>MybatisPlus的整合</h1><h3 id="一、Spring-Mybatis-mp实现"><a href="#一、Spring-Mybatis-mp实现" class="headerlink" title="一、Spring + Mybatis + mp实现"></a>一、Spring + Mybatis + mp实现</h3><p><strong>jdbc.properties</strong>  jdbc配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jdbc.driver&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">jdbc.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">jdbc.username&#x3D;root  </span><br><span class="line">jdbc.password&#x3D;root</span><br></pre></td></tr></table></figure>
+
+<p><strong>applicationContext.xml</strong>  Spring配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;  </span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;  </span><br><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;  </span><br><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;  </span><br><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans  </span><br><span class="line">      http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd&quot;&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;context:property-placeholder location&#x3D;&quot;classpath:*.properties&quot;&#x2F;&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;!-- 定义数据源 --&gt;  </span><br><span class="line">    &lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.alibaba.druid.pool.DruidDataSource&quot;  </span><br><span class="line">          destroy-method&#x3D;&quot;close&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;$&#123;jdbc.url&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;$&#123;jdbc.username&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;jdbc.password&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value&#x3D;&quot;$&#123;jdbc.driver&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;maxActive&quot; value&#x3D;&quot;10&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;minIdle&quot; value&#x3D;&quot;5&quot;&#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;bean&gt;  </span><br><span class="line">    </span><br><span class="line">    &lt;!--这里使用MP提供的sqlSessionFactory，完成了Spring与MP的整合--&gt;  </span><br><span class="line">    &lt;bean id&#x3D;&quot;sqlSessionFactory&quot; class&#x3D;&quot;com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;configLocation&quot; value&#x3D;&quot;classpath:mybatis-config.xml&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;globalConfig&quot;&gt;  </span><br><span class="line">            &lt;bean class&#x3D;&quot;com.baomidou.mybatisplus.core.config.GlobalConfig&quot;&gt;  </span><br><span class="line">                &lt;property name&#x3D;&quot;dbConfig&quot;&gt;  </span><br><span class="line">                    &lt;bean class&#x3D;&quot;com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig&quot;&gt;  </span><br><span class="line">                        &lt;property name&#x3D;&quot;idType&quot; value&#x3D;&quot;AUTO&quot;&#x2F;&gt;  </span><br><span class="line">                    &lt;&#x2F;bean&gt;</span><br><span class="line">				&lt;&#x2F;property&gt;</span><br><span class="line">			&lt;&#x2F;bean&gt;</span><br><span class="line">		&lt;&#x2F;property&gt;</span><br><span class="line">	&lt;&#x2F;bean&gt;  </span><br><span class="line">	</span><br><span class="line">    &lt;!--扫描mapper接口，使用的依然是Mybatis原生的扫描器--&gt;  </span><br><span class="line">    &lt;bean class&#x3D;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;basePackage&quot; value&#x3D;&quot;cn.itcast.mp.simple.mapper&quot;&#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;bean&gt;  </span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>User</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import com.baomidou.mybatisplus.annotation.TableName;  </span><br><span class="line">import lombok.AllArgsConstructor;  </span><br><span class="line">import lombok.Data;  </span><br><span class="line">import lombok.NoArgsConstructor;  </span><br><span class="line">  </span><br><span class="line">@Data  </span><br><span class="line">@NoArgsConstructor  </span><br><span class="line">@AllArgsConstructor  </span><br><span class="line">@TableName(&quot;tb_user&quot;)  </span><br><span class="line">public class User &#123;  </span><br><span class="line">  </span><br><span class="line">    private Long id;  </span><br><span class="line">    private String userName;  </span><br><span class="line">    private String password;  </span><br><span class="line">    private String name;  </span><br><span class="line">    private Integer age;  </span><br><span class="line">    private String email;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UserMapper</strong>接口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import cn.itcast.mp.simple.pojo.User;  </span><br><span class="line">import com.baomidou.mybatisplus.core.mapper.BaseMapper;  </span><br><span class="line">  </span><br><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、SpringBoot-Mybatis-mp实现"><a href="#二、SpringBoot-Mybatis-mp实现" class="headerlink" title="二、SpringBoot + Mybatis + mp实现"></a>二、SpringBoot + Mybatis + mp实现</h3><p><strong>application.properties</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">spring.application.name &#x3D; itcast-mp-springboot  </span><br><span class="line">  </span><br><span class="line">spring.datasource.driver-class-name&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">spring.datasource.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">spring.datasource.username&#x3D;root  </span><br><span class="line">spring.datasource.password&#x3D;root</span><br></pre></td></tr></table></figure>
+
+<p><strong>pojo</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import com.baomidou.mybatisplus.annotation.TableName;  </span><br><span class="line">import lombok.AllArgsConstructor;  </span><br><span class="line">import lombok.Data;  </span><br><span class="line">import lombok.NoArgsConstructor;  </span><br><span class="line">  </span><br><span class="line">@Data  </span><br><span class="line">@NoArgsConstructor  </span><br><span class="line">@AllArgsConstructor  </span><br><span class="line">@TableName(&quot;tb_user&quot;)  </span><br><span class="line">public class User &#123;  </span><br><span class="line">  </span><br><span class="line">    private Long id;  </span><br><span class="line">    private String userName;  </span><br><span class="line">    private String password;  </span><br><span class="line">    private String name;  </span><br><span class="line">    private Integer age;  </span><br><span class="line">    private String email;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>mapper</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import cn.itcast.mp.pojo.User;</span><br><span class="line">import com.baomidou.mybatisplus.core.mapper.BaseMapper;</span><br><span class="line"></span><br><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>application</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package cn.itcast.mp; import org.mybatis.spring.annotation.MapperScan;</span><br><span class="line">import org.springframework.boot.SpringApplication; </span><br><span class="line">import org.springframework.boot.WebApplicationType; </span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication; </span><br><span class="line">import org.springframework.boot.builder.SpringApplicationBuilder;</span><br><span class="line"></span><br><span class="line">@MapperScan(&quot;cn.itcast.mp.mapper&quot;) &#x2F;&#x2F;设置mapper接口的扫描包</span><br><span class="line">@SpringBootApplication public class MyApplication &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(MyApplication.class, args); </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端</tag>
+        <tag>MybatisPlus</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringBoot自动装配</title>
     <url>/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/</url>
-    <content><![CDATA[<h1 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a>SpringBoot自动装配原理</h1><h2 id="一、Conditon"><a href="#一、Conditon" class="headerlink" title="一、Conditon"></a>一、Conditon</h2><p>实现选择性创建Bean操作</p>
-<br/>
-
+    <content><![CDATA[<h1 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a>SpringBoot自动装配原理</h1><h2 id="一、Conditon"><a href="#一、Conditon" class="headerlink" title="一、Conditon"></a>一、Conditon</h2><p>实现选择性创建Bean操作<br><br></p>
 <ol>
 <li>通过坐标是否存在从而创建Bean</li>
 </ol>
@@ -383,7 +429,7 @@
 
 <p><strong>方法：</strong><br>打开文件：/etc/systemd/logind.conf，并修改</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#HandleLidSwitch    合上笔记本盖后的行为，suspend改为ignore（即合盖不休眠）</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong>在原文件中，还要去掉前面的#来取消注释<br><br><br>在这个文件中还有一些相关的值可以修改：</p>
+<p><strong>注意：</strong> 在原文件中，还要去掉前面的#来取消注释<br><br><br>在这个文件中还有一些相关的值可以修改：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#HandlePowerKey     按下电源键后的行为，默认power off</span><br><span class="line">#HandleSleepKey     按下挂起键后的行为，默认suspend</span><br><span class="line">#HandleHibernateKey 按下休眠键后的行为，默认hibernate</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>其他</category>

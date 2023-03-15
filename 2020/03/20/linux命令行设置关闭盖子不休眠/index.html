@@ -129,7 +129,7 @@
 
 <p><strong>方法：</strong><br>打开文件：/etc/systemd/logind.conf，并修改</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#HandleLidSwitch    合上笔记本盖后的行为，suspend改为ignore（即合盖不休眠）</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong>在原文件中，还要去掉前面的#来取消注释<br><br><br>在这个文件中还有一些相关的值可以修改：</p>
+<p><strong>注意：</strong> 在原文件中，还要去掉前面的#来取消注释<br><br><br>在这个文件中还有一些相关的值可以修改：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#HandlePowerKey     按下电源键后的行为，默认power off</span><br><span class="line">#HandleSleepKey     按下挂起键后的行为，默认suspend</span><br><span class="line">#HandleHibernateKey 按下休眠键后的行为，默认hibernate</span><br></pre></td></tr></table></figure>
       </div>
     </div>
