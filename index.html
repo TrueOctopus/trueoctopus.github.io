@@ -118,6 +118,90 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/03/18/Nosql%E7%AE%80%E8%BF%B0/">Nosql简述</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-18 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/JAVA/">JAVA</a></span>
+      <p><h1 id="Nosql简述"><a href="#Nosql简述" class="headerlink" title="Nosql简述"></a>Nosql简述</h1><br>
+
+<p><strong>在单机Mysql时可能出现：</strong></p>
+<ul>
+<li>数据量太大</li>
+<li>数据的索引太大</li>
+<li>访问量，读写混合量太大</li>
+</ul>
+<br>
+
+<p><strong>进而出现Memcached（缓存）+ Mysql + 垂直拆分（读写分离）</strong></p>
+<p>通过多台数据库服务器分配读写的任务分摊压力，使用缓存来保存以提高效率</p>
+<br>
+
+<p><strong>分库分表 + 水平拆分 + Mysql集群</strong></p>
+<p>早年MyISAM：表锁，高并发下会出现锁问题</p>
+<p>现今Innodb：行锁</p>
+<p>所以通过分库分表来减少写的压力，将读写统一为一个集群，通过多集群分摊压力提高效率</p>
+<br>
+
+<p><strong>NoSql的出现</strong></p>
+<p>用户的各类信息爆发式增长，数据量过多，Mysql等关系型数据库不够用，为了解决这类情况需要用到NoSql数据库</p>
+<br>
+
+<h2 id="什么是NoSQL"><a href="#什么是NoSQL" class="headerlink" title="什么是NoSQL"></a><strong>什么是NoSQL</strong></h2><p>NoSQL = Not only Sql，泛指非关系型数据库</p>
+<p>关系型数据库：表格，行，列</p>
+<p>非关系型数据库：不需要一个固定的存储格式，可以简单地进行横向扩展</p>
+<br>
+
+<p><strong>NoSQL特点</strong></p>
+<ul>
+<li>方便扩展</li>
+<li>大数据量高性能</li>
+<li>数据类型多样，不需要事先设计数据库</li>
+<li>传统RDBMS<ul>
+<li>结构化组织</li>
+<li>SQL</li>
+<li>数据和关系都存在单独的表中</li>
+<li>数据操作，数据定义语言</li>
+<li>严格的一致性</li>
+<li>基础的事务</li>
+<li>······</li>
+</ul>
+</li>
+<li>NoSQL<ul>
+<li>不仅仅是数据</li>
+<li>没有固定的查询语言</li>
+<li>键值对存储，列存储，文档存储，图形数据库存储（社交关系）</li>
+<li>CAP定理和BASE（异地多活）</li>
+<li>高性能，高可用，高可扩展</li>
+<li>······</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="NoSQL的四大分类"><a href="#NoSQL的四大分类" class="headerlink" title="NoSQL的四大分类"></a><strong>NoSQL的四大分类</strong></h2><p><strong>KV键值对</strong></p>
+<ul>
+<li>Redis</li>
+<li>Tair</li>
+<li>memecache</li>
+</ul>
+<p><strong>文档型数据库（bson格式）</strong></p>
+<ul>
+<li>MongoDB</li>
+<li>ConthDB</li>
+</ul>
+<p><strong>列存储数据库</strong></p>
+<ul>
+<li>HBase</li>
+<li>分布式文件系统</li>
+</ul>
+<p><strong>图关系数据库</strong></p>
+<ul>
+<li>Neo4j InfoGrid</li>
+</ul>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/03/18/Nosql%E7%AE%80%E8%BF%B0/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/03/17/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">MP插件的基本使用</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-17 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/JAVA/">JAVA</a></span>
       <p><h1 id="MP插件的基本使用"><a href="#MP插件的基本使用" class="headerlink" title="MP插件的基本使用"></a>MP插件的基本使用</h1><h3 id="Mybatis插件机制"><a href="#Mybatis插件机制" class="headerlink" title="Mybatis插件机制"></a><strong>Mybatis插件机制</strong></h3><ul>
@@ -549,24 +633,6 @@
 </ol>
 </p>
       <div class="post-button"><a class="btn" href="/2020/08/23/Apache2%E9%83%A8%E7%BD%B2flask/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/07/29/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/">解决Flask+Apache2邮箱前端验证问题</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-07-29 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/flask/">flask</a></span>
-      <p><h1 id="解决Flask-Apache2解决邮箱前端验证问题"><a href="#解决Flask-Apache2解决邮箱前端验证问题" class="headerlink" title="解决Flask+Apache2解决邮箱前端验证问题"></a>解决Flask+Apache2解决邮箱前端验证问题</h1><br/>
-
-<p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
-<br/>
-
-<p><img src="https://s1.ax1x.com/2020/07/29/amMFmj.png" alt="amMFmj.png"></p>
-<p>如果已经安装了这个模块但是仍然报错时，可能是由于flask与Apache模块间的兼容问题，这时需要调整以下几个模块的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Flask-WTF&#x3D;&#x3D;0.14.2</span><br><span class="line">WTForms&#x3D;&#x3D;2.1</span><br><span class="line">Werkzeug&#x3D;&#x3D;0.16.0</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>：此处为我配置成功的版本，不代表其他更高版本的模块不可用，可自行尝试</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/07/29/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
 
