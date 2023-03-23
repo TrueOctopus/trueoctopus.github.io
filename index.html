@@ -118,33 +118,34 @@
 
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/23/Redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Redis基本使用</a></h2>
+      <h2 class="title"><a href="/2023/03/23/Redis/Redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Redis基本使用</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-23 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Redis/">Redis</a></span>
-      <p><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a><strong>事务</strong></h2><p>事务本质是一组命令的集合  </p>
-<p>事务的<strong>四个特性(ACID)</strong>：</p>
+      <p><h2 id="一、事务"><a href="#一、事务" class="headerlink" title="一、事务"></a><strong>一、事务</strong></h2><p>事务的<strong>四个特性(ACID)</strong>：</p>
 <ul>
 <li><strong>原子性（Atomicity）：</strong> 指事务是一个不可分割的最小工作单位，事务中的操作只有都发生和都不发生两种情况（要么同时成功，要么同时失败）</li>
 <li><strong>一致性（Consistency）：</strong> 事务必须使数据库从一个一致状态变换到另外一个一致状态</li>
 <li><strong>隔离性（Isolation）：</strong> 一个事务的执行不能被其他事务干扰，即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰</li>
 <li><strong>持久性（Durability）：</strong> 一个事务一旦提交成功，它对数据库中数据的改变将是永久性的，接下来的其他操作或故障不应对其有任何影响</li>
 </ul>
-<p>Redis单条命令是保证原子性，但是其事务不保证原子性</p></p>
-      <div class="post-button"><a class="btn" href="/2023/03/23/Redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+<div class="note info">
+            <p><strong>Redis事务</strong>本质是一组命令的集合，顺序执行</p><p><strong>一次性、顺序性、排他性</strong>，执行一系列的命令</p><p>Redis单条命令是保证原子性，但是其事务<strong>不保证原子性</strong>，没有隔离级别的概念</p>
+          </div></p>
+      <div class="post-button"><a class="btn" href="/2023/03/23/Redis/Redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/19/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/">Redis数据类型与命令</a></h2>
+      <h2 class="title"><a href="/2023/03/19/Redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/">Redis数据类型与命令</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-19 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Redis/">Redis</a></span>
       <p><div class="note info">
             <p>Redis共有5种基本数据类型与三种特殊类型</p><p>Redis是<strong>单线程</strong>基于内存操作，cpu不是瓶颈，瓶颈是内存与网络带宽；</p>
           </div></p>
-      <div class="post-button"><a class="btn" href="/2023/03/19/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/19/Redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/18/Nosql%E7%AE%80%E8%BF%B0/">Nosql简述</a></h2>
+      <h2 class="title"><a href="/2023/03/18/Redis/Nosql%E7%AE%80%E8%BF%B0/">Nosql简述</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-18 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Redis/">Redis</a></span>
       <p><p><strong>在单机Mysql时可能出现：</strong></p>
 <ul>
@@ -166,81 +167,81 @@
 
 <p><strong>NoSql的出现</strong></p>
 <p>用户的各类信息爆发式增长，数据量过多，Mysql等关系型数据库不够用，为了解决这类情况需要用到NoSql数据库</p></p>
-      <div class="post-button"><a class="btn" href="/2023/03/18/Nosql%E7%AE%80%E8%BF%B0/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/18/Redis/Nosql%E7%AE%80%E8%BF%B0/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/17/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">MP插件的基本使用</a></h2>
+      <h2 class="title"><a href="/2023/03/17/MybatisPlus/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">MP插件的基本使用</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-17 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><h3 id="Mybatis插件机制"><a href="#Mybatis插件机制" class="headerlink" title="Mybatis插件机制"></a><strong>Mybatis插件机制</strong></h3><ul>
 <li>拦截执行器的方法 Executor</li>
 <li>拦截参数的处理 ParameterHandler</li>
 <li>拦截结果集的处理 ResultSetHandler</li>
 <li>拦截sql语法构建的处理 StatementHandler<br></p>
-      <div class="post-button"><a class="btn" href="/2023/03/17/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/17/MybatisPlus/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/16/MP%E5%AE%9E%E7%8E%B0ActiveRecord/">MP实现ActiveRecord</a></h2>
+      <h2 class="title"><a href="/2023/03/16/MybatisPlus/MP%E5%AE%9E%E7%8E%B0ActiveRecord/">MP实现ActiveRecord</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-16 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><p>实体类中继承 Model&lt;T&gt;即可使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class User extends Model&lt;User&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在实现中不需要显性引入Mapper，但是Mapper中仍要继承BaseMapper</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void testSelectById()&#123;  </span><br><span class="line">    User user &#x3D; new User();  </span><br><span class="line">    user.setId(16L);  </span><br><span class="line">   </span><br><span class="line">    User user &#x3D; user.selectById();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2023/03/16/MP%E5%AE%9E%E7%8E%B0ActiveRecord/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MP%E5%AE%9E%E7%8E%B0ActiveRecord/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/16/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/">MP条件构造器</a></h2>
+      <h2 class="title"><a href="/2023/03/16/MybatisPlus/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/">MP条件构造器</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-16 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><div class="note info">
             <h3 id="条件构造器"><a href="#条件构造器" class="headerlink" title="条件构造器"></a>条件构造器</h3><p>具体见官网文档：</p><p><a href="https://baomidou.com/pages/10c804/#abstractwrapper" target="_blank" rel="noopener">条件构造器</a> </p>
           </div>
 
 <p>以下是常用的基本操作：</p></p>
-      <div class="post-button"><a class="btn" href="/2023/03/16/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/16/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/">MybatisPlus配置项</a></h2>
+      <h2 class="title"><a href="/2023/03/16/MybatisPlus/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/">MybatisPlus配置项</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-16 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><h3 id="常用的MybatisPlus配置项"><a href="#常用的MybatisPlus配置项" class="headerlink" title="常用的MybatisPlus配置项"></a>常用的MybatisPlus配置项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 指定全局的配置文件</span><br><span class="line">mybatis-plus.config-location&#x3D;classpath:mybatis-config.xml</span><br><span class="line"></span><br><span class="line"># 指定Mapper.xml文件的路径</span><br><span class="line">mybatis-plus.mapper-locations &#x3D; classpath*:mybatis&#x2F;*.xml</span><br><span class="line"></span><br><span class="line"># 实体对象的扫描包</span><br><span class="line">mybatis-plus.type-aliases-package &#x3D; cn.itcast.mp.pojo</span><br><span class="line"></span><br><span class="line"># 禁用自定的驼峰映射</span><br><span class="line">#mybatis-plus.configuration.map-underscore-to-camel-case&#x3D;true</span><br><span class="line"></span><br><span class="line"># 禁用缓存</span><br><span class="line">#mybatis-plus.configuration.cache-enabled&#x3D;false</span><br><span class="line"></span><br><span class="line"># 全局的id生成策略</span><br><span class="line">#mybatis-plus.global-config.db-config.id-type&#x3D;input</span><br><span class="line">mybatis-plus.global-config.db-config.id-type&#x3D;auto</span><br><span class="line"></span><br><span class="line"># 全局的表名的前缀</span><br><span class="line">mybatis-plus.global-config.db-config.table-prefix&#x3D;tb_</span><br><span class="line"></span><br><span class="line"># 删除状态的值为：1</span><br><span class="line">mybatis-plus.global-config.db-config.logic-delete-value&#x3D;1</span><br><span class="line"></span><br><span class="line"># 未删除状态的值为：0</span><br><span class="line">mybatis-plus.global-config.db-config.logic-not-delete-value&#x3D;0</span><br><span class="line"></span><br><span class="line"># 枚举包扫描</span><br><span class="line">mybatis-plus.type-enums-package&#x3D;cn.itcast.mp.enums</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/15/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/">MybatisPlus的CRUD操作</a></h2>
+      <h2 class="title"><a href="/2023/03/15/MybatisPlus/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/">MybatisPlus的CRUD操作</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-15 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><p>在继承MP的BaseMapper后已经有了基本的操作：</p>
 <p><img src="https://i.imgtg.com/2023/03/15/fwB86.png" alt="fwB86.png"></p>
 <p>返回值为int，指受影响的数据条数。</p></p>
-      <div class="post-button"><a class="btn" href="/2023/03/15/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/15/MybatisPlus/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/14/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/">MybatisPlus的整合</a></h2>
+      <h2 class="title"><a href="/2023/03/14/MybatisPlus/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/">MybatisPlus的整合</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-14 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><p>具体实现Spring Springboot与MP的整合</p>
 <h3 id="一、Spring-Mybatis-mp实现"><a href="#一、Spring-Mybatis-mp实现" class="headerlink" title="一、Spring + Mybatis + mp实现"></a>一、Spring + Mybatis + mp实现</h3><p><strong>jdbc.properties</strong>  jdbc配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">jdbc.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">jdbc.username&#x3D;root  </span><br><span class="line">jdbc.password&#x3D;root</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2023/03/14/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/14/MybatisPlus/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">SpringBoot自动装配</a></h2>
+      <h2 class="title"><a href="/2023/03/13/SpringBoot/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">SpringBoot自动装配</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-13 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/SpringBoot/">SpringBoot</a></span>
       <p><div class="note info">
             <h3 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a><strong>SpringBoot自动装配原理</strong></h3><p>通过Condition、enable、import等注解实现自动装配</p>
           </div></p>
-      <div class="post-button"><a class="btn" href="/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/13/SpringBoot/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
     </div>
   </div>
 
