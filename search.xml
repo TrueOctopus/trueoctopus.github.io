@@ -1,6 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Redis数据类型与命令</title>
+    <url>/2023/03/19/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Redis数据类型与命令"><a href="#Redis数据类型与命令" class="headerlink" title="Redis数据类型与命令"></a><strong>Redis数据类型与命令</strong></h1><br>
+
+<p>Redis是<strong>单线程</strong>基于内存操作，cpu不是瓶颈，瓶颈是内存与网络带宽；</p>
+<h2 id="Redis-Key"><a href="#Redis-Key" class="headerlink" title="Redis-Key"></a><strong>Redis-Key</strong></h2><p><strong>常用命令：</strong></p>
+<ul>
+<li><strong>select</strong> 切换数据库</li>
+<li><strong>dbsize</strong> 数据库数量查询</li>
+<li><strong>key *</strong> 查看所有key</li>
+<li><strong>flushdb</strong> 清除当前数据库</li>
+<li><strong>flushall</strong> 清除全部数据库内容</li>
+<li><strong>set</strong> 设置key</li>
+<li><strong>exists</strong> 判断是否存在</li>
+<li><strong>expire</strong> 设置key过期时间</li>
+<li><strong>ttl</strong> 查看剩余时间</li>
+<li><strong>type</strong> 查看key的类型</li>
+</ul>
+<h2 id="五大数据类型"><a href="#五大数据类型" class="headerlink" title="五大数据类型"></a><strong>五大数据类型</strong></h2><h3 id="String（字符串）"><a href="#String（字符串）" class="headerlink" title="String（字符串）"></a><strong>String（字符串）</strong></h3><ul>
+<li><p><strong>append</strong> 追加字符串，如果key不存在相当于set一个新的key</p>
+</li>
+<li><p><strong>strlen</strong> 获取字符串长度</p>
+</li>
+<li><p><strong>incr</strong> 自增1</p>
+</li>
+<li><p><strong>decr</strong> 自减1</p>
+</li>
+<li><p><strong>incrby</strong> 自增一个步长</p>
+</li>
+<li><p><strong>decrby</strong> 自减一个步长</p>
+</li>
+<li><p><strong>getrange key 0 1</strong> 获取字符串[0,1]</p>
+</li>
+<li><p><strong>getrange key 0 -1</strong> 获取全部字符串</p>
+</li>
+<li><p><strong>setrange key 1 xx</strong> 替换指定位置的字符串</p>
+<br>
+</li>
+<li><p><strong>setex（set with expire）</strong> 设置并附带过期时间</p>
+</li>
+<li><p><strong>setnx（set if not exist）</strong> 如果不存在再设置（分布式锁中常常设置）</p>
+<br>
+</li>
+<li><p><strong>mset</strong> 同时设置多组kv</p>
+</li>
+<li><p><strong>mget</strong> 同时获取多个值</p>
+</li>
+<li><p><strong>msetnx</strong> 如果不存在再设置，同时成功或者失败</p>
+<br>
+
+</li>
+</ul>
+<p><strong>对象</strong> key设计为user:{id}:{filed}</p>
+<ul>
+<li><p><strong>set user:1 {k1:v1, k1:v1}</strong> 设置一个 user:1 对象，值为json</p>
+</li>
+<li><p><strong>mset user:1:k1 v1 user:1:k2 v2</strong> 值单独设置</p>
+<br>
+</li>
+<li><p><strong>getset</strong> 先get再set，如果不存在则返回nil，如果存在，获取原来的值；并设置新的值</p>
+<br>
+
+</li>
+</ul>
+<p><strong>使用场景：</strong></p>
+<ul>
+<li>计数器</li>
+<li>统计多单位的数量</li>
+<li>对象缓存存储</li>
+</ul>
+<br>
+
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a><strong>List</strong></h3><p>基本的数据类型，列表，在redis中可以用作队列、栈等</p>
+<p>所有的List命令都是“l”开头的</p>
+<ul>
+<li><p><strong>lpush</strong> 将一个或者多个数值，插入到列表的头部（左）</p>
+</li>
+<li><p><strong>rpush</strong> 将一个或者多个数值，插入到列表的尾部（右）</p>
+</li>
+<li><p><strong>lrange list 0 -1</strong> 取值</p>
+</li>
+<li><p><strong>lpop</strong> 移出第一个元素</p>
+</li>
+<li><p><strong>rpop</strong> 移出最后一个元素</p>
+</li>
+<li><p><strong>lindex</strong> 根据下标获取值</p>
+</li>
+<li><p><strong>llen</strong> 获取列表长度</p>
+</li>
+<li><p><strong>lrem list 1（删除数量） v</strong> 移除指定的值</p>
+</li>
+<li><p><strong>ltrim</strong> 截取</p>
+<br>
+</li>
+<li><p><strong>rpoplpush</strong> 移除列表最后一个元素，并添加到一个新列表中</p>
+</li>
+<li><p><strong>lset</strong> 指定下标更新，没有会报错</p>
+</li>
+<li><p><strong>linsert</strong> 在具体值前或后插入值</p>
+<br></li>
+</ul>
+<p><strong>使用场景</strong></p>
+<ul>
+<li>栈 lpush lpop</li>
+<li>队列 lpush rpop</li>
+</ul>
+<br>
+
+<h3 id="Set（集合）"><a href="#Set（集合）" class="headerlink" title="Set（集合）"></a><strong>Set（集合）</strong></h3><p>set中的值不能重复，无序不重复集合<br><br></p>
+<ul>
+<li><strong>sadd</strong> 添加</li>
+<li><strong>smembers</strong> 查看</li>
+<li><strong>sismember</strong> 查看某一个值是否存在</li>
+<li><strong>srem</strong> 移除某一个值</li>
+<li><strong>scard</strong> 查看有多少值</li>
+<li><strong>srandmember</strong> 随机抽取一个或多个元素</li>
+<li><strong>spop</strong> 随机删除</li>
+<li><strong>smove</strong> 将一个指定的值移动到另外一个set集合</li>
+<li><strong>sdiff</strong> 差集</li>
+<li><strong>sinter</strong> 交集</li>
+<li><strong>sunion</strong> 并集</li>
+</ul>
+<br>
+
+<p><strong>使用场景</strong></p>
+<ul>
+<li>共同关注</li>
+<li>二度好友（六度分割理论）</li>
+</ul>
+<br>
+
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a><strong>Hash</strong></h3><p>Map集合，key-map 值为一个map集合，本质和spring没有太大区别</p>
+<ul>
+<li><strong>hset</strong> 设置</li>
+<li><strong>hget</strong> 取值</li>
+<li><strong>hmset</strong> 批量设置</li>
+<li><strong>hmget</strong> 批量取</li>
+<li><strong>hgetall</strong> 获取全部字段和值</li>
+<li><strong>hdel</strong> 删除指定的key字段，对应的值也会被删除</li>
+<li><strong>hlen</strong> 获取字段数量</li>
+<li><strong>hexists</strong> 判断hash中指定字段是否存在</li>
+<li><strong>hkeys</strong> 获取全部key</li>
+<li><strong>hvals</strong> 获取所有值</li>
+<li><strong>hincrby</strong> 自增</li>
+<li><strong>hdecrby</strong> 自减</li>
+</ul>
+<br>
+使用场景：
+
+<ul>
+<li>变更的数据 user name ······ 更适用于对象的存储，String更适用于字符的存储</li>
+</ul>
+<br>
+
+<h3 id="Zest（有序集合）"><a href="#Zest（有序集合）" class="headerlink" title="Zest（有序集合）"></a><strong>Zest（有序集合）</strong></h3><p>在set基础上增加了一个值，set：k1 v1； zset：k1 score1 v1</p>
+<ul>
+<li><strong>zadd</strong> 添加</li>
+<li><strong>zrange</strong> 查询</li>
+<li><strong>zrangebyscore</strong> 根据score排序升序</li>
+<li><strong>zrevrangebyscore k +inf -inf</strong> 根据score降序</li>
+<li><strong>zrem</strong> 删除</li>
+<li><strong>zcard</strong> 获取集合中的个数</li>
+<li><strong>zcount</strong> 获取指定区间的数量</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li>set 排序</li>
+<li>权重判断</li>
+<li>排行榜</li>
+</ul>
+<p>其余api详见<a href="https://redis.io/docs/" target="_blank" rel="noopener">官网</a></p>
+<br>
+
+<h2 id="三种特殊数据类型"><a href="#三种特殊数据类型" class="headerlink" title="三种特殊数据类型"></a><strong>三种特殊数据类型</strong></h2><h3 id="Geospatial（地理位置）"><a href="#Geospatial（地理位置）" class="headerlink" title="Geospatial（地理位置）"></a><strong>Geospatial（地理位置）</strong></h3><p>定位、附近的人、打车位置计算，可以推算地理位置信息</p>
+<ul>
+<li><strong>geoadd key (纬度 经度 名)</strong> 添加位置，两级添加不了</li>
+<li><strong>geopos</strong> 获取指定的位置</li>
+<li><strong>geodist</strong> 获取两地的距离</li>
+<li><strong>georadius</strong> 通过半径找附近的人，所有的数据都应在一个key里</li>
+<li><strong>georadiusbymember</strong> 通过成员名找周边</li>
+<li><strong>geohash</strong> 将二维的经纬度转换为一堆字符串，越接近距离越近</li>
+</ul>
+<p>底层实现原理就是zset，可以使用zset来操作</p>
+<ul>
+<li><strong>zrem</strong> 删除</li>
+<li><strong>zrange</strong> 查看</li>
+</ul>
+<br>
+
+<h3 id="Hyperloglog（基数统计）"><a href="#Hyperloglog（基数统计）" class="headerlink" title="Hyperloglog（基数统计）"></a><strong>Hyperloglog（基数统计）</strong></h3><p>优点：占用的内存是固定的，计算2^64不同的元素的基数只要12kb</p>
+<ul>
+<li><strong>pfadd</strong> 添加</li>
+<li><strong>pfcount</strong> 计算元素个数</li>
+<li><strong>pfmerge</strong> 合并两个key，并集</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li>计算网页的uv（一个人访问一个网站多次，但是还是算一个人），有0.81%的错误率</li>
+</ul>
+<p>如果允许容错可以使用hyperloglog，如果不能容错则使用set或者自己的数据类型</p>
+<br>
+
+<h3 id="Bitmaps（位存储）"><a href="#Bitmaps（位存储）" class="headerlink" title="Bitmaps（位存储）"></a><strong>Bitmaps（位存储）</strong></h3><ul>
+<li><strong>setbit</strong> 设置值</li>
+<li><strong>getbit</strong> 查看</li>
+<li><strong>bitcount</strong> 统计1的数量</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li>统计疫情感染人数 0 1 0 0</li>
+<li>统计活跃不活跃</li>
+<li>登录未登录</li>
+<li>打卡</li>
+</ul>
+<p>两个状态的都可以使用Bitmaps，只有0 1两个状态</p>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nosql简述</title>
     <url>/2023/03/18/Nosql%E7%AE%80%E8%BF%B0/</url>
     <content><![CDATA[<h1 id="Nosql简述"><a href="#Nosql简述" class="headerlink" title="Nosql简述"></a>Nosql简述</h1><br>
@@ -81,7 +307,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>Redis</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -175,7 +401,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>MybatisPlus</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -204,7 +430,7 @@
 <p><strong>查询</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void testSelect()&#123;  </span><br><span class="line">    User user &#x3D; new User();  </span><br><span class="line">  </span><br><span class="line">    QueryWrapper&lt;User&gt; wrapper  &#x3D; new QueryWrapper&lt;&gt;();  </span><br><span class="line">    wrapper.ge(&quot;age&quot;, 30); &#x2F;&#x2F;大于等于30岁的用户查询出来  </span><br><span class="line">  </span><br><span class="line">    List&lt;User&gt; users &#x3D; user.selectList(wrapper);  </span><br><span class="line">    for (User user1 : users) &#123;  </span><br><span class="line">        System.out.println(user1);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>MybatisPlus</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -246,7 +472,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void testSelect()&#123;  </span><br><span class="line">    QueryWrapper&lt;User&gt; wrapper &#x3D; new QueryWrapper&lt;&gt;();  </span><br><span class="line">    &#x2F;&#x2F;SELECT id,name,age FROM tb_user WHERE name &#x3D; ? OR age &#x3D; ?  </span><br><span class="line">    wrapper.eq(&quot;name&quot;, &quot;王五&quot;)  </span><br><span class="line">            .or()  </span><br><span class="line">            .eq(&quot;age&quot;, 21)  </span><br><span class="line">            .select(&quot;id&quot;,&quot;name&quot;,&quot;age&quot;); &#x2F;&#x2F;指定查询的字段  </span><br><span class="line">  </span><br><span class="line">    List&lt;User&gt; users &#x3D; this.userMapper.selectList(wrapper);  </span><br><span class="line">    for (User user : users) &#123;  </span><br><span class="line">        System.out.println(user);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>MybatisPlus</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -261,7 +487,7 @@
 
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>MybatisPlus</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -326,7 +552,7 @@
 
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>MybatisPlus</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -361,7 +587,7 @@
 <p><strong>application</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package cn.itcast.mp; import org.mybatis.spring.annotation.MapperScan;</span><br><span class="line">import org.springframework.boot.SpringApplication; </span><br><span class="line">import org.springframework.boot.WebApplicationType; </span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication; </span><br><span class="line">import org.springframework.boot.builder.SpringApplicationBuilder;</span><br><span class="line"></span><br><span class="line">@MapperScan(&quot;cn.itcast.mp.mapper&quot;) &#x2F;&#x2F;设置mapper接口的扫描包</span><br><span class="line">@SpringBootApplication public class MyApplication &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(MyApplication.class, args); </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>MybatisPlus</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
@@ -485,7 +711,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
