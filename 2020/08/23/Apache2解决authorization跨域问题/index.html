@@ -121,13 +121,14 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h1 id="Apache2-解决authorization跨域问题"><a href="#Apache2-解决authorization跨域问题" class="headerlink" title="Apache2 解决authorization跨域问题"></a>Apache2 解决authorization跨域问题</h1><br/>
-
-<div class="note default">
+        <div class="note default">
             <p>问题描述：前端在请求头中发送的Authorization字段消失不见，报跨域错误而跨域配置无误</p><p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
           </div>
 
-<br/>
+
+<a id="more"></a>
+
+<br>
 
 <ol>
 <li><p>修改apache2配置文件，默认位于 /etc/apache2/sites-available/，软链接到sites-enabled文件夹才会生效</p>
@@ -186,6 +187,21 @@
   </div>
 </footer>
 </div>
+
+<style>
+  .lx-entry{
+    line-height: 2rem;
+  }
+
+  .lx-entry p {
+    line-height: 2rem;
+  }
+
+  .lx-entry li {
+    line-height: 2rem;
+  }
+
+</style>
 
 <button class="hamburger hamburger--arrow-r" type="button">
     <div class="hamburger-box">

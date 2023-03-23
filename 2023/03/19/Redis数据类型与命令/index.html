@@ -121,9 +121,12 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h1 id="Redis数据类型与命令"><a href="#Redis数据类型与命令" class="headerlink" title="Redis数据类型与命令"></a><strong>Redis数据类型与命令</strong></h1><br>
+        <div class="note info">
+            <p>Redis共有5种基本数据类型与三种特殊类型</p><p>Redis是<strong>单线程</strong>基于内存操作，cpu不是瓶颈，瓶颈是内存与网络带宽；</p>
+          </div>
 
-<p>Redis是<strong>单线程</strong>基于内存操作，cpu不是瓶颈，瓶颈是内存与网络带宽；</p>
+<a id="more"></a>
+
 <h2 id="Redis-Key"><a href="#Redis-Key" class="headerlink" title="Redis-Key"></a><strong>Redis-Key</strong></h2><p><strong>常用命令：</strong></p>
 <ul>
 <li><strong>select</strong> 切换数据库</li>
@@ -342,12 +345,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="#">
+		<a class="copy" href="/2023/03/23/Redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>没有更新的文章</h3>
+						<h3>Redis基本使用</h3>
 					</div>
 				</div>
 			</div>
@@ -376,6 +379,21 @@
   </div>
 </footer>
 </div>
+
+<style>
+  .lx-entry{
+    line-height: 2rem;
+  }
+
+  .lx-entry p {
+    line-height: 2rem;
+  }
+
+  .lx-entry li {
+    line-height: 2rem;
+  }
+
+</style>
 
 <button class="hamburger hamburger--arrow-r" type="button">
     <div class="hamburger-box">

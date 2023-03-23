@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Redis基本使用</title>
+    <url>/2023/03/23/Redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a><strong>事务</strong></h2><p>事务本质是一组命令的集合  </p>
+<p>事务的<strong>四个特性(ACID)</strong>：</p>
+<ul>
+<li><strong>原子性（Atomicity）：</strong> 指事务是一个不可分割的最小工作单位，事务中的操作只有都发生和都不发生两种情况（要么同时成功，要么同时失败）</li>
+<li><strong>一致性（Consistency）：</strong> 事务必须使数据库从一个一致状态变换到另外一个一致状态</li>
+<li><strong>隔离性（Isolation）：</strong> 一个事务的执行不能被其他事务干扰，即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰</li>
+<li><strong>持久性（Durability）：</strong> 一个事务一旦提交成功，它对数据库中数据的改变将是永久性的，接下来的其他操作或故障不应对其有任何影响</li>
+</ul>
+<p>Redis单条命令是保证原子性，但是其事务不保证原子性</p>
+<a id="more"></a>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis数据类型与命令</title>
     <url>/2023/03/19/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Redis数据类型与命令"><a href="#Redis数据类型与命令" class="headerlink" title="Redis数据类型与命令"></a><strong>Redis数据类型与命令</strong></h1><br>
+    <content><![CDATA[<div class="note info">
+            <p>Redis共有5种基本数据类型与三种特殊类型</p><p>Redis是<strong>单线程</strong>基于内存操作，cpu不是瓶颈，瓶颈是内存与网络带宽；</p>
+          </div>
 
-<p>Redis是<strong>单线程</strong>基于内存操作，cpu不是瓶颈，瓶颈是内存与网络带宽；</p>
+<a id="more"></a>
+
 <h2 id="Redis-Key"><a href="#Redis-Key" class="headerlink" title="Redis-Key"></a><strong>Redis-Key</strong></h2><p><strong>常用命令：</strong></p>
 <ul>
 <li><strong>select</strong> 切换数据库</li>
@@ -229,9 +255,7 @@
   <entry>
     <title>Nosql简述</title>
     <url>/2023/03/18/Nosql%E7%AE%80%E8%BF%B0/</url>
-    <content><![CDATA[<h1 id="Nosql简述"><a href="#Nosql简述" class="headerlink" title="Nosql简述"></a>Nosql简述</h1><br>
-
-<p><strong>在单机Mysql时可能出现：</strong></p>
+    <content><![CDATA[<p><strong>在单机Mysql时可能出现：</strong></p>
 <ul>
 <li>数据量太大</li>
 <li>数据的索引太大</li>
@@ -251,6 +275,8 @@
 
 <p><strong>NoSql的出现</strong></p>
 <p>用户的各类信息爆发式增长，数据量过多，Mysql等关系型数据库不够用，为了解决这类情况需要用到NoSql数据库</p>
+<a id="more"></a>
+
 <br>
 
 <h2 id="什么是NoSQL"><a href="#什么是NoSQL" class="headerlink" title="什么是NoSQL"></a><strong>什么是NoSQL</strong></h2><p>NoSQL = Not only Sql，泛指非关系型数据库</p>
@@ -318,11 +344,12 @@
   <entry>
     <title>MP插件的基本使用</title>
     <url>/2023/03/17/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1 id="MP插件的基本使用"><a href="#MP插件的基本使用" class="headerlink" title="MP插件的基本使用"></a>MP插件的基本使用</h1><h3 id="Mybatis插件机制"><a href="#Mybatis插件机制" class="headerlink" title="Mybatis插件机制"></a><strong>Mybatis插件机制</strong></h3><ul>
+    <content><![CDATA[<h3 id="Mybatis插件机制"><a href="#Mybatis插件机制" class="headerlink" title="Mybatis插件机制"></a><strong>Mybatis插件机制</strong></h3><ul>
 <li>拦截执行器的方法 Executor</li>
 <li>拦截参数的处理 ParameterHandler</li>
 <li>拦截结果集的处理 ResultSetHandler</li>
 <li>拦截sql语法构建的处理 StatementHandler<br>
+<a id="more"></a>
 
 </li>
 </ul>
@@ -412,11 +439,15 @@
   <entry>
     <title>MP实现ActiveRecord</title>
     <url>/2023/03/16/MP%E5%AE%9E%E7%8E%B0ActiveRecord/</url>
-    <content><![CDATA[<h1 id="MP实现ActiveRecord"><a href="#MP实现ActiveRecord" class="headerlink" title="MP实现ActiveRecord"></a>MP实现ActiveRecord</h1><p>实体类中继承 Model&lt;T&gt;即可使用</p>
+    <content><![CDATA[<p>实体类中继承 Model&lt;T&gt;即可使用</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class User extends Model&lt;User&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在实现中不需要显性引入Mapper，但是Mapper中仍要继承BaseMapper</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void testSelectById()&#123;  </span><br><span class="line">    User user &#x3D; new User();  </span><br><span class="line">    user.setId(16L);  </span><br><span class="line">   </span><br><span class="line">    User user &#x3D; user.selectById();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
 
 <p><strong>新增</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void testInsert()&#123;  </span><br><span class="line">    User user &#x3D; new User();  </span><br><span class="line">    user.setUserName(&quot;diaochan&quot;);  </span><br><span class="line">    user.setPassword(&quot;123456&quot;);  </span><br><span class="line">    user.setAge(20);  </span><br><span class="line">    user.setName(&quot;貂蝉&quot;);  </span><br><span class="line">    user.setMail(&quot;diaochan@itcast.cn&quot;);  </span><br><span class="line">    user.setVersion(1);  </span><br><span class="line">    user.setSex(SexEnum.WOMAN); &#x2F;&#x2F;使用的是枚举  </span><br><span class="line">  </span><br><span class="line">    &#x2F;&#x2F; 调用AR的insert方法进行插入数据  </span><br><span class="line">    boolean insert &#x3D; user.insert();  </span><br><span class="line">    System.out.println(&quot;result &#x3D;&gt; &quot; + insert);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -442,8 +473,13 @@
   <entry>
     <title>MP条件构造器</title>
     <url>/2023/03/16/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="条件构造器"><a href="#条件构造器" class="headerlink" title="条件构造器"></a>条件构造器</h1><p>具体见官网文档：</p>
-<p><a href="https://baomidou.com/pages/10c804/#abstractwrapper" target="_blank" rel="noopener">条件构造器</a><br><br></p>
+    <content><![CDATA[<div class="note info">
+            <h3 id="条件构造器"><a href="#条件构造器" class="headerlink" title="条件构造器"></a>条件构造器</h3><p>具体见官网文档：</p><p><a href="https://baomidou.com/pages/10c804/#abstractwrapper" target="_blank" rel="noopener">条件构造器</a> </p>
+          </div>
+
+<p>以下是常用的基本操作：</p>
+<a id="more"></a>
+
 <ul>
 <li><strong>allEq</strong></li>
 </ul>
@@ -485,6 +521,7 @@
     <url>/2023/03/16/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/</url>
     <content><![CDATA[<h3 id="常用的MybatisPlus配置项"><a href="#常用的MybatisPlus配置项" class="headerlink" title="常用的MybatisPlus配置项"></a>常用的MybatisPlus配置项</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 指定全局的配置文件</span><br><span class="line">mybatis-plus.config-location&#x3D;classpath:mybatis-config.xml</span><br><span class="line"></span><br><span class="line"># 指定Mapper.xml文件的路径</span><br><span class="line">mybatis-plus.mapper-locations &#x3D; classpath*:mybatis&#x2F;*.xml</span><br><span class="line"></span><br><span class="line"># 实体对象的扫描包</span><br><span class="line">mybatis-plus.type-aliases-package &#x3D; cn.itcast.mp.pojo</span><br><span class="line"></span><br><span class="line"># 禁用自定的驼峰映射</span><br><span class="line">#mybatis-plus.configuration.map-underscore-to-camel-case&#x3D;true</span><br><span class="line"></span><br><span class="line"># 禁用缓存</span><br><span class="line">#mybatis-plus.configuration.cache-enabled&#x3D;false</span><br><span class="line"></span><br><span class="line"># 全局的id生成策略</span><br><span class="line">#mybatis-plus.global-config.db-config.id-type&#x3D;input</span><br><span class="line">mybatis-plus.global-config.db-config.id-type&#x3D;auto</span><br><span class="line"></span><br><span class="line"># 全局的表名的前缀</span><br><span class="line">mybatis-plus.global-config.db-config.table-prefix&#x3D;tb_</span><br><span class="line"></span><br><span class="line"># 删除状态的值为：1</span><br><span class="line">mybatis-plus.global-config.db-config.logic-delete-value&#x3D;1</span><br><span class="line"></span><br><span class="line"># 未删除状态的值为：0</span><br><span class="line">mybatis-plus.global-config.db-config.logic-not-delete-value&#x3D;0</span><br><span class="line"></span><br><span class="line"># 枚举包扫描</span><br><span class="line">mybatis-plus.type-enums-package&#x3D;cn.itcast.mp.enums</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
 ]]></content>
       <categories>
         <category>MybatisPlus</category>
@@ -498,11 +535,11 @@
   <entry>
     <title>MybatisPlus的CRUD操作</title>
     <url>/2023/03/15/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h1 id="MybatisPlus的CRUD操作"><a href="#MybatisPlus的CRUD操作" class="headerlink" title="MybatisPlus的CRUD操作"></a>MybatisPlus的CRUD操作</h1><br>
-在继承MP的BaseMapper后已经有了基本的操作：
-
+    <content><![CDATA[<p>在继承MP的BaseMapper后已经有了基本的操作：</p>
 <p><img src="https://i.imgtg.com/2023/03/15/fwB86.png" alt="fwB86.png"></p>
 <p>返回值为int，指受影响的数据条数。</p>
+<a id="more"></a>
+
 <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a><strong>插入</strong></h3><p>设定id策略@TableId</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@TableId(type &#x3D; IdType.AUTO) &#x2F;&#x2F;通过添加注解改变MP的id策略</span><br><span class="line"></span><br><span class="line">AUTO(0),  &#x2F;&#x2F;id自增</span><br><span class="line">NONE(1),  &#x2F;&#x2F;未设置主键类型</span><br><span class="line">INPUT(2), &#x2F;&#x2F;用户输入id，可通过自己注册自动填充插件进行填充</span><br><span class="line">&#x2F;&#x2F;以下类型只有当插入id为空时才会自动填充</span><br><span class="line">ID_WORKER(3),  &#x2F;&#x2F;全局唯一id（idWorker）</span><br><span class="line">UUID(4),  &#x2F;&#x2F;全局唯一id（UUID）</span><br><span class="line">ID_WORKER_STR(5); &#x2F;&#x2F;字符串全局唯一id（idWorker的字符串表示）</span><br></pre></td></tr></table></figure>
 
@@ -563,8 +600,11 @@
   <entry>
     <title>MybatisPlus的整合</title>
     <url>/2023/03/14/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/</url>
-    <content><![CDATA[<h1 id="MybatisPlus的整合"><a href="#MybatisPlus的整合" class="headerlink" title="MybatisPlus的整合"></a>MybatisPlus的整合</h1><h3 id="一、Spring-Mybatis-mp实现"><a href="#一、Spring-Mybatis-mp实现" class="headerlink" title="一、Spring + Mybatis + mp实现"></a>一、Spring + Mybatis + mp实现</h3><p><strong>jdbc.properties</strong>  jdbc配置</p>
+    <content><![CDATA[<p>具体实现Spring Springboot与MP的整合</p>
+<h3 id="一、Spring-Mybatis-mp实现"><a href="#一、Spring-Mybatis-mp实现" class="headerlink" title="一、Spring + Mybatis + mp实现"></a>一、Spring + Mybatis + mp实现</h3><p><strong>jdbc.properties</strong>  jdbc配置</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jdbc.driver&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">jdbc.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">jdbc.username&#x3D;root  </span><br><span class="line">jdbc.password&#x3D;root</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p><strong>applicationContext.xml</strong>  Spring配置</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;  </span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;  </span><br><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;  </span><br><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;  </span><br><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans  </span><br><span class="line">      http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd&quot;&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;context:property-placeholder location&#x3D;&quot;classpath:*.properties&quot;&#x2F;&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;!-- 定义数据源 --&gt;  </span><br><span class="line">    &lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.alibaba.druid.pool.DruidDataSource&quot;  </span><br><span class="line">          destroy-method&#x3D;&quot;close&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;$&#123;jdbc.url&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;$&#123;jdbc.username&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;jdbc.password&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value&#x3D;&quot;$&#123;jdbc.driver&#125;&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;maxActive&quot; value&#x3D;&quot;10&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;minIdle&quot; value&#x3D;&quot;5&quot;&#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;bean&gt;  </span><br><span class="line">    </span><br><span class="line">    &lt;!--这里使用MP提供的sqlSessionFactory，完成了Spring与MP的整合--&gt;  </span><br><span class="line">    &lt;bean id&#x3D;&quot;sqlSessionFactory&quot; class&#x3D;&quot;com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;configLocation&quot; value&#x3D;&quot;classpath:mybatis-config.xml&quot;&#x2F;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;globalConfig&quot;&gt;  </span><br><span class="line">            &lt;bean class&#x3D;&quot;com.baomidou.mybatisplus.core.config.GlobalConfig&quot;&gt;  </span><br><span class="line">                &lt;property name&#x3D;&quot;dbConfig&quot;&gt;  </span><br><span class="line">                    &lt;bean class&#x3D;&quot;com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig&quot;&gt;  </span><br><span class="line">                        &lt;property name&#x3D;&quot;idType&quot; value&#x3D;&quot;AUTO&quot;&#x2F;&gt;  </span><br><span class="line">                    &lt;&#x2F;bean&gt;</span><br><span class="line">				&lt;&#x2F;property&gt;</span><br><span class="line">			&lt;&#x2F;bean&gt;</span><br><span class="line">		&lt;&#x2F;property&gt;</span><br><span class="line">	&lt;&#x2F;bean&gt;  </span><br><span class="line">	</span><br><span class="line">    &lt;!--扫描mapper接口，使用的依然是Mybatis原生的扫描器--&gt;  </span><br><span class="line">    &lt;bean class&#x3D;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;  </span><br><span class="line">        &lt;property name&#x3D;&quot;basePackage&quot; value&#x3D;&quot;cn.itcast.mp.simple.mapper&quot;&#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;bean&gt;  </span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure>
@@ -598,7 +638,13 @@
   <entry>
     <title>SpringBoot自动装配</title>
     <url>/2023/03/13/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/</url>
-    <content><![CDATA[<h1 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a>SpringBoot自动装配原理</h1><h2 id="一、Conditon"><a href="#一、Conditon" class="headerlink" title="一、Conditon"></a>一、Conditon</h2><p>实现选择性创建Bean操作<br><br></p>
+    <content><![CDATA[<div class="note info">
+            <h3 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a><strong>SpringBoot自动装配原理</strong></h3><p>通过Condition、enable、import等注解实现自动装配</p>
+          </div>
+
+<a id="more"></a>
+
+<h2 id="一、Condition"><a href="#一、Condition" class="headerlink" title="一、Condition"></a><strong>一、Condition</strong></h2><p>实现选择性创建Bean操作<br><br></p>
 <ol>
 <li>通过坐标是否存在从而创建Bean</li>
 </ol>
@@ -625,9 +671,11 @@
 </ol>
 <p><strong>UserConfig</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UserConfig &#123;</span><br><span class="line"></span><br><span class="line">    @@Bean</span><br><span class="line">    @ConditionalOnProperty(name &#x3D; &quot;test&quot;,havingValue &#x3D; &quot;111&quot;)</span><br><span class="line">    public User user()&#123;</span><br><span class="line">        return new User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SpringBoot自动配置中存在各类不同触发条件下的ConditionalOn*<br><br/></p>
-<h2 id="二、Enable"><a href="#二、Enable" class="headerlink" title="二、Enable"></a>二、Enable</h2><p>动态启用某些功能，底层使用@Import注解导入配置类，实现Bean的动态加载。</p>
-<br/>
+<p>SpringBoot自动配置中存在各类不同触发条件下的ConditionalOn*</p>
+<br>
+
+<h2 id="二、Enable"><a href="#二、Enable" class="headerlink" title="二、Enable"></a><strong>二、Enable</strong></h2><p>动态启用某些功能，底层使用@Import注解导入配置类，实现Bean的动态加载。</p>
+<br>
 
 <p>SpringBoot不能直接获取第三方工程的Bean，原因是在@SpringBootApplication中存在@ComponentScan注解，其扫描的范围只有当前引导类所在的包及其子包。</p>
 <ol>
@@ -649,7 +697,7 @@
 <p><strong>Application</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableUser</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="三、-Import注解"><a href="#三、-Import注解" class="headerlink" title="三、@Import注解"></a>三、@Import注解</h2><p>@Import的四种用法</p>
+<h2 id="三、-Import注解"><a href="#三、-Import注解" class="headerlink" title="三、@Import注解"></a><strong>三、@Import注解</strong></h2><p>@Import的四种用法</p>
 <ol>
 <li>导入Bean</li>
 </ol>
@@ -682,9 +730,9 @@
 <p><strong>Application</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(&#123;MyImportBeanDefinitionRegistrar.class&#125;)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<br/>
+<br>
 
-<h2 id="四、-EnableAutoConfiguration注解"><a href="#四、-EnableAutoConfiguration注解" class="headerlink" title="四、@EnableAutoConfiguration注解"></a>四、@EnableAutoConfiguration注解</h2><p>在@SpringBootApplication中有注解@EnableAutoConfiguration，其中有@Import({AutoConfigurationImportSelector.class})，使用了上一节中的第三种方式</p>
+<h2 id="四、-EnableAutoConfiguration注解"><a href="#四、-EnableAutoConfiguration注解" class="headerlink" title="四、@EnableAutoConfiguration注解"></a><strong>四、@EnableAutoConfiguration注解</strong></h2><p>在@SpringBootApplication中有注解@EnableAutoConfiguration，其中有@Import({AutoConfigurationImportSelector.class})，使用了上一节中的第三种方式</p>
 <p><strong>EnableAutoConfiguration</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">@AutoConfigurationPackage</span><br><span class="line">@Import(&#123;AutoConfigurationImportSelector.class&#125;)</span><br><span class="line">public @interface EnableAutoConfiguration &#123;</span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY &#x3D; &quot;spring.boot.enableautoconfiguration&quot;;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] exclude() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    String[] excludeName() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -702,7 +750,7 @@
 <p>其中比如RedisAutoConfiguration，通过ConditionalOnClass等条件注解控制相关Bean的加载</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConditionalOnClass(&#123;RedisOperations.class&#125;)</span><br><span class="line">@EnableConfigurationProperties(&#123;RedisProperties.class&#125;)</span><br><span class="line">@Import(&#123;LettuceConnectionConfiguration.class, JedisConnectionConfiguration.class&#125;)</span><br><span class="line">public class RedisAutoConfiguration &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<br/>
+<br>
 
 <ul>
 <li>@EnableAutoConfiguration注解内部使用@Import({AutoConfigurationImportSelector.class})加载配置类</li>
@@ -722,13 +770,14 @@
   <entry>
     <title>Apache2解决authorization跨域问题</title>
     <url>/2020/08/23/Apache2%E8%A7%A3%E5%86%B3authorization%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="Apache2-解决authorization跨域问题"><a href="#Apache2-解决authorization跨域问题" class="headerlink" title="Apache2 解决authorization跨域问题"></a>Apache2 解决authorization跨域问题</h1><br/>
-
-<div class="note default">
+    <content><![CDATA[<div class="note default">
             <p>问题描述：前端在请求头中发送的Authorization字段消失不见，报跨域错误而跨域配置无误</p><p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
           </div>
 
-<br/>
+
+<a id="more"></a>
+
+<br>
 
 <ol>
 <li><p>修改apache2配置文件，默认位于 /etc/apache2/sites-available/，软链接到sites-enabled文件夹才会生效</p>
@@ -761,7 +810,7 @@
             <p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
           </div>
 
-<h1 id="Apache2部署flask"><a href="#Apache2部署flask" class="headerlink" title="Apache2部署flask"></a>Apache2部署flask</h1><br/>
+<a id="more"></a>
 
 <ol>
 <li><p>安装apache2和wsgi模块</p>
@@ -797,12 +846,12 @@
   <entry>
     <title>解决Flask+Apache2邮箱前端验证问题</title>
     <url>/2020/07/29/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="解决Flask-Apache2解决邮箱前端验证问题"><a href="#解决Flask-Apache2解决邮箱前端验证问题" class="headerlink" title="解决Flask+Apache2解决邮箱前端验证问题"></a>解决Flask+Apache2解决邮箱前端验证问题</h1><br/>
-
-<p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
-<br/>
+    <content><![CDATA[<p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
+<br>
 
 <p><img src="https://s1.ax1x.com/2020/07/29/amMFmj.png" alt="amMFmj.png"></p>
+<a id="more"></a>
+
 <p>如果已经安装了这个模块但是仍然报错时，可能是由于flask与Apache模块间的兼容问题，这时需要调整以下几个模块的版本</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Flask-WTF&#x3D;&#x3D;0.14.2</span><br><span class="line">WTForms&#x3D;&#x3D;2.1</span><br><span class="line">Werkzeug&#x3D;&#x3D;0.16.0</span><br></pre></td></tr></table></figure>
 
@@ -819,16 +868,14 @@
   <entry>
     <title>Apache2解决中文编码问题</title>
     <url>/2020/07/29/Apache2%E8%A7%A3%E5%86%B3%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="Apache2-解决utf-8编码问题"><a href="#Apache2-解决utf-8编码问题" class="headerlink" title="Apache2 解决utf-8编码问题"></a>Apache2 解决utf-8编码问题</h1><br/>
-
-<ol>
+    <content><![CDATA[<ol>
 <li><p>修改 /usr/lib/python2.7/ 下的 site.py 文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo vim &#x2F;usr&#x2F;lib&#x2F;python2.7&#x2F;site.py</span><br></pre></td></tr></table></figure>
 
-
-
 </li>
 </ol>
+<a id="more"></a>
+
 <ol start="2">
 <li><p>将设置解码函数内默认的ascii编码改为utf-8即可</p>
  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def setencoding():</span><br><span class="line">    &quot;&quot;&quot;Set the string encoding used by the Unicode implementation.The</span><br><span class="line">    default is &#39;ascii&#39;, but if you&#39;re willing to experiment, you can</span><br><span class="line">    change this.&quot;&quot;&quot;</span><br><span class="line">    encoding &#x3D; &quot;utf-8&quot; # 将默认编码改成utf-8即可</span><br><span class="line">    if 0:</span><br><span class="line">        # Enable to support locale aware default string encodings.</span><br><span class="line">        import locale</span><br><span class="line">        loc &#x3D; locale.getdefaultlocale()</span><br><span class="line">        if loc[1]:</span><br><span class="line">            encoding &#x3D; loc[1]</span><br><span class="line">    if 0:</span><br><span class="line">        # Enable to switch off string to Unicode coercion and implicit</span><br><span class="line">        # Unicode to string conversion.</span><br><span class="line">        encoding &#x3D; &quot;undefined&quot;</span><br><span class="line">    if encoding !&#x3D; &quot;ascii&quot;:</span><br><span class="line">        # On Non-Unicode builds this will raise an AttributeError...</span><br><span class="line">        sys.setdefaultencoding(encoding) # Needs Python Unicode build !</span><br></pre></td></tr></table></figure>
@@ -854,6 +901,8 @@
     <content><![CDATA[<div class="note default">
             <p>环境：<br>系统：Ubuntu18.04<br>GPU：GTXm1050ti<br>显卡驱动：440<br>CUDA：10.1<br>Cudnn：7.6.5<br>Tensorflow-gpu：2.1.0</p><p>Tensorflow官网：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p>
           </div>
+
+<a id="more"></a>
 
 <h1 id="显卡驱动的安装"><a href="#显卡驱动的安装" class="headerlink" title="显卡驱动的安装"></a>显卡驱动的安装</h1><p>（以gtx1050ti为例）</p>
 <h3 id="三种方式"><a href="#三种方式" class="headerlink" title="三种方式"></a>三种方式</h3><ol>
@@ -972,6 +1021,7 @@
             <p>之前使用老笔记本制作nas时，将笔记本合上后会断连，所以需要使用命令行设置关闭盖子不休眠</p>
           </div>
 
+<a id="more"></a>
 <br>
 
 <p><strong>方法：</strong><br>打开文件：/etc/systemd/logind.conf，并修改</p>
@@ -991,7 +1041,12 @@
     <content><![CDATA[<h2 id="两种安装方式"><a href="#两种安装方式" class="headerlink" title="两种安装方式"></a>两种安装方式</h2><p>一：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ wget -O - https:&#x2F;&#x2F;github.com&#x2F;OpenMediaVault-Plugin-Developers&#x2F;packages&#x2F;raw&#x2F;master&#x2F;install | bash</span><br></pre></td></tr></table></figure>
 <p>二：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install dirmngr</span><br><span class="line"># 下载安装包</span><br><span class="line">$ wget http:&#x2F;&#x2F;omv-extras.org&#x2F;openmediavault-omvextrasorg_latest_all4.deb</span><br><span class="line"># 安装</span><br><span class="line">$ dpkg -i openmediavault-omvextrasorg_latest_all4.deb</span><br><span class="line"># 更新</span><br><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install dirmngr</span><br><span class="line"># 下载安装包</span><br><span class="line">$ wget http:&#x2F;&#x2F;omv-extras.org&#x2F;openmediavault-omvextrasorg_latest_all4.deb</span><br><span class="line"># 安装</span><br><span class="line">$ dpkg -i openmediavault-omvextrasorg_latest_all4.deb</span><br><span class="line"># 更新</span><br><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
+]]></content>
       <categories>
         <category>OMV</category>
       </categories>
@@ -1015,7 +1070,7 @@
 <li><p>按F10保存并退出</p>
 </li>
 </ol>
-]]></content>
+<a id="more"></a>]]></content>
       <categories>
         <category>其他</category>
       </categories>
@@ -1029,6 +1084,8 @@
     <content><![CDATA[<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>大概是因为这个软件基于Python2，然后软连接挂了，或者是没安装python，确认安装完成后输入以下命令，重启软件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo ln -s &#x2F;usr&#x2F;bin&#x2F;python3 &#x2F;usr&#x2F;bin&#x2F;python</span><br></pre></td></tr></table></figure>
 <p><strong>注意：</strong>如果提示已存在，把原有的删去重新建一个</p>
+<a id="more"></a>
+
 ]]></content>
       <categories>
         <category>其他</category>
@@ -1041,7 +1098,7 @@
   <entry>
     <title>Windows快捷键列表</title>
     <url>/2020/03/20/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/</url>
-    <content><![CDATA[<h2 id="Ctrl键功能"><a href="#Ctrl键功能" class="headerlink" title="Ctrl键功能"></a>Ctrl键功能</h2><ol>
+    <content><![CDATA[<h1 id="常用的Windows快捷键"><a href="#常用的Windows快捷键" class="headerlink" title="常用的Windows快捷键"></a>常用的Windows快捷键</h1><h2 id="Ctrl键功能"><a href="#Ctrl键功能" class="headerlink" title="Ctrl键功能"></a>Ctrl键功能</h2><ol>
 <li><p>Ctrl S 保存　</p>
 </li>
 <li><p>Ctrl W 关闭程序</p>
@@ -1062,6 +1119,10 @@
 </li>
 <li><p>Ctrl A 全选　　</p>
 </li>
+</ol>
+<a id="more"></a>
+
+<ol start="11">
 <li><p>Ctrl [ 缩小文字　　</p>
 </li>
 <li><p>Ctrl ] 放大文字　　</p>
@@ -1316,7 +1377,10 @@
             <p>运行环境：<br>    Ubuntu18.04</p>
           </div>
 
+<a id="more"></a>
+
 <h1 id="更新pip的三种方法"><a href="#更新pip的三种方法" class="headerlink" title="更新pip的三种方法"></a>更新pip的三种方法</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line">$ python -m pip install -U --force-reinstall pip</span><br><span class="line">$ pip install --user --upgrade pip</span><br></pre></td></tr></table></figure>
+
 <h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><p>当使用pip安装时速度过慢可尝试使用更换为国内源的方式，但是国内源可能没有对应的安装包或没有最新的版本。<br><br></p>
 <h2 id="换源的方式"><a href="#换源的方式" class="headerlink" title="换源的方式"></a>换源的方式</h2><div class="note info">
             <p>国内pip镜像源：</p><ul><li>阿里： <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a> </li><li>中国科技大学： <a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a>  </li><li>豆瓣： <a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a>   </li><li>清华大学： <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a>   </li><li>中国科学技术大学： <a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li></ul>

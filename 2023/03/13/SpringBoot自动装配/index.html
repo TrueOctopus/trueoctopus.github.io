@@ -121,7 +121,13 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h1 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a>SpringBoot自动装配原理</h1><h2 id="一、Conditon"><a href="#一、Conditon" class="headerlink" title="一、Conditon"></a>一、Conditon</h2><p>实现选择性创建Bean操作<br><br></p>
+        <div class="note info">
+            <h3 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a><strong>SpringBoot自动装配原理</strong></h3><p>通过Condition、enable、import等注解实现自动装配</p>
+          </div>
+
+<a id="more"></a>
+
+<h2 id="一、Condition"><a href="#一、Condition" class="headerlink" title="一、Condition"></a><strong>一、Condition</strong></h2><p>实现选择性创建Bean操作<br><br></p>
 <ol>
 <li>通过坐标是否存在从而创建Bean</li>
 </ol>
@@ -148,9 +154,11 @@
 </ol>
 <p><strong>UserConfig</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UserConfig &#123;</span><br><span class="line"></span><br><span class="line">    @@Bean</span><br><span class="line">    @ConditionalOnProperty(name &#x3D; &quot;test&quot;,havingValue &#x3D; &quot;111&quot;)</span><br><span class="line">    public User user()&#123;</span><br><span class="line">        return new User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SpringBoot自动配置中存在各类不同触发条件下的ConditionalOn*<br><br/></p>
-<h2 id="二、Enable"><a href="#二、Enable" class="headerlink" title="二、Enable"></a>二、Enable</h2><p>动态启用某些功能，底层使用@Import注解导入配置类，实现Bean的动态加载。</p>
-<br/>
+<p>SpringBoot自动配置中存在各类不同触发条件下的ConditionalOn*</p>
+<br>
+
+<h2 id="二、Enable"><a href="#二、Enable" class="headerlink" title="二、Enable"></a><strong>二、Enable</strong></h2><p>动态启用某些功能，底层使用@Import注解导入配置类，实现Bean的动态加载。</p>
+<br>
 
 <p>SpringBoot不能直接获取第三方工程的Bean，原因是在@SpringBootApplication中存在@ComponentScan注解，其扫描的范围只有当前引导类所在的包及其子包。</p>
 <ol>
@@ -172,7 +180,7 @@
 <p><strong>Application</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableUser</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="三、-Import注解"><a href="#三、-Import注解" class="headerlink" title="三、@Import注解"></a>三、@Import注解</h2><p>@Import的四种用法</p>
+<h2 id="三、-Import注解"><a href="#三、-Import注解" class="headerlink" title="三、@Import注解"></a><strong>三、@Import注解</strong></h2><p>@Import的四种用法</p>
 <ol>
 <li>导入Bean</li>
 </ol>
@@ -205,9 +213,9 @@
 <p><strong>Application</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@Import(&#123;MyImportBeanDefinitionRegistrar.class&#125;)</span><br><span class="line">public class SpringbootEnableApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootEnableApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<br/>
+<br>
 
-<h2 id="四、-EnableAutoConfiguration注解"><a href="#四、-EnableAutoConfiguration注解" class="headerlink" title="四、@EnableAutoConfiguration注解"></a>四、@EnableAutoConfiguration注解</h2><p>在@SpringBootApplication中有注解@EnableAutoConfiguration，其中有@Import({AutoConfigurationImportSelector.class})，使用了上一节中的第三种方式</p>
+<h2 id="四、-EnableAutoConfiguration注解"><a href="#四、-EnableAutoConfiguration注解" class="headerlink" title="四、@EnableAutoConfiguration注解"></a><strong>四、@EnableAutoConfiguration注解</strong></h2><p>在@SpringBootApplication中有注解@EnableAutoConfiguration，其中有@Import({AutoConfigurationImportSelector.class})，使用了上一节中的第三种方式</p>
 <p><strong>EnableAutoConfiguration</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">@AutoConfigurationPackage</span><br><span class="line">@Import(&#123;AutoConfigurationImportSelector.class&#125;)</span><br><span class="line">public @interface EnableAutoConfiguration &#123;</span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY &#x3D; &quot;spring.boot.enableautoconfiguration&quot;;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] exclude() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    String[] excludeName() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -225,7 +233,7 @@
 <p>其中比如RedisAutoConfiguration，通过ConditionalOnClass等条件注解控制相关Bean的加载</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConditionalOnClass(&#123;RedisOperations.class&#125;)</span><br><span class="line">@EnableConfigurationProperties(&#123;RedisProperties.class&#125;)</span><br><span class="line">@Import(&#123;LettuceConnectionConfiguration.class, JedisConnectionConfiguration.class&#125;)</span><br><span class="line">public class RedisAutoConfiguration &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<br/>
+<br>
 
 <ul>
 <li>@EnableAutoConfiguration注解内部使用@Import({AutoConfigurationImportSelector.class})加载配置类</li>
@@ -274,6 +282,21 @@
   </div>
 </footer>
 </div>
+
+<style>
+  .lx-entry{
+    line-height: 2rem;
+  }
+
+  .lx-entry p {
+    line-height: 2rem;
+  }
+
+  .lx-entry li {
+    line-height: 2rem;
+  }
+
+</style>
 
 <button class="hamburger hamburger--arrow-r" type="button">
     <div class="hamburger-box">

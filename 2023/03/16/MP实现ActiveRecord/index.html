@@ -121,11 +121,15 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h1 id="MP实现ActiveRecord"><a href="#MP实现ActiveRecord" class="headerlink" title="MP实现ActiveRecord"></a>MP实现ActiveRecord</h1><p>实体类中继承 Model&lt;T&gt;即可使用</p>
+        <p>实体类中继承 Model&lt;T&gt;即可使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class User extends Model&lt;User&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在实现中不需要显性引入Mapper，但是Mapper中仍要继承BaseMapper</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void testSelectById()&#123;  </span><br><span class="line">    User user &#x3D; new User();  </span><br><span class="line">    user.setId(16L);  </span><br><span class="line">   </span><br><span class="line">    User user &#x3D; user.selectById();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
 
 <p><strong>新增</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void testInsert()&#123;  </span><br><span class="line">    User user &#x3D; new User();  </span><br><span class="line">    user.setUserName(&quot;diaochan&quot;);  </span><br><span class="line">    user.setPassword(&quot;123456&quot;);  </span><br><span class="line">    user.setAge(20);  </span><br><span class="line">    user.setName(&quot;貂蝉&quot;);  </span><br><span class="line">    user.setMail(&quot;diaochan@itcast.cn&quot;);  </span><br><span class="line">    user.setVersion(1);  </span><br><span class="line">    user.setSex(SexEnum.WOMAN); &#x2F;&#x2F;使用的是枚举  </span><br><span class="line">  </span><br><span class="line">    &#x2F;&#x2F; 调用AR的insert方法进行插入数据  </span><br><span class="line">    boolean insert &#x3D; user.insert();  </span><br><span class="line">    System.out.println(&quot;result &#x3D;&gt; &quot; + insert);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -179,6 +183,21 @@
   </div>
 </footer>
 </div>
+
+<style>
+  .lx-entry{
+    line-height: 2rem;
+  }
+
+  .lx-entry p {
+    line-height: 2rem;
+  }
+
+  .lx-entry li {
+    line-height: 2rem;
+  }
+
+</style>
 
 <button class="hamburger hamburger--arrow-r" type="button">
     <div class="hamburger-box">

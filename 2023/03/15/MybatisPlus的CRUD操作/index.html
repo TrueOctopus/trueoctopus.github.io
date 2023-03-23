@@ -121,11 +121,11 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h1 id="MybatisPlus的CRUD操作"><a href="#MybatisPlus的CRUD操作" class="headerlink" title="MybatisPlus的CRUD操作"></a>MybatisPlus的CRUD操作</h1><br>
-在继承MP的BaseMapper后已经有了基本的操作：
-
+        <p>在继承MP的BaseMapper后已经有了基本的操作：</p>
 <p><img src="https://i.imgtg.com/2023/03/15/fwB86.png" alt="fwB86.png"></p>
 <p>返回值为int，指受影响的数据条数。</p>
+<a id="more"></a>
+
 <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a><strong>插入</strong></h3><p>设定id策略@TableId</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@TableId(type &#x3D; IdType.AUTO) &#x2F;&#x2F;通过添加注解改变MP的id策略</span><br><span class="line"></span><br><span class="line">AUTO(0),  &#x2F;&#x2F;id自增</span><br><span class="line">NONE(1),  &#x2F;&#x2F;未设置主键类型</span><br><span class="line">INPUT(2), &#x2F;&#x2F;用户输入id，可通过自己注册自动填充插件进行填充</span><br><span class="line">&#x2F;&#x2F;以下类型只有当插入id为空时才会自动填充</span><br><span class="line">ID_WORKER(3),  &#x2F;&#x2F;全局唯一id（idWorker）</span><br><span class="line">UUID(4),  &#x2F;&#x2F;全局唯一id（UUID）</span><br><span class="line">ID_WORKER_STR(5); &#x2F;&#x2F;字符串全局唯一id（idWorker的字符串表示）</span><br></pre></td></tr></table></figure>
 
@@ -215,6 +215,21 @@
   </div>
 </footer>
 </div>
+
+<style>
+  .lx-entry{
+    line-height: 2rem;
+  }
+
+  .lx-entry p {
+    line-height: 2rem;
+  }
+
+  .lx-entry li {
+    line-height: 2rem;
+  }
+
+</style>
 
 <button class="hamburger hamburger--arrow-r" type="button">
     <div class="hamburger-box">

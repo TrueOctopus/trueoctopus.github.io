@@ -121,12 +121,12 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h1 id="解决Flask-Apache2解决邮箱前端验证问题"><a href="#解决Flask-Apache2解决邮箱前端验证问题" class="headerlink" title="解决Flask+Apache2解决邮箱前端验证问题"></a>解决Flask+Apache2解决邮箱前端验证问题</h1><br/>
-
-<p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
-<br/>
+        <p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
+<br>
 
 <p><img src="https://s1.ax1x.com/2020/07/29/amMFmj.png" alt="amMFmj.png"></p>
+<a id="more"></a>
+
 <p>如果已经安装了这个模块但是仍然报错时，可能是由于flask与Apache模块间的兼容问题，这时需要调整以下几个模块的版本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Flask-WTF&#x3D;&#x3D;0.14.2</span><br><span class="line">WTForms&#x3D;&#x3D;2.1</span><br><span class="line">Werkzeug&#x3D;&#x3D;0.16.0</span><br></pre></td></tr></table></figure>
 
@@ -173,6 +173,21 @@
   </div>
 </footer>
 </div>
+
+<style>
+  .lx-entry{
+    line-height: 2rem;
+  }
+
+  .lx-entry p {
+    line-height: 2rem;
+  }
+
+  .lx-entry li {
+    line-height: 2rem;
+  }
+
+</style>
 
 <button class="hamburger hamburger--arrow-r" type="button">
     <div class="hamburger-box">
