@@ -35,11 +35,15 @@
 <p>默认是不开启的</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">appendonly no</span><br><span class="line"></span><br><span class="line">appendfilename &quot;appendonly.aof&quot;</span><br><span class="line">appenddirname &quot;appendonlydir&quot;</span><br><span class="line"></span><br><span class="line"># appendfsync always</span><br><span class="line">appendfsync everysec</span><br><span class="line"># appendfsync no</span><br><span class="line"></span><br><span class="line">no-appendfsync-on-rewrite no</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br></pre></td></tr></table></figure>
 
+<br>
+
 <h3 id="重写规则"><a href="#重写规则" class="headerlink" title="重写规则"></a><strong>重写规则</strong></h3><p>当aof文件的大小超过设定值时，Redis就会启动aof文件的内容压缩，只保留可以恢复数据的最小指令集</p>
 <p><strong>重写原理：</strong> </p>
 <p>aof文件持续增长而过大时，会fork出一条新进程来将文件重写（也是先写临时文件最后再rename），遍历新进程的内存中数据，每条记录有一条的Set语句。重写aof文件的操作，并没有读取旧的aof文件</p>
 <p><strong>触发机制：</strong></p>
 <p>Redis会记录上次重写时的AOF大小，默认配置是当AOF文件大小是上次rewrite后大小的已被且文件大于64M的触发。</p>
+<br>
+
 <h3 id="校验机制"><a href="#校验机制" class="headerlink" title="校验机制"></a><strong>校验机制</strong></h3><p>如果aof文件错误则启动不了redis，需要修复文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">redis-check-aof --fix 文件名</span><br></pre></td></tr></table></figure>
 
