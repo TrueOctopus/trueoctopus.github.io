@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Redis持久化</title>
-    <url>/2023/03/24/Redis%E6%8C%81%E4%B9%85%E5%8C%96/</url>
+    <url>/2023/03/24/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96/</url>
     <content><![CDATA[<div class="note info">
             <p>Redis是内存数据库，如果不将内存中的数据进行持久化，一旦服务器进程关闭，其数据库状态也会被刷新，则会丢失相关的数据，所以需要进行持久化对数据做保存</p>
           </div>
