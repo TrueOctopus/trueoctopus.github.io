@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Redis订阅发布</title>
+    <url>/2023/03/25/Redis/Redis%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83/</url>
+    <content><![CDATA[<div class="note info">
+            <p>Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。 Redis 客户端可以订阅任意数量的频道。</p>
+          </div>
+
+<p>订阅/发布消息图：</p>
+<ul>
+<li>消息发送者</li>
+<li>频道</li>
+<li>消息订阅者</li>
+</ul>
+<p><img src="https://i.imgtg.com/2023/03/25/jBISq.png" alt="jBISq.png"></p>
+<a id="more"></a>
+
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a><strong>命令</strong></h3><p>订阅</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">subscribe [channel]</span><br></pre></td></tr></table></figure>
+
+<p>发送消息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">publish [channel] [message]</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a><strong>使用场景</strong></h3><ul>
+<li>实时聊天（聊天室）</li>
+<li>实时消息系统（网站推送）</li>
+<li>订阅关注</li>
+<li>复杂用消息中间件（MQ）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis持久化</title>
     <url>/2023/03/24/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96/</url>
     <content><![CDATA[<div class="note info">
