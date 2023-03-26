@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Redis缓存穿透和雪崩</title>
+    <url>/2023/03/26/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9/</url>
+    <content><![CDATA[<h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a><strong>缓存穿透</strong></h2><div class="note info">
+            <p>缓存穿透的概念：用户想要查询一个数据，发现redis内存数据库没有，也就是缓存没有命中，于是向持久层数据库查询。发现也没有，于是本次查询失败。当用户很多的时候，缓存都没有命中，于是都去请求了持久层数据库。这会给持久层数据库造成很大的压力，这时候就相当于出现了缓存穿透</p>
+          </div>
+
+<a id="more"></a>
+
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a><strong>解决方案</strong></h3><ul>
+<li><strong>布隆过滤器</strong></li>
+</ul>
+<p>布隆过滤器是一种数据结构，对所有可能查询的参数以hash形式存储，在控制层先进行校验，不符合则丢弃，从而避免了对底层存储系统的查询压力</p>
+<p><img src="https://i.imgtg.com/2023/03/26/jiclc.png" alt="jiclc.png"></p>
+<ul>
+<li><strong>缓存空对象</strong></li>
+</ul>
+<p>当存储层不命中后，即使返回空对象也将其缓存起来，同时会设置一个过期时间，之后再访问这个数据将会从缓存中获取，保护了后端数据源</p>
+<p><img src="https://i.imgtg.com/2023/03/26/jisTr.png" alt="jisTr.png"></p>
+<p><strong>存在的问题</strong></p>
+<p>1.需要更多空间存储空键</p>
+<p>2.即使设置了过期时间，但是和存储层的时间窗口不一致，不能保持一致性</p>
+<br>
+
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a><strong>缓存击穿</strong></h2><div class="note info">
+            <p>这里需要注意和缓存击穿的区别，缓存击穿，是指一个key非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个key在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个屏障上凿开了一个洞。 </p><p>当某个key在过期的瞬间，有大量的请求并发访问，这类数据一般是热点数据，由于缓存过期，会同时访 问数据库来查询最新数据，并且回写缓存，会导使数据库瞬间压力过大。</p>
+          </div>
+
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a><strong>解决方法</strong></h3><ul>
+<li><p><strong>设置热点数据永不过期</strong></p>
+</li>
+<li><p><strong>加互斥锁</strong></p>
+</li>
+</ul>
+<p>分布式锁：使用分布式锁，保证对于每个key同时只有一个线程去查询后端服务，其他线程没有获得分布式锁的权限，因此只需要等待即可。这种方式将高并发的压力转移到了分布式锁，因此对分布式锁的考验很大。</p>
+<br>
+
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a><strong>缓存雪崩</strong></h2><p>缓存集中失效，redis宕机</p>
+<p><img src="https://i.imgtg.com/2023/03/26/jiYcG.png" alt="jiYcG.png"></p>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a><strong>解决方案</strong></h3><ul>
+<li><strong>redis高可用</strong></li>
+</ul>
+<p>搭建集群，异地多活</p>
+<ul>
+<li><strong>限流降级</strong></li>
+</ul>
+<p>缓存失效后，通过加锁或者队列来控制数据库写缓存的线程数量</p>
+<ul>
+<li><strong>数据预热</strong></li>
+</ul>
+<p>正式部署前预先访问一遍可能的数据，尽可能手动触发加载缓存，设置不同的缓存时间，让缓存失效的时间点尽量均匀</p>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis主从复制与哨兵模式</title>
     <url>/2023/03/25/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%B8%8E%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<div class="note info">
@@ -75,7 +136,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">redis-sentinel senticel.conf</span><br></pre></td></tr></table></figure>
 
 <p><strong>配置说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Example sentinel.conf </span><br><span class="line"># 哨兵sentinel实例运行的端口 默认26379 </span><br><span class="line">port 26379 </span><br><span class="line"></span><br><span class="line"># 哨兵sentinel的工作目录 </span><br><span class="line">dir &#x2F;tmp </span><br><span class="line"></span><br><span class="line"># 哨兵sentinel监控的redis主节点的 ip port </span><br><span class="line"># master-name 可以自己命名的主节点名字，只能由字母A-z、数字0-9 、这三个字符&quot;.-_&quot;组成。 </span><br><span class="line"># quorum 配置多少个sentinel哨兵统一认为master主节点失联 那么这时客观上认为主节点失联了 </span><br><span class="line"># sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6379 2</span><br><span class="line"></span><br><span class="line"># 当在Redis实例中开启了requirepass foobared 授权密码 这样所有连接Redis实例的客户端都 要提供密码 </span><br><span class="line"># 设置哨兵sentinel 连接主从的密码 注意必须为主从设置一样的验证密码 </span><br><span class="line"># sentinel auth-pass &lt;master-name&gt; &lt;password&gt;</span><br><span class="line">sentinel auth-pass mymaster MySUPER--secret-0123passw0rd </span><br><span class="line"></span><br><span class="line"># 指定多少毫秒之后 主节点没有应答哨兵sentinel 此时 哨兵主观上认为主节点下线 默认30秒 </span><br><span class="line"># sentinel down-after-milliseconds &lt;master-name&gt; &lt;milliseconds&gt;</span><br><span class="line">sentinel down-after-milliseconds mymaster 30000 </span><br><span class="line"></span><br><span class="line"># 这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行同步， </span><br><span class="line">这个数字越小，完成failover所需的时间就越长，</span><br><span class="line">但是如果这个数字越大，就意味着越多的slave因为replication而不可用。</span><br><span class="line">可以通过将这个值设为 1 来保证每次只有一个slave 处于不能处理命令请求的状态。 </span><br><span class="line"># sentinel parallel-syncs &lt;master-name&gt; &lt;numslaves&gt;</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line"></span><br><span class="line"># 故障转移的超时时间 failover-timeout 可以用在以下这些方面： </span><br><span class="line">#1. 同一个sentinel对同一个master两次failover之间的间隔时间。 </span><br><span class="line">#2. 当一个slave从一个错误的master那里同步数据开始计算时间。直到slave被纠正为向正确 master那里同步数据时。 </span><br><span class="line">#3.当想要取消一个正在进行的failover所需要的时间。 </span><br><span class="line">#4.当进行failover时，配置所有slaves指向新的master所需的最大时间。</span><br><span class="line">不过，即使过了这个超时，slaves依然会被正确配置为指向master，但是就不按parallel-syncs所配置的规则来了 </span><br><span class="line"># 默认三分钟 </span><br><span class="line"># sentinel failover-timeout &lt;master-name&gt; &lt;milliseconds&gt;</span><br><span class="line">sentinel failover-timeout mymaster 180000</span><br><span class="line"></span><br><span class="line"># SCRIPTS EXECUTION </span><br><span class="line"></span><br><span class="line">#配置当某一事件发生时所需要执行的脚本，可以通过脚本来通知管理员，例如当系统运行不正常时发邮 件通知相关人员。 </span><br><span class="line">#对于脚本的运行结果有以下规则： </span><br><span class="line">#若脚本执行后返回1，那么该脚本稍后将会被再次执行，重复次数目前默认为10 </span><br><span class="line">#若脚本执行后返回2，或者比2更高的一个返回值，脚本将不会重复执行。 </span><br><span class="line">#如果脚本在执行过程中由于收到系统中断信号被终止了，则同返回值为1时的行为相同。 </span><br><span class="line">#一个脚本的最大执行时间为60s，如果超过这个时间，脚本将会被一个SIGKILL信号终止，之后重新执行。 </span><br><span class="line">#通知型脚本:当sentinel有任何警告级别的事件发生时（比如说redis实例的主观失效和客观失效等等），将会去调用这个脚本</span><br><span class="line">这时这个脚本应该通过邮件，SMS等方式去通知系统管理员关于系统不正常运行的信息。</span><br><span class="line">调用该脚本时，将传给脚本两个参数，一个是事件的类型，一个是事件的描述。</span><br><span class="line">如果sentinel.conf配置文件中配置了这个脚本路径，那么必须保证这个脚本存在于这个路径，并且是可执行的，否则sentinel无法正常启动成功。 </span><br><span class="line"></span><br><span class="line">#通知脚本 </span><br><span class="line"># sentinel notification-script &lt;master-name&gt; &lt;script-path&gt;</span><br><span class="line">sentinel notification-script mymaster &#x2F;var&#x2F;redis&#x2F;notify.sh</span><br><span class="line"></span><br><span class="line"># 客户端重新配置主节点参数脚本 </span><br><span class="line"># 当一个master由于failover而发生改变时，这个脚本将会被调用，通知相关的客户端关于master 地址已经发生改变的信息。 </span><br><span class="line"># 以下参数将会在调用脚本时传给脚本: </span><br><span class="line"># </span><br><span class="line"># 目前总是“failover”, </span><br><span class="line"># 是“leader”或者“observer”中的一个。 </span><br><span class="line"># 参数 from-ip, from-port, to-ip, to-port是用来和旧的master和新的master(即旧的 slave)通信的</span><br><span class="line"># 这个脚本应该是通用的，能被多次调用，不是针对性的。 </span><br><span class="line"># sentinel client-reconfig-script &lt;master-name&gt; &lt;script-path&gt;</span><br><span class="line">sentinel client-reconfig-script mymaster &#x2F;var&#x2F;redis&#x2F;reconfig.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Example sentinel.conf </span><br><span class="line"># 哨兵sentinel实例运行的端口 默认26379 </span><br><span class="line">port 26379 </span><br><span class="line"></span><br><span class="line"># 哨兵sentinel的工作目录 </span><br><span class="line">dir &#x2F;tmp </span><br><span class="line"></span><br><span class="line"># 哨兵sentinel监控的redis主节点的 ip port </span><br><span class="line"># master-name 可以自己命名的主节点名字，只能由字母A-z、数字0-9 、这三个字符&quot;.-_&quot;组成。 </span><br><span class="line"># quorum 配置多少个sentinel哨兵统一认为master主节点失联 那么这时客观上认为主节点失联了 </span><br><span class="line"># sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6379 2</span><br><span class="line"></span><br><span class="line"># 当在Redis实例中开启了requirepass foobared 授权密码 这样所有连接Redis实例的客户端都 要提供密码 </span><br><span class="line"># 设置哨兵sentinel 连接主从的密码 注意必须为主从设置一样的验证密码 </span><br><span class="line"># sentinel auth-pass &lt;master-name&gt; &lt;password&gt;</span><br><span class="line">sentinel auth-pass mymaster MySUPER--secret-0123passw0rd </span><br><span class="line"></span><br><span class="line"># 指定多少毫秒之后 主节点没有应答哨兵sentinel 此时 哨兵主观上认为主节点下线 默认30秒 </span><br><span class="line"># sentinel down-after-milliseconds &lt;master-name&gt; &lt;milliseconds&gt;</span><br><span class="line">sentinel down-after-milliseconds mymaster 30000 </span><br><span class="line"></span><br><span class="line"># 这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行同步， </span><br><span class="line">这个数字越小，完成failover所需的时间就越长，</span><br><span class="line">但是如果这个数字越大，就意味着越多的slave因为replication而不可用。</span><br><span class="line">可以通过将这个值设为 1 来保证每次只有一个slave 处于不能处理命令请求的状态。 </span><br><span class="line"># sentinel parallel-syncs &lt;master-name&gt; &lt;numslaves&gt;</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line"></span><br><span class="line"># 故障转移的超时时间 failover-timeout 可以用在以下这些方面： </span><br><span class="line">#1. 同一个sentinel对同一个master两次failover之间的间隔时间。 </span><br><span class="line">#2. 当一个slave从一个错误的master那里同步数据开始计算时间。直到slave被纠正为向正确 master那里同步数据时。 </span><br><span class="line">#3.当想要取消一个正在进行的failover所需要的时间。 </span><br><span class="line">#4.当进行failover时，配置所有slaves指向新的master所需的最大时间。</span><br><span class="line">不过，即使过了这个超时，slaves依然会被正确配置为指向master，但是就不按parallel-syncs所配置的规则来了 </span><br><span class="line"># 默认三分钟 </span><br><span class="line"># sentinel failover-timeout &lt;master-name&gt; &lt;milliseconds&gt;</span><br><span class="line">sentinel failover-timeout mymaster 180000</span><br><span class="line"></span><br><span class="line"># SCRIPTS EXECUTION </span><br><span class="line"></span><br><span class="line">#配置当某一事件发生时所需要执行的脚本，可以通过脚本来通知管理员，例如当系统运行不正常时发邮 件通知相关人员。 </span><br><span class="line">#对于脚本的运行结果有以下规则： </span><br><span class="line">#若脚本执行后返回1，那么该脚本稍后将会被再次执行，重复次数目前默认为10 </span><br><span class="line">#若脚本执行后返回2，或者比2更高的一个返回值，脚本将不会重复执行。 </span><br><span class="line">#如果脚本在执行过程中由于收到系统中断信号被终止了，则同返回值为1时的行为相同。 </span><br><span class="line">#一个脚本的最大执行时间为60s，如果超过这个时间，脚本将会被一个SIGKILL信号终止，之后重新执行。 </span><br><span class="line">#通知型脚本:当sentinel有任何警告级别的事件发生时（比如说redis实例的主观失效和客观失效等等），将会去调用这个脚本</span><br><span class="line">这时这个脚本应该通过邮件，SMS等方式去通知系统管理员关于系统不正常运行的信息。</span><br><span class="line">调用该脚本时，将传给脚本两个参数，一个是事件的类型，一个是事件的描述。</span><br><span class="line">如果sentinel.co nf配置文件中配置了这个脚本路径，那么必须保证这个脚本存在于这个路径，并且是可执行的，否则sentinel无法正常启动成功。 </span><br><span class="line"></span><br><span class="line">#通知脚本 </span><br><span class="line"># sentinel notification-script &lt;master-name&gt; &lt;script-path&gt;</span><br><span class="line">sentinel notification-script mymaster &#x2F;var&#x2F;redis&#x2F;notify.sh</span><br><span class="line"></span><br><span class="line"># 客户端重新配置主节点参数脚本 </span><br><span class="line"># 当一个master由于failover而发生改变时，这个脚本将会被调用，通知相关的客户端关于master 地址已经发生改变的信息。 </span><br><span class="line"># 以下参数将会在调用脚本时传给脚本: </span><br><span class="line"># </span><br><span class="line"># 目前总是“failover”, </span><br><span class="line"># 是“leader”或者“observer”中的一个。 </span><br><span class="line"># 参数 from-ip, from-port, to-ip, to-port是用来和旧的master和新的master(即旧的 slave)通信的</span><br><span class="line"># 这个脚本应该是通用的，能被多次调用，不是针对性的。 </span><br><span class="line"># sentinel client-reconfig-script &lt;master-name&gt; &lt;script-path&gt;</span><br><span class="line">sentinel client-reconfig-script mymaster &#x2F;var&#x2F;redis&#x2F;reconfig.sh</span><br></pre></td></tr></table></figure>
 
 <p><strong>优点</strong></p>
 <ul>
