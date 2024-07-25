@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>Three.js基本操作 | 真丶章鱼</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="TrueOctopus">
+  <meta name="keywords" content="tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
+  <meta name="description" content="个人一些学习心得的分享">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.4.4',
+    localsearch:{
+      "enable": true,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'search.xml'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css">
+  
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.jside.menu.min.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "",
+	     });
+	}); 
+	</script>
+  <!--Google_Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FJ730WCCCZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FJ730WCCCZ');
+</script>
+<!--baidu_analytics-->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?21f26915b6f95a060b761aab1e41201f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+<body>
+<div class="single">
+<div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Search..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+<div id="page">
+<div class="header">
+  <div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
+    <div class="overlay">
+      <a href="javascript:;" class="popup-trigger" title="search"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+      <div class="page-title">
+        <div class="avatar"><a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"></a></div>
+        <span>2023-04-15</span>
+        <h2>Three.js基本操作</h2>
+        <div class="tags"><i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/Three-js/" rel="tag">Three.js</a> <i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></div>
+        <div class="social-links">
+    <a href="https://github.com/trueoctopus" target="_blank" title="social-link"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:18368876370@163.com" target="_blank" title="social-link"><i class="fa fa-envelope fa-fw"></i></a>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <div class="note info">
+            <h3 id="Three-js基本操作"><a href="#Three-js基本操作" class="headerlink" title="Three.js基本操作"></a><strong>Three.js基本操作</strong></h3><p>初步使用three.js，基本api</p>
+          </div>
+
+<span id="more"></span>
+
+<br>
+
+<h2 id="渲染场景和物体"><a href="#渲染场景和物体" class="headerlink" title="渲染场景和物体"></a><strong>渲染场景和物体</strong></h2><ol>
+<li><strong>创建场景</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> scene = <span class="keyword">new</span> <span class="title class_">Three</span>.<span class="title class_">Scene</span>()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>创建相机</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> camera = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">PerspectiveCamera</span>(</span><br><span class="line">  <span class="number">75</span>,</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">innerWidth</span> / <span class="variable language_">window</span>.<span class="property">innerHeight</span>,</span><br><span class="line">  <span class="number">0.1</span>,</span><br><span class="line">  <span class="number">1000</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置相机位置</span></span><br><span class="line">camera.<span class="property">position</span>.<span class="title function_">set</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>PerspectiveCamera</strong>（透视摄像机）</p>
+<p>第一个参数是<strong>视野角度（FOV）</strong></p>
+<p>第二个参数是<strong>长宽比（aspect ratio）</strong></p>
+<p>接下来的两个参数是<strong>近截面</strong>（near）和<strong>远截面</strong>（far）</p>
+<ol start="3">
+<li><strong>渲染器</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化渲染器</span></span><br><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">WebGLRenderer</span>();</span><br><span class="line"><span class="comment">// 设置渲染的尺寸大小</span></span><br><span class="line">renderer.<span class="title function_">setSize</span>(<span class="variable language_">window</span>.<span class="property">innerWidth</span>, <span class="variable language_">window</span>.<span class="property">innerHeight</span>);</span><br><span class="line"><span class="comment">// console.log(renderer);</span></span><br><span class="line"><span class="comment">// 将webgl渲染的canvas内容添加到body</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(renderer.<span class="property">domElement</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用渲染器，通过相机将场景渲染进来</span></span><br><span class="line">renderer.<span class="title function_">render</span>(scene, camera);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>加入物体</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加物体</span></span><br><span class="line"><span class="comment">// 创建几何体</span></span><br><span class="line"><span class="keyword">const</span> cubeGeometry = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">BoxGeometry</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> cubeMaterial = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123; <span class="attr">color</span>: <span class="number">0xffff00</span> &#125;);</span><br><span class="line"><span class="comment">// 根据几何体和材质创建物体</span></span><br><span class="line"><span class="keyword">const</span> cube = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(cubeGeometry, cubeMaterial);</span><br><span class="line"><span class="comment">// 将几何体添加到场景中</span></span><br><span class="line">scene.<span class="title function_">add</span>(cube);</span><br></pre></td></tr></table></figure>
+
+<h2 id="轨道控制器"><a href="#轨道控制器" class="headerlink" title="轨道控制器"></a><strong>轨道控制器</strong></h2><ol>
+<li><strong>创建轨道控制器</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建轨道控制器</span></span><br><span class="line"><span class="keyword">const</span> controls = <span class="keyword">new</span> <span class="title class_">OrbitControls</span>(camera, renderer.<span class="property">domElement</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>控制器更新</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">//如果后期需要控制器带有阻尼效果，或者自动旋转等效果，就需要加入controls.update()</span></span><br><span class="line">  controls.<span class="title function_">update</span>()</span><br><span class="line">  renderer.<span class="title function_">render</span>(scene, camera);</span><br><span class="line">  <span class="comment">//   渲染下一帧的时候就会调用render函数</span></span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(render);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">render</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="控制物体移动"><a href="#控制物体移动" class="headerlink" title="控制物体移动"></a><strong>控制物体移动</strong></h2><ol>
+<li><strong>添加坐标辅助器</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> axesHelper = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">AxesHelper</span>( <span class="number">5</span> ); scene.<span class="title function_">add</span>( axesHelper );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2. </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2024/07/24/%E5%85%B6%E4%BB%96/%E5%85%B3%E9%97%AD%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E7%A8%8B%E5%BA%8F/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>关闭端口占用程序</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2023/03/26/Redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Redis缓存...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2024.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>备案号：<a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">浙ICP备20022343号-1</a> <br/>转载请注明出处
+  </div>
+</footer>
+
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button>
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>TrueOctopus</p>
+          <span class="tagline">一个带学生</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-th-list fa-fw"></i>分类</span>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook/">留言板</a></li>
+        <li><a href="/about/">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="http://yangyuheng.top" target="_blank">yangyuheng的个人博客</a></li>
+        <li> <a href="https://lx.js.org" target="_blank">Hexo主题-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/local.search.min.js"></script>
+
+</body>
+</html>

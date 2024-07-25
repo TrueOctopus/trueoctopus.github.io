@@ -13,7 +13,7 @@
   var CONFIG = {
     root: '/',
     theme: 'lx',
-    version: '0.3.8',
+    version: '0.4.4',
     localsearch:{
       "enable": true,
       "trigger": "auto",
@@ -25,8 +25,9 @@
   };
 </script>
 
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.8-fixed/source/css/main.min.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css">
+  
   <style type="text/css">
     pre,
     code {
@@ -38,7 +39,7 @@
     body {
       font-family: sans-serif;
     }
-    h1, h2, h3, h4, h5, h6, figure {
+    h1, h2, h3, h4, h5, figure {
       font-family: sans-serif;
     }
     .menu-container{
@@ -46,14 +47,14 @@
     }
   </style>
 
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.jside.menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.jside.menu.min.js"></script>
 	<script>
 	$(document).ready(function(){
 	$(".menu-container").jSideMenu({
 	    jSidePosition: "position-right",
 	    jSideSticky: true,
-	    jSideSkin: "black-grey",
+	    jSideSkin: "",
 	     });
 	}); 
 	</script>
@@ -75,12 +76,12 @@
     s.parentNode.insertBefore(hm, s);
   })();
 </script>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-<meta name="generator" content="Hexo 4.2.1"></head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
 <body>
 <div id="page">
-<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
 <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
@@ -98,126 +99,129 @@
   <div id="local-search-result"></div>
 </div>
 
-<div id="lx-aside" style="background-image: url(/images/cover3.jpg)">
-  <div class="overlay">
-  <div class="featured">
-    <div class="avatar"><a href="/"><img src="/images/avatar.jpg"></a></div>
-    <span>TrueOctopus</span>
-    <h1>真丶章鱼</h1>
-    <span>——分享所得</span>
-    <div class="social-links">
-    <a href="https://github.com/trueoctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
-    <a href="mailto:18368876370@163.com" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+<div class="header">
+  <div id="lx-aside" style="background-image: url(/images/cover3.jpg)">
+    <div class="overlay">
+      <a href="javascript:;" class="popup-trigger" title="search"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+      <div class="featured">
+        <div class="avatar"><a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"></a></div>
+        <span>TrueOctopus</span>
+        <h1>真丶章鱼</h1>
+        <span>分享所得</span>
+        <div class="social-links">
+    <a href="https://github.com/trueoctopus" target="_blank" title="social-link"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:18368876370@163.com" target="_blank" title="social-link"><i class="fa fa-envelope fa-fw"></i></a>
 </div>
-  </div>
+      </div>
+    </div>
   </div>
 </div>
-
 <div id="lx-main-content">
-  <div class="lx-post"> 
+  <div class="lx-post">
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/03/17/MybatisPlus/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">MP插件的基本使用</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-17 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
+      <p><h3 id="Mybatis插件机制"><a href="#Mybatis插件机制" class="headerlink" title="Mybatis插件机制"></a><strong>Mybatis插件机制</strong></h3><ul>
+<li>拦截执行器的方法 Executor</li>
+<li>拦截参数的处理 ParameterHandler</li>
+<li>拦截结果集的处理 ResultSetHandler</li>
+<li>拦截sql语法构建的处理 StatementHandler<br></p>
+      <div class="post-button"><a class="btn" href="/2023/03/17/MybatisPlus/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2023/03/16/MybatisPlus/MP%E5%AE%9E%E7%8E%B0ActiveRecord/">MP实现ActiveRecord</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-16 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
+      <p><p>实体类中继承 Model&lt;T&gt;即可使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class User extends Model&lt;User&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在实现中不需要显性引入Mapper，但是Mapper中仍要继承BaseMapper</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void testSelectById()&#123;  </span><br><span class="line">    User user = new User();  </span><br><span class="line">    user.setId(16L);  </span><br><span class="line">   </span><br><span class="line">    User user = user.selectById();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MP%E5%AE%9E%E7%8E%B0ActiveRecord/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/03/16/MybatisPlus/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/">MP条件构造器</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-16 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-16 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><div class="note info">
-            <h3 id="条件构造器"><a href="#条件构造器" class="headerlink" title="条件构造器"></a>条件构造器</h3><p>具体见官网文档：</p><p><a href="https://baomidou.com/pages/10c804/#abstractwrapper" target="_blank" rel="noopener">条件构造器</a> </p>
+            <h3 id="条件构造器"><a href="#条件构造器" class="headerlink" title="条件构造器"></a>条件构造器</h3><p>具体见官网文档：</p><p><a target="_blank" rel="noopener" href="https://baomidou.com/pages/10c804/#abstractwrapper">条件构造器</a> </p>
           </div>
 
 <p>以下是常用的基本操作：</p></p>
-      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MP%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2023/03/16/MybatisPlus/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/">MybatisPlus配置项</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-16 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
-      <p><h3 id="常用的MybatisPlus配置项"><a href="#常用的MybatisPlus配置项" class="headerlink" title="常用的MybatisPlus配置项"></a>常用的MybatisPlus配置项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 指定全局的配置文件</span><br><span class="line">mybatis-plus.config-location&#x3D;classpath:mybatis-config.xml</span><br><span class="line"></span><br><span class="line"># 指定Mapper.xml文件的路径</span><br><span class="line">mybatis-plus.mapper-locations &#x3D; classpath*:mybatis&#x2F;*.xml</span><br><span class="line"></span><br><span class="line"># 实体对象的扫描包</span><br><span class="line">mybatis-plus.type-aliases-package &#x3D; cn.itcast.mp.pojo</span><br><span class="line"></span><br><span class="line"># 禁用自定的驼峰映射</span><br><span class="line">#mybatis-plus.configuration.map-underscore-to-camel-case&#x3D;true</span><br><span class="line"></span><br><span class="line"># 禁用缓存</span><br><span class="line">#mybatis-plus.configuration.cache-enabled&#x3D;false</span><br><span class="line"></span><br><span class="line"># 全局的id生成策略</span><br><span class="line">#mybatis-plus.global-config.db-config.id-type&#x3D;input</span><br><span class="line">mybatis-plus.global-config.db-config.id-type&#x3D;auto</span><br><span class="line"></span><br><span class="line"># 全局的表名的前缀</span><br><span class="line">mybatis-plus.global-config.db-config.table-prefix&#x3D;tb_</span><br><span class="line"></span><br><span class="line"># 删除状态的值为：1</span><br><span class="line">mybatis-plus.global-config.db-config.logic-delete-value&#x3D;1</span><br><span class="line"></span><br><span class="line"># 未删除状态的值为：0</span><br><span class="line">mybatis-plus.global-config.db-config.logic-not-delete-value&#x3D;0</span><br><span class="line"></span><br><span class="line"># 枚举包扫描</span><br><span class="line">mybatis-plus.type-enums-package&#x3D;cn.itcast.mp.enums</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-16 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
+      <p><h3 id="常用的MybatisPlus配置项"><a href="#常用的MybatisPlus配置项" class="headerlink" title="常用的MybatisPlus配置项"></a>常用的MybatisPlus配置项</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 指定全局的配置文件</span><br><span class="line">mybatis-plus.config-location=classpath:mybatis-config.xml</span><br><span class="line"></span><br><span class="line"># 指定Mapper.xml文件的路径</span><br><span class="line">mybatis-plus.mapper-locations = classpath*:mybatis/*.xml</span><br><span class="line"></span><br><span class="line"># 实体对象的扫描包</span><br><span class="line">mybatis-plus.type-aliases-package = cn.itcast.mp.pojo</span><br><span class="line"></span><br><span class="line"># 禁用自定的驼峰映射</span><br><span class="line">#mybatis-plus.configuration.map-underscore-to-camel-case=true</span><br><span class="line"></span><br><span class="line"># 禁用缓存</span><br><span class="line">#mybatis-plus.configuration.cache-enabled=false</span><br><span class="line"></span><br><span class="line"># 全局的id生成策略</span><br><span class="line">#mybatis-plus.global-config.db-config.id-type=input</span><br><span class="line">mybatis-plus.global-config.db-config.id-type=auto</span><br><span class="line"></span><br><span class="line"># 全局的表名的前缀</span><br><span class="line">mybatis-plus.global-config.db-config.table-prefix=tb_</span><br><span class="line"></span><br><span class="line"># 删除状态的值为：1</span><br><span class="line">mybatis-plus.global-config.db-config.logic-delete-value=1</span><br><span class="line"></span><br><span class="line"># 未删除状态的值为：0</span><br><span class="line">mybatis-plus.global-config.db-config.logic-not-delete-value=0</span><br><span class="line"></span><br><span class="line"># 枚举包扫描</span><br><span class="line">mybatis-plus.type-enums-package=cn.itcast.mp.enums</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2023/03/16/MybatisPlus/MybatisPlus%E9%85%8D%E7%BD%AE%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2023/03/15/MybatisPlus/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/">MybatisPlus的CRUD操作</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-15 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><p>在继承MP的BaseMapper后已经有了基本的操作：</p>
 <p><img src="https://i.imgtg.com/2023/03/15/fwB86.png" alt="fwB86.png"></p>
 <p>返回值为int，指受影响的数据条数。</p></p>
-      <div class="post-button"><a class="btn" href="/2023/03/15/MybatisPlus/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/15/MybatisPlus/MybatisPlus%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2023/03/14/MybatisPlus/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/">MybatisPlus的整合</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-14 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-14 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/MybatisPlus/">MybatisPlus</a></span>
       <p><p>具体实现Spring Springboot与MP的整合</p>
 <h3 id="一、Spring-Mybatis-mp实现"><a href="#一、Spring-Mybatis-mp实现" class="headerlink" title="一、Spring + Mybatis + mp实现"></a>一、Spring + Mybatis + mp实现</h3><p><strong>jdbc.properties</strong>  jdbc配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver&#x3D;com.mysql.jdbc.Driver  </span><br><span class="line">jdbc.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;mp?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;autoReconnect&#x3D;true&amp;allowMultiQueries&#x3D;true&amp;useSSL&#x3D;false  </span><br><span class="line">jdbc.username&#x3D;root  </span><br><span class="line">jdbc.password&#x3D;root</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2023/03/14/MybatisPlus/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver  </span><br><span class="line">jdbc.url=jdbc:mysql://127.0.0.1:3306/mp?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;allowMultiQueries=true&amp;useSSL=false  </span><br><span class="line">jdbc.username=root  </span><br><span class="line">jdbc.password=root</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2023/03/14/MybatisPlus/MybatisPlus%E7%9A%84%E6%95%B4%E5%90%88/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2023/03/13/SpringBoot/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">SpringBoot自动装配</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2023-03-13 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/SpringBoot/">SpringBoot</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-03-13 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/SpringBoot/">SpringBoot</a></span>
       <p><div class="note info">
             <h3 id="SpringBoot自动装配原理"><a href="#SpringBoot自动装配原理" class="headerlink" title="SpringBoot自动装配原理"></a><strong>SpringBoot自动装配原理</strong></h3><p>通过Condition、enable、import等注解实现自动装配</p>
           </div></p>
-      <div class="post-button"><a class="btn" href="/2023/03/13/SpringBoot/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2023/03/13/SpringBoot/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2020/08/23/Apache/Apache2%E8%A7%A3%E5%86%B3authorization%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">Apache2解决authorization跨域问题</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-08-23 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-08-23 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
       <p><div class="note default">
             <p>问题描述：前端在请求头中发送的Authorization字段消失不见，报跨域错误而跨域配置无误</p><p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
           </div></p>
-      <div class="post-button"><a class="btn" href="/2020/08/23/Apache/Apache2%E8%A7%A3%E5%86%B3authorization%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2020/08/23/Apache/Apache2%E8%A7%A3%E5%86%B3authorization%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2020/08/23/Apache/Apache2%E9%83%A8%E7%BD%B2flask/">Apache2部署flask</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-08-23 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-08-23 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
       <p><div class="note default">
             <p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
           </div></p>
-      <div class="post-button"><a class="btn" href="/2020/08/23/Apache/Apache2%E9%83%A8%E7%BD%B2flask/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2020/08/23/Apache/Apache2%E9%83%A8%E7%BD%B2flask/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2 class="title"><a href="/2020/07/29/Apache/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/">解决Flask+Apache2邮箱前端验证问题</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-07-29 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/flask/">flask</a></span>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-07-29 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/flask/">flask</a></span>
       <p><p>在apache上配置flask时可能出现如图所示的email-validator模块丢失问题 </p>
 <br>
 
 <p><img src="https://s1.ax1x.com/2020/07/29/amMFmj.png" alt="amMFmj.png"></p></p>
-      <div class="post-button"><a class="btn" href="/2020/07/29/Apache/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/07/29/Apache/Apache2%E8%A7%A3%E5%86%B3%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">Apache2解决中文编码问题</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-07-29 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Apache/">Apache</a></span>
-      <p><ol>
-<li><p>修改 /usr/lib/python2.7/ 下的 site.py 文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim &#x2F;usr&#x2F;lib&#x2F;python2.7&#x2F;site.py</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol></p>
-      <div class="post-button"><a class="btn" href="/2020/07/29/Apache/Apache2%E8%A7%A3%E5%86%B3%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/03/22/%E5%85%B6%E4%BB%96/Ubuntu%E5%AE%89%E8%A3%85Tensorflow-gpu/">Ubuntu安装Tensorflow-gpu</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar"></i> 2020-03-22 | <i class="fa fa-folder"></i> <a class="category-link" href="/categories/Tensorflow/">Tensorflow</a></span>
-      <p><div class="note default">
-            <p>环境：<br>系统：Ubuntu18.04<br>GPU：GTXm1050ti<br>显卡驱动：440<br>CUDA：10.1<br>Cudnn：7.6.5<br>Tensorflow-gpu：2.1.0</p><p>Tensorflow官网：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p>
-          </div></p>
-      <div class="post-button"><a class="btn" href="/2020/03/22/%E5%85%B6%E4%BB%96/Ubuntu%E5%AE%89%E8%A3%85Tensorflow-gpu/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读全文</a></div>
+      <div class="post-button"><a class="btn" href="/2020/07/29/Apache/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
 
@@ -228,35 +232,19 @@
 
 <footer>
   <div>
-  Copyright &copy; 2019.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号-1</a> <br/>转载请注明出处
+  Copyright &copy; 2024.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>备案号：<a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">浙ICP备20022343号-1</a> <br/>转载请注明出处
   </div>
 </footer>
+
   </div>
 </div>
 </div>
 
-<style>
-  .title {
-    font-weight: bold;
-  }
-  .lx-post {
-    line-height: 2rem;
-  }
-
-  .lx-post p {
-    line-height: 2rem;
-  }
-
-  .lx-post li {
-    line-height: 2rem;
-  }
-</style>
-
-<button class="hamburger hamburger--arrow-r" type="button">
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
     <div class="hamburger-box">
       <div class="hamburger-inner"></div>
     </div>
-</button> 
+</button>
 <div class="menu visibility">
   <div class="menu-head">
     <span class="layer">
@@ -279,20 +267,20 @@
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-th-list fa-fw"></i>分类</span>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/guestbook">留言板</a></li>
-        <li><a href="/about">关于</a></li>
+          <li><a href="/guestbook/">留言板</a></li>
+        <li><a href="/about/">关于</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-link fa-fw"></i>友链</span>
         <ul>
           <li> <a href="http://yangyuheng.top" target="_blank">yangyuheng的个人博客</a></li>
-        <li> <a href="https://lx.blleng.cn" target="_blank">Hexo主题-Lx</a></li>
+        <li> <a href="https://lx.js.org" target="_blank">Hexo主题-Lx</a></li>
         </ul>
     </li>
   </ul>
@@ -302,7 +290,7 @@
 <div class="gototop js-top">
   <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
 </div>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.easing.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.easing.min.js"></script>
 <script>
 (function () {
 	"use strict";
@@ -328,7 +316,7 @@
 	});
 }());
 </script>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/local.search.min.js"></script>
 
 </body>
 </html>

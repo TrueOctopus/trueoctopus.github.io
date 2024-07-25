@@ -13,7 +13,7 @@
   var CONFIG = {
     root: '/',
     theme: 'lx',
-    version: '0.3.8',
+    version: '0.4.4',
     localsearch:{
       "enable": true,
       "trigger": "auto",
@@ -25,8 +25,9 @@
   };
 </script>
 
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.8-fixed/source/css/main.min.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css">
+  
   <style type="text/css">
     pre,
     code {
@@ -38,7 +39,7 @@
     body {
       font-family: sans-serif;
     }
-    h1, h2, h3, h4, h5, h6, figure {
+    h1, h2, h3, h4, h5, figure {
       font-family: sans-serif;
     }
     .menu-container{
@@ -46,14 +47,14 @@
     }
   </style>
 
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.jside.menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.jside.menu.min.js"></script>
 	<script>
 	$(document).ready(function(){
 	$(".menu-container").jSideMenu({
 	    jSidePosition: "position-right",
 	    jSideSticky: true,
-	    jSideSkin: "black-grey",
+	    jSideSkin: "",
 	     });
 	}); 
 	</script>
@@ -75,12 +76,12 @@
     s.parentNode.insertBefore(hm, s);
   })();
 </script>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-<meta name="generator" content="Hexo 4.2.1"></head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
 <body>
 <div class="single">
-<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
 <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
@@ -99,23 +100,22 @@
 </div>
 
 <div id="page">
-
-<meta name="keywords" content="Apache,部署,Flask,tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
-
-<div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
-  <div class="overlay">
-    <div class="page-title">
-      <div class="avatar"><a href="/"><img src="/images/avatar.jpg"></a></div>
-      <span>2020-08-23</span>
-      <h2>Apache2部署flask</h2>
-      <div class="tags"><i
-          class="fa fa-tag"></i><a class="tag-link" href="/tags/Apache/" rel="tag">Apache</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/flask/" rel="tag">flask</a>
-      </div>
-    <div class="social-links">
-    <a href="https://github.com/trueoctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
-    <a href="mailto:18368876370@163.com" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
-</div></div>
+<div class="header">
+  <div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
+    <div class="overlay">
+      <a href="javascript:;" class="popup-trigger" title="search"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+      <div class="page-title">
+        <div class="avatar"><a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"></a></div>
+        <span>2020-08-23</span>
+        <h2>Apache2部署flask</h2>
+        <div class="tags"><i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/Apache/" rel="tag">Apache</a> <i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/flask/" rel="tag">flask</a></div>
+        <div class="social-links">
+    <a href="https://github.com/trueoctopus" target="_blank" title="social-link"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:18368876370@163.com" target="_blank" title="social-link"><i class="fa fa-envelope fa-fw"></i></a>
 </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="lx-main-content">
   <div class="lx-post">
@@ -125,29 +125,25 @@
             <p>环境：<br>系统：Ubuntu18.04<br>版本：Apache2.4 python3.6</p>
           </div>
 
-<a id="more"></a>
+<span id="more"></span>
 
 <ol>
 <li><p>安装apache2和wsgi模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install apache2</span><br><span class="line">$ sudo apt-get install libapache2-mod-wsgi-py3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install apache2</span><br><span class="line">$ sudo apt-get install libapache2-mod-wsgi-py3</span><br></pre></td></tr></table></figure>
 
 <p>安装完成后访问80端口，出现初始页面代表apache2安装成功</p>
 </li>
 <li><p>在项目根目录下新建wsgi配置文件，范例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import site</span><br><span class="line">site.addsitedir(&#39;&#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;venv&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#39;) # 项目的环境配置</span><br><span class="line">import sys       </span><br><span class="line">sys.path.insert(0, &#39;&#x2F;home&#x2F;zzy&#x2F;xgkxflask&#39;) # 项目根目录</span><br><span class="line">from flasky import app as application # 启动文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import site</span><br><span class="line">site.addsitedir(&#x27;/home/zzy/xgkxflask/venv/lib/python3.6/site-packages&#x27;) # 项目的环境配置</span><br><span class="line">import sys       </span><br><span class="line">sys.path.insert(0, &#x27;/home/zzy/xgkxflask&#x27;) # 项目根目录</span><br><span class="line">from flasky import app as application # 启动文件</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>配置apache2配置文件，默认位于 /etc/apache2/sites-available/，默认配置为000-default.conf，可自行配置，软链接到sites-enabled文件夹才会生效，范例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">  &lt;VirtualHost *:80&gt; # 应用的端口</span><br><span class="line"># The ServerName directive sets the request scheme, hostname and port that</span><br><span class="line">  	# the server uses to identify itself. This is used when creating</span><br><span class="line">  	# redirection URLs. In the context of virtual hosts, the ServerName</span><br><span class="line">  	# specifies what hostname must appear in the request&#39;s Host: header to</span><br><span class="line">  	# match this virtual host. For the default virtual host (this file) this</span><br><span class="line">  	# value is not decisive as it is used as a last resort host regardless.</span><br><span class="line">  	# However, you must set it for any further virtual host explicitly.</span><br><span class="line">  	ServerName trueoctopus.com # 绑定的域名</span><br><span class="line">  </span><br><span class="line">  	ServerAdmin xgkx@hgu.edu.cn # 管理员联系方式，出错时会显示在报错内容中</span><br><span class="line">  	DocumentRoot &#x2F;home&#x2F;zzy&#x2F;xgkxflask # 网站根目录</span><br><span class="line">  	</span><br><span class="line">  	LoadModule headers_module &#x2F;usr&#x2F;lib&#x2F;apache2&#x2F;modules&#x2F;mod_headers.so # 跨域用mod</span><br><span class="line">          Header always set Access-Control-Allow-Origin &quot;*&quot;</span><br><span class="line">          Header always set Access-Control-Allow-Methods &quot;GET,POST,PUT,DELETE,OPTIONS&quot;</span><br><span class="line">  	Header always set Access-Control-Allow-Headers &quot;authorization,content-type&quot;</span><br><span class="line">  	# 上面为跨域配置</span><br><span class="line">  </span><br><span class="line">  	WSGIDaemonProcess xgkxflask user&#x3D;zzy group&#x3D;zzy processes&#x3D;4 threads&#x3D;4 </span><br><span class="line">  	# 进程配置 用户不得为root用户，processes为进程 threads为线程</span><br><span class="line">  	WSGIScriptAlias &#x2F; &#x2F;home&#x2F;zzy&#x2F;xgkxflask&#x2F;xgkxflask.wsgi</span><br><span class="line">      	# wsgi配置文件地址，将IP:端口&#x2F;下的请求转发至项目位置</span><br><span class="line">  	WSGIPassAuthorization On # 请求头中允许authorization发送</span><br><span class="line">  </span><br><span class="line">  	&lt;Directory &#x2F;home&#x2F;zzy&#x2F;xgkxflask&gt; # 项目地址</span><br><span class="line">  	WSGIProcessGroup xgkxflask #项目名</span><br><span class="line">  	WSGIApplicationGroup %&#123;GLOBAL&#125;</span><br><span class="line">  	</span><br><span class="line">  	#权限设置</span><br><span class="line">          Order allow,deny</span><br><span class="line">          Allow from all</span><br><span class="line">  	Require all granted</span><br><span class="line">  	&lt;&#x2F;Directory&gt;</span><br><span class="line">  </span><br><span class="line">  	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,</span><br><span class="line">  	# error, crit, alert, emerg.</span><br><span class="line">  	# It is also possible to configure the loglevel for particular</span><br><span class="line">  	# modules, e.g.</span><br><span class="line">  	#LogLevel info ssl:warn</span><br><span class="line">  	</span><br><span class="line">  	# 日志位置</span><br><span class="line">  	ErrorLog $&#123;APACHE_LOG_DIR&#125;&#x2F;error.log </span><br><span class="line">  	CustomLog $&#123;APACHE_LOG_DIR&#125;&#x2F;access.log combined</span><br><span class="line">  </span><br><span class="line">  	# For most configuration files from conf-available&#x2F;, which are</span><br><span class="line">  	# enabled or disabled at a global level, it is possible to</span><br><span class="line">  	# include a line for only one particular virtual host. For example the</span><br><span class="line">  	# following line enables the CGI configuration for this host only</span><br><span class="line">  	# after it has been globally disabled with &quot;a2disconf&quot;.</span><br><span class="line">  	#Include conf-available&#x2F;serve-cgi-bin.conf</span><br><span class="line">  &lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<li><p>配置apache2配置文件，默认位于 &#x2F;etc&#x2F;apache2&#x2F;sites-available&#x2F;，默认配置为000-default.conf，可自行配置，软链接到sites-enabled文件夹才会生效，范例如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">  &lt;VirtualHost *:80&gt; # 应用的端口</span><br><span class="line"># The ServerName directive sets the request scheme, hostname and port that</span><br><span class="line">  	# the server uses to identify itself. This is used when creating</span><br><span class="line">  	# redirection URLs. In the context of virtual hosts, the ServerName</span><br><span class="line">  	# specifies what hostname must appear in the request&#x27;s Host: header to</span><br><span class="line">  	# match this virtual host. For the default virtual host (this file) this</span><br><span class="line">  	# value is not decisive as it is used as a last resort host regardless.</span><br><span class="line">  	# However, you must set it for any further virtual host explicitly.</span><br><span class="line">  	ServerName trueoctopus.com # 绑定的域名</span><br><span class="line">  </span><br><span class="line">  	ServerAdmin xgkx@hgu.edu.cn # 管理员联系方式，出错时会显示在报错内容中</span><br><span class="line">  	DocumentRoot /home/zzy/xgkxflask # 网站根目录</span><br><span class="line">  	</span><br><span class="line">  	LoadModule headers_module /usr/lib/apache2/modules/mod_headers.so # 跨域用mod</span><br><span class="line">          Header always set Access-Control-Allow-Origin &quot;*&quot;</span><br><span class="line">          Header always set Access-Control-Allow-Methods &quot;GET,POST,PUT,DELETE,OPTIONS&quot;</span><br><span class="line">  	Header always set Access-Control-Allow-Headers &quot;authorization,content-type&quot;</span><br><span class="line">  	# 上面为跨域配置</span><br><span class="line">  </span><br><span class="line">  	WSGIDaemonProcess xgkxflask user=zzy group=zzy processes=4 threads=4 </span><br><span class="line">  	# 进程配置 用户不得为root用户，processes为进程 threads为线程</span><br><span class="line">  	WSGIScriptAlias / /home/zzy/xgkxflask/xgkxflask.wsgi</span><br><span class="line">      	# wsgi配置文件地址，将IP:端口/下的请求转发至项目位置</span><br><span class="line">  	WSGIPassAuthorization On # 请求头中允许authorization发送</span><br><span class="line">  </span><br><span class="line">  	&lt;Directory /home/zzy/xgkxflask&gt; # 项目地址</span><br><span class="line">  	WSGIProcessGroup xgkxflask #项目名</span><br><span class="line">  	WSGIApplicationGroup %&#123;GLOBAL&#125;</span><br><span class="line">  	</span><br><span class="line">  	#权限设置</span><br><span class="line">          Order allow,deny</span><br><span class="line">          Allow from all</span><br><span class="line">  	Require all granted</span><br><span class="line">  	&lt;/Directory&gt;</span><br><span class="line">  </span><br><span class="line">  	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,</span><br><span class="line">  	# error, crit, alert, emerg.</span><br><span class="line">  	# It is also possible to configure the loglevel for particular</span><br><span class="line">  	# modules, e.g.</span><br><span class="line">  	#LogLevel info ssl:warn</span><br><span class="line">  	</span><br><span class="line">  	# 日志位置</span><br><span class="line">  	ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log </span><br><span class="line">  	CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</span><br><span class="line">  </span><br><span class="line">  	# For most configuration files from conf-available/, which are</span><br><span class="line">  	# enabled or disabled at a global level, it is possible to</span><br><span class="line">  	# include a line for only one particular virtual host. For example the</span><br><span class="line">  	# following line enables the CGI configuration for this host only</span><br><span class="line">  	# after it has been globally disabled with &quot;a2disconf&quot;.</span><br><span class="line">  	#Include conf-available/serve-cgi-bin.conf</span><br><span class="line">  &lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在ports.conf中配置端口，位于/etc/apache2下，服务器安全组需开放</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listen 80</span><br><span class="line">Listen 8080</span><br></pre></td></tr></table></figure>
+<li><p>在ports.conf中配置端口，位于&#x2F;etc&#x2F;apache2下，服务器安全组需开放</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listen 80</span><br><span class="line">Listen 8080</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重启服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo &#x2F;etc&#x2F;init.d&#x2F;apache2 restart</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/apache2 restart</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       </div>
@@ -155,7 +151,7 @@
   </div>
 </div>
 <div class="lx-navigation">
-	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
+	<div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
 		<div class="overlay"></div>
 		<a class="copy" href="/2020/08/23/Apache/Apache2%E8%A7%A3%E5%86%B3authorization%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
 			<div class="display-t">
@@ -168,7 +164,7 @@
 			</div>
 		</a>
 	</div>
-        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
+        <div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
 		<div class="overlay"></div>
 		<a class="copy" href="/2020/07/29/Apache/%E8%A7%A3%E5%86%B3Flask+Apache2%E9%82%AE%E7%AE%B1%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%E9%97%AE%E9%A2%98/">
 			<div class="display-t">
@@ -187,31 +183,17 @@
 
 <footer>
   <div>
-  Copyright &copy; 2019.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号-1</a> <br/>转载请注明出处
+  Copyright &copy; 2024.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>备案号：<a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">浙ICP备20022343号-1</a> <br/>转载请注明出处
   </div>
 </footer>
+
 </div>
 
-<style>
-  .lx-entry{
-    line-height: 2rem;
-  }
-
-  .lx-entry p {
-    line-height: 2rem;
-  }
-
-  .lx-entry li {
-    line-height: 2rem;
-  }
-
-</style>
-
-<button class="hamburger hamburger--arrow-r" type="button">
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
     <div class="hamburger-box">
       <div class="hamburger-inner"></div>
     </div>
-</button> 
+</button>
 <div class="menu visibility">
   <div class="menu-head">
     <span class="layer">
@@ -234,20 +216,20 @@
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-th-list fa-fw"></i>分类</span>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/guestbook">留言板</a></li>
-        <li><a href="/about">关于</a></li>
+          <li><a href="/guestbook/">留言板</a></li>
+        <li><a href="/about/">关于</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-link fa-fw"></i>友链</span>
         <ul>
           <li> <a href="http://yangyuheng.top" target="_blank">yangyuheng的个人博客</a></li>
-        <li> <a href="https://lx.blleng.cn" target="_blank">Hexo主题-Lx</a></li>
+        <li> <a href="https://lx.js.org" target="_blank">Hexo主题-Lx</a></li>
         </ul>
     </li>
   </ul>
@@ -257,7 +239,7 @@
 <div class="gototop js-top">
   <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
 </div>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.easing.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.easing.min.js"></script>
 <script>
 (function () {
 	"use strict";
@@ -283,7 +265,7 @@
 	});
 }());
 </script>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/local.search.min.js"></script>
 
 </body>
 </html>

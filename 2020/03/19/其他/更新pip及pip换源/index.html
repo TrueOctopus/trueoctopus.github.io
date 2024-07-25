@@ -13,7 +13,7 @@
   var CONFIG = {
     root: '/',
     theme: 'lx',
-    version: '0.3.8',
+    version: '0.4.4',
     localsearch:{
       "enable": true,
       "trigger": "auto",
@@ -25,8 +25,9 @@
   };
 </script>
 
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.8-fixed/source/css/main.min.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css">
+  
   <style type="text/css">
     pre,
     code {
@@ -38,7 +39,7 @@
     body {
       font-family: sans-serif;
     }
-    h1, h2, h3, h4, h5, h6, figure {
+    h1, h2, h3, h4, h5, figure {
       font-family: sans-serif;
     }
     .menu-container{
@@ -46,14 +47,14 @@
     }
   </style>
 
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.jside.menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.jside.menu.min.js"></script>
 	<script>
 	$(document).ready(function(){
 	$(".menu-container").jSideMenu({
 	    jSidePosition: "position-right",
 	    jSideSticky: true,
-	    jSideSkin: "black-grey",
+	    jSideSkin: "",
 	     });
 	}); 
 	</script>
@@ -75,12 +76,12 @@
     s.parentNode.insertBefore(hm, s);
   })();
 </script>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-<meta name="generator" content="Hexo 4.2.1"></head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
 <body>
 <div class="single">
-<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
 <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
@@ -99,23 +100,22 @@
 </div>
 
 <div id="page">
-
-<meta name="keywords" content="Ubuntu,pip,pip换源,tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
-
-<div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
-  <div class="overlay">
-    <div class="page-title">
-      <div class="avatar"><a href="/"><img src="/images/avatar.jpg"></a></div>
-      <span>2020-03-19</span>
-      <h2>更新pip及pip换源</h2>
-      <div class="tags"><i
-          class="fa fa-tag"></i><a class="tag-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/pip/" rel="tag">pip</a>
-      </div>
-    <div class="social-links">
-    <a href="https://github.com/trueoctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
-    <a href="mailto:18368876370@163.com" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
-</div></div>
+<div class="header">
+  <div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
+    <div class="overlay">
+      <a href="javascript:;" class="popup-trigger" title="search"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+      <div class="page-title">
+        <div class="avatar"><a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"></a></div>
+        <span>2020-03-19</span>
+        <h2>更新pip及pip换源</h2>
+        <div class="tags"><i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a> <i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/pip/" rel="tag">pip</a></div>
+        <div class="social-links">
+    <a href="https://github.com/trueoctopus" target="_blank" title="social-link"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:18368876370@163.com" target="_blank" title="social-link"><i class="fa fa-envelope fa-fw"></i></a>
 </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="lx-main-content">
   <div class="lx-post">
@@ -125,21 +125,23 @@
             <p>运行环境：<br>    Ubuntu18.04</p>
           </div>
 
-<a id="more"></a>
+<span id="more"></span>
 
-<h1 id="更新pip的三种方法"><a href="#更新pip的三种方法" class="headerlink" title="更新pip的三种方法"></a>更新pip的三种方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line">$ python -m pip install -U --force-reinstall pip</span><br><span class="line">$ pip install --user --upgrade pip</span><br></pre></td></tr></table></figure>
+<h1 id="更新pip的三种方法"><a href="#更新pip的三种方法" class="headerlink" title="更新pip的三种方法"></a>更新pip的三种方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line">$ python -m pip install -U --force-reinstall pip</span><br><span class="line">$ pip install --user --upgrade pip</span><br></pre></td></tr></table></figure>
 
 <h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><p>当使用pip安装时速度过慢可尝试使用更换为国内源的方式，但是国内源可能没有对应的安装包或没有最新的版本。<br><br></p>
 <h2 id="换源的方式"><a href="#换源的方式" class="headerlink" title="换源的方式"></a>换源的方式</h2><div class="note info">
-            <p>国内pip镜像源：</p><ul><li>阿里： <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a> </li><li>中国科技大学： <a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a>  </li><li>豆瓣： <a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a>   </li><li>清华大学： <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a>   </li><li>中国科学技术大学： <a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li></ul>
+            <p>国内pip镜像源：</p><ul><li>阿里： <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a> </li><li>中国科技大学： <a target="_blank" rel="noopener" href="https://pypi.mirrors.ustc.edu.cn/simple/">https://pypi.mirrors.ustc.edu.cn/simple/</a>  </li><li>豆瓣： <a target="_blank" rel="noopener" href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a>   </li><li>清华大学： <a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/">https://pypi.tuna.tsinghua.edu.cn/simple/</a>   </li><li>中国科学技术大学： <a target="_blank" rel="noopener" href="http://pypi.mirrors.ustc.edu.cn/simple/">http://pypi.mirrors.ustc.edu.cn/simple/</a></li></ul>
           </div>
 <ol>
-<li><h3 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a><strong>临时使用</strong></h3> 例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install tensorflow -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a><strong>临时使用</strong></h3><p> 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install tensorflow -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>-i后添加的是指定的pip源</p>
+<br>
+</li>
+<li><h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a><strong>永久修改</strong></h3></li>
 </ol>
-<p><strong>注意：</strong>-i后添加的是指定的pip源<br><br></p>
-<ol start="2">
-<li><h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a><strong>永久修改</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit ~&#x2F;.pip&#x2F;pip.conf</span><br><span class="line">修改内容如下：</span><br><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure></li>
-</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit ~/.pip/pip.conf</span><br><span class="line">修改内容如下：</span><br><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
 <p><strong>注意：</strong>index-url后填写的是指定的pip源，当没有pip.conf时请自行在对应位置创建文件，这里使用的文本编辑器是gedit，目标文件不存在的话会自行创建。</p>
 
       </div>
@@ -147,7 +149,7 @@
   </div>
 </div>
 <div class="lx-navigation">
-	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
+	<div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
 		<div class="overlay"></div>
 		<a class="copy" href="/2020/03/20/%E5%85%B6%E4%BB%96/Windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8/">
 			<div class="display-t">
@@ -160,7 +162,7 @@
 			</div>
 		</a>
 	</div>
-        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
+        <div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
 		<div class="overlay"></div>
 		<a class="copy" href="#">
 			<div class="display-t">
@@ -179,31 +181,17 @@
 
 <footer>
   <div>
-  Copyright &copy; 2019.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号-1</a> <br/>转载请注明出处
+  Copyright &copy; 2024.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>备案号：<a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">浙ICP备20022343号-1</a> <br/>转载请注明出处
   </div>
 </footer>
+
 </div>
 
-<style>
-  .lx-entry{
-    line-height: 2rem;
-  }
-
-  .lx-entry p {
-    line-height: 2rem;
-  }
-
-  .lx-entry li {
-    line-height: 2rem;
-  }
-
-</style>
-
-<button class="hamburger hamburger--arrow-r" type="button">
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
     <div class="hamburger-box">
       <div class="hamburger-inner"></div>
     </div>
-</button> 
+</button>
 <div class="menu visibility">
   <div class="menu-head">
     <span class="layer">
@@ -226,20 +214,20 @@
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-th-list fa-fw"></i>分类</span>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/guestbook">留言板</a></li>
-        <li><a href="/about">关于</a></li>
+          <li><a href="/guestbook/">留言板</a></li>
+        <li><a href="/about/">关于</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-link fa-fw"></i>友链</span>
         <ul>
           <li> <a href="http://yangyuheng.top" target="_blank">yangyuheng的个人博客</a></li>
-        <li> <a href="https://lx.blleng.cn" target="_blank">Hexo主题-Lx</a></li>
+        <li> <a href="https://lx.js.org" target="_blank">Hexo主题-Lx</a></li>
         </ul>
     </li>
   </ul>
@@ -249,7 +237,7 @@
 <div class="gototop js-top">
   <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
 </div>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.easing.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.easing.min.js"></script>
 <script>
 (function () {
 	"use strict";
@@ -275,7 +263,7 @@
 	});
 }());
 </script>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/local.search.min.js"></script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@
   var CONFIG = {
     root: '/',
     theme: 'lx',
-    version: '0.3.8',
+    version: '0.4.4',
     localsearch:{
       "enable": true,
       "trigger": "auto",
@@ -25,8 +25,9 @@
   };
 </script>
 
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.8-fixed/source/css/main.min.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css">
+  
   <style type="text/css">
     pre,
     code {
@@ -38,7 +39,7 @@
     body {
       font-family: sans-serif;
     }
-    h1, h2, h3, h4, h5, h6, figure {
+    h1, h2, h3, h4, h5, figure {
       font-family: sans-serif;
     }
     .menu-container{
@@ -46,14 +47,14 @@
     }
   </style>
 
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.jside.menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.jside.menu.min.js"></script>
 	<script>
 	$(document).ready(function(){
 	$(".menu-container").jSideMenu({
 	    jSidePosition: "position-right",
 	    jSideSticky: true,
-	    jSideSkin: "black-grey",
+	    jSideSkin: "",
 	     });
 	}); 
 	</script>
@@ -75,12 +76,12 @@
     s.parentNode.insertBefore(hm, s);
   })();
 </script>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-<meta name="generator" content="Hexo 4.2.1"></head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
 <body>
 <div class="single">
-<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
 <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
@@ -99,23 +100,22 @@
 </div>
 
 <div id="page">
-
-<meta name="keywords" content="Nosql,Redis,tf,tensorflow,Ubuntu,linux,python,章鱼的博客">
-
-<div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
-  <div class="overlay">
-    <div class="page-title">
-      <div class="avatar"><a href="/"><img src="/images/avatar.jpg"></a></div>
-      <span>2023-03-18</span>
-      <h2>Nosql简述</h2>
-      <div class="tags"><i
-          class="fa fa-tag"></i><a class="tag-link" href="/tags/JAVA/" rel="tag">JAVA</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/Nosql/" rel="tag">Nosql</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/Redis/" rel="tag">Redis</a>
-      </div>
-    <div class="social-links">
-    <a href="https://github.com/trueoctopus" target="_blank"><i class="fa fa-github fa-fw"></i></a>
-    <a href="mailto:18368876370@163.com" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
-</div></div>
+<div class="header">
+  <div id="lx-aside" style="background-image: url(/images/cover0.jpg)" data-stellar-background-ratio="0.5">
+    <div class="overlay">
+      <a href="javascript:;" class="popup-trigger" title="search"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+      <div class="page-title">
+        <div class="avatar"><a href="/"><img src="/images/avatar.jpg" alt="TrueOctopus"></a></div>
+        <span>2023-03-18</span>
+        <h2>Nosql简述</h2>
+        <div class="tags"><i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/JAVA/" rel="tag">JAVA</a> <i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/Nosql/" rel="tag">Nosql</a> <i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/Redis/" rel="tag">Redis</a></div>
+        <div class="social-links">
+    <a href="https://github.com/trueoctopus" target="_blank" title="social-link"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:18368876370@163.com" target="_blank" title="social-link"><i class="fa fa-envelope fa-fw"></i></a>
 </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="lx-main-content">
   <div class="lx-post">
@@ -141,11 +141,11 @@
 
 <p><strong>NoSql的出现</strong></p>
 <p>用户的各类信息爆发式增长，数据量过多，Mysql等关系型数据库不够用，为了解决这类情况需要用到NoSql数据库</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <br>
 
-<h2 id="什么是NoSQL"><a href="#什么是NoSQL" class="headerlink" title="什么是NoSQL"></a><strong>什么是NoSQL</strong></h2><p>NoSQL = Not only Sql，泛指非关系型数据库</p>
+<h2 id="什么是NoSQL"><a href="#什么是NoSQL" class="headerlink" title="什么是NoSQL"></a><strong>什么是NoSQL</strong></h2><p>NoSQL &#x3D; Not only Sql，泛指非关系型数据库</p>
 <p>关系型数据库：表格，行，列</p>
 <p>非关系型数据库：不需要一个固定的存储格式，可以简单地进行横向扩展</p>
 <br>
@@ -203,7 +203,7 @@
   </div>
 </div>
 <div class="lx-navigation">
-	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
+	<div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-l.jpg)">
 		<div class="overlay"></div>
 		<a class="copy" href="/2023/03/19/Redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%91%BD%E4%BB%A4/">
 			<div class="display-t">
@@ -216,7 +216,7 @@
 			</div>
 		</a>
 	</div>
-        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
+        <div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer-r.jpg)">
 		<div class="overlay"></div>
 		<a class="copy" href="/2023/03/17/MybatisPlus/MP%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
 			<div class="display-t">
@@ -235,31 +235,17 @@
 
 <footer>
   <div>
-  Copyright &copy; 2019.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>备案号：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备20022343号-1</a> <br/>转载请注明出处
+  Copyright &copy; 2024.<a href="/">真丶章鱼</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>备案号：<a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">浙ICP备20022343号-1</a> <br/>转载请注明出处
   </div>
 </footer>
+
 </div>
 
-<style>
-  .lx-entry{
-    line-height: 2rem;
-  }
-
-  .lx-entry p {
-    line-height: 2rem;
-  }
-
-  .lx-entry li {
-    line-height: 2rem;
-  }
-
-</style>
-
-<button class="hamburger hamburger--arrow-r" type="button">
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
     <div class="hamburger-box">
       <div class="hamburger-inner"></div>
     </div>
-</button> 
+</button>
 <div class="menu visibility">
   <div class="menu-head">
     <span class="layer">
@@ -282,20 +268,20 @@
     <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-th-list fa-fw"></i>分类</span>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MybatisPlus/">MybatisPlus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OMV/">OMV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flask/">flask</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/guestbook">留言板</a></li>
-        <li><a href="/about">关于</a></li>
+          <li><a href="/guestbook/">留言板</a></li>
+        <li><a href="/about/">关于</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-link fa-fw"></i>友链</span>
         <ul>
           <li> <a href="http://yangyuheng.top" target="_blank">yangyuheng的个人博客</a></li>
-        <li> <a href="https://lx.blleng.cn" target="_blank">Hexo主题-Lx</a></li>
+        <li> <a href="https://lx.js.org" target="_blank">Hexo主题-Lx</a></li>
         </ul>
     </li>
   </ul>
@@ -305,7 +291,7 @@
 <div class="gototop js-top">
   <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
 </div>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.easing.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.easing.min.js"></script>
 <script>
 (function () {
 	"use strict";
@@ -331,7 +317,7 @@
 	});
 }());
 </script>
-<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/local.search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/local.search.min.js"></script>
 
 </body>
 </html>
