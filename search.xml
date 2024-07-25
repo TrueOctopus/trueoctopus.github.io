@@ -1809,7 +1809,9 @@ SpringBoot自动配置中存在各类不同触发条件下的ConditionalOn*</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> axesHelper = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">AxesHelper</span>( <span class="number">5</span> ); scene.<span class="title function_">add</span>( axesHelper );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>2. </p>
+<ol start="2">
+<li>……</li>
+</ol>
 ]]></content>
       <categories>
         <category>Three.js</category>
